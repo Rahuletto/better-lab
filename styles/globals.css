@@ -463,9 +463,15 @@ html {
 
 .move-buttons button {
   background: var(--background-dark);
-  border: 1px solid var(--border);
+  border: 2px solid var(--border);
   padding: 8px 12px;
   color: var(--accent);
   border-radius: 8px;
   font-family: var(--jb-font);
+  cursor: pointer;
+}
+
+.move-buttons button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
 }
