@@ -1,5 +1,6 @@
 import { useCallback, useState } from "react";
-import styles from "../../styles/Home.module.css";
+import styles from "./QuestionDisplay.module.css"
+
 import { DataStream } from "@/pages";
 
 import dynamic from "next/dynamic";
