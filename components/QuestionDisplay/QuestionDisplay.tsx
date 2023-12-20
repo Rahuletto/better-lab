@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import styles from "./QuestionDisplay.module.css";
 
-import { DataStream } from '@/pages';
+import { DataStream } from "@/types/DataStream";
+import { CompileMsg } from "@/types/CompileMsg";
 
 import dynamic from 'next/dynamic';
 const CodeEditor = dynamic(
@@ -11,31 +12,14 @@ const CodeEditor = dynamic(
 
 import { FaAngleLeft, FaSquareCheck, FaAngleRight } from "react-icons/fa6";
 
-import { loadLanguage } from '@uiw/codemirror-extensions-langs';
-
-export type Languages =
-	| "c"
-	| "cpp"
-	| "csharp"
-	| "go"
-	| "java"
-	| "julia"
-	| "perl"
-	| "haskell"
-	| "javascript"
-	| "lua"
-	| "php"
-	| "python"
-	| "ruby"
-	| "r"
-	| "rust"
-	| "swift"
-	| "typescript";
+import { loadLanguage } from "@uiw/codemirror-extensions-langs";
+import { Languages } from "@/types/Languages";
 
 const Question = () => {
 	const [num, setNum] = useState<number>(75);
 	const [user, setUser] = useState<string>("401123438381");
 	const [data, setData] = useState<DataStream | null>(null);
+	const [res, setRes] = useState<CompileMsg | null>(null);
 
 	const [opn, setOpn] = useState(false);
 
@@ -53,6 +37,7 @@ const Question = () => {
 
 	async function run() {
 		if (!data) return;
+		const box = document.getElementById("result");
 
 		fetch("/api/run?user=" + user, {
 			method: "POST",
@@ -67,7 +52,11 @@ const Question = () => {
 			}),
 		})
 			.then((d) => d.json())
-			.then((a) => console.log(a));
+			.then((a) => {
+				console.log(a);
+				setRes(a);
+				box?.scrollIntoView({ behavior: "smooth" });
+			});
 		return true;
 	}
 
@@ -248,6 +237,34 @@ const Question = () => {
 						</a>
 					</p>
 				</div>
+			</div>
+			<div id="result">
+				{res && (
+					<div className={styles.result}>
+						<h2
+							style={
+								res.result.statusCode != "200"
+									? { color: "var(--red)" }
+									: { color: "var(--green)" }
+							}
+						>
+							{res.result.evalPercentage}%
+						</h2>
+						{res.result.errorMsg ? (
+							<pre className={styles.error}>{res.result.errorMsg}</pre>
+						) : (
+							<div className={styles.resVar}>
+								{res.result.statusArray.map((el, ind) => {
+									return (
+										<div className={el.color} key={ind}>
+											<p>{el.msg}</p>
+										</div>
+									);
+								})}
+							</div>
+						)}
+					</div>
+				)}
 			</div>
 		</>
 	);

@@ -76,6 +76,16 @@ code::-moz-selection {
   color: var(--background)
 }
 
+pre::selection {
+  background-color: var(--red) !important;
+  color: var(--background) !important;
+}
+
+pre::-moz-selection {
+  background-color: var(--red) !important;
+  color: var(--background) !important;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -105,6 +115,7 @@ html {
   background-color: var(--background);
   color: var(--color);
   padding: 18px;
+  scroll-behavior: smooth;
 }
 
 code {
@@ -117,6 +128,11 @@ code {
   display: block;
   margin: 4px 0px;
   white-space: pre-line;
+}
+
+pre {
+  font-family: var(--jb-font);
+  font-size: 14px;
 }
 
 .cm-tooltip-autocomplete {
@@ -445,6 +461,30 @@ html {
 
 .cm-gutters {
   background-color: transparent !important;
+}
+
+.green {
+  background: #65d1330e;
+  border: 1px solid var(--green);
+  color: var(--green)
+}
+
+.red {
+  background: #D133330e;
+  border: 1px solid var(--red);
+  color: var(--red)
+}
+
+.red,
+.green {
+  padding: 4px 8px;
+  border-radius: 8px;
+  width: fit-content
+}
+
+.green p,
+.red p {
+  margin: 0px;
 }
 
 @media only screen and (max-width: 690px) {
