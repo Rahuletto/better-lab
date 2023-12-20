@@ -1,0 +1,18 @@
+export type Languages =
+	| "c"
+	| "cpp"
+	| "csharp"
+	| "go"
+	| "java"
+	| "julia"
+	| "perl"
+	| "haskell"
+	| "javascript"
+	| "lua"
+	| "php"
+	| "python"
+	| "ruby"
+	| "r"
+	| "rust"
+	| "swift"
+	| "typescript";
