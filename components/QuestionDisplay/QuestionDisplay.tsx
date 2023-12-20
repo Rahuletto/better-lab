@@ -9,8 +9,7 @@ const CodeEditor = dynamic(
 	{ ssr: false },
 );
 
-import { FaAngleLeft } from "react-icons/fa";
-import { FaAngleRight } from "react-icons/fa";
+import { FaAngleLeft, FaSquareCheck, FaAngleRight } from "react-icons/fa6";
 
 import { loadLanguage } from "@uiw/codemirror-extensions-langs";
 
@@ -61,7 +60,7 @@ const Question = () => {
 		return;
 	}, []);
 
-	async function run() {
+	async function getQuestion() {
 		fetch("/api/question?id=" + num + "&user=" + user)
 			.then((d) => d.json())
 			.then((a) => {
@@ -87,24 +86,27 @@ const Question = () => {
 							type="number"
 							onChange={(e) => setNum(Number(e.target?.value))}
 						/>
-						<button type="button" onClick={() => run()}>
+						<button type="button" onClick={() => getQuestion()}>
 							Submit
 						</button>
 					</form>
 				</div>
 			</dialog>
-			<button type="button" onClick={() => setOpn(true)}>
-				Edit
-			</button>
 
-			{data && <h2>{String(data?.questionData?.SESSION_NAME)}</h2>}
-			{data && (
-				<div
-					dangerouslySetInnerHTML={{
-						__html: String(data.questionData.Q_DESC),
-					}}
-				/>
-			)}
+			<div className={styles.qna}>
+				{data && <h2>{String(data?.questionData?.SESSION_NAME)}</h2>}
+				{data && (
+					<div
+						dangerouslySetInnerHTML={{
+							__html: String(data.questionData.Q_DESC),
+						}}
+					/>
+				)}
+
+				<button type="button" onClick={() => setOpn(true)}>
+					Edit
+				</button>
+			</div>
 			<div className={styles.grid}>
 				<div className={styles.caseChild}>
 					<div className={styles.sideContainer}>
@@ -127,7 +129,7 @@ const Question = () => {
 									>
 										<FaAngleLeft />
 									</button>
-                  <p>
+									<p>
 										{page + 1}/{data.questionData.MANDATORY.length}
 									</p>
 									<button
@@ -194,6 +196,7 @@ const Question = () => {
 
 				<div className={styles.codeWrapper}>
 					<p>Code Editor</p>
+          <button className={styles.run}><FaSquareCheck /> Submit</button>
 					<CodeEditor code={code} language={language} onChange={onChange} />
 					<p
 						style={{
@@ -201,6 +204,8 @@ const Question = () => {
 							marginRight: "12px",
 							marginBottom: 0,
 							opacity: 0.7,
+							position: "relative",
+							bottom: "-4px",
 						}}
 					>
 						Powered by{" "}
