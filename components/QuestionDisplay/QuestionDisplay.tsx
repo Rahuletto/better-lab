@@ -101,8 +101,8 @@ const Question = () => {
 					}}
 				/>
 			)}
-			<div className="grid">
-				<div className="case-child">
+			<div className={styles.grid}>
+				<div className={styles.caseChild}>
 					<div
 						className={styles.sideContainer}
 						style={{
@@ -123,7 +123,7 @@ const Question = () => {
 						</div>
 						{data &&
 							(data.questionData.MANDATORY.length > 1 ? (
-								<div className="move-buttons">
+								<div className={styles.moveButtons}>
 									<button
 										disabled={page <= 0}
 										onClick={() => setPage((i) => i - 1)}

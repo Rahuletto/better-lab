@@ -36,3 +36,41 @@
     font-family: var(--jb-font) !important;
     color: var(--tip-color);
 }
+
+
+.grid {
+    display: grid;
+    grid-template-columns: 0.3fr 1fr;
+    grid-template-rows: 1fr;
+
+    gap: 16px;
+}
+
+.caseChild {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.5fr 1fr;
+
+    gap: 16px;
+
+}
+
+.moveButtons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.moveButtons button {
+    background: var(--background-dark);
+    border: 2px solid var(--border);
+    padding: 8px 12px;
+    color: var(--accent);
+    border-radius: 8px;
+    font-family: var(--jb-font);
+    cursor: pointer;
+}
+
+.moveButtons button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
