@@ -4,8 +4,8 @@
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
     background: var(--code-editor);
     border: 2px solid var(--border);
     padding: 8px 4px;
@@ -24,11 +24,11 @@
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
     -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
 }
 
 .sideContainer p {
@@ -44,9 +44,9 @@
 .sideContainer h3 {
     margin: 0px;
     -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     margin-bottom: 8px;
     font-weight: 700;
     margin-left: 12px;
@@ -68,13 +68,13 @@
 }
 
 
-.grid > *:nth-child(1) {
+.grid>*:nth-child(1) {
     -ms-grid-row: 1;
     -ms-grid-column: 1;
 }
 
 
-.grid > *:nth-child(2) {
+.grid>*:nth-child(2) {
     -ms-grid-row: 1;
     -ms-grid-column: 3;
 }
@@ -89,12 +89,12 @@
     gap: 16px;
 }
 
-.caseChild > *:nth-child(1) {
+.caseChild>*:nth-child(1) {
     -ms-grid-row: 1;
     -ms-grid-column: 1;
 }
 
-.caseChild > *:nth-child(2) {
+.caseChild>*:nth-child(2) {
     -ms-grid-row: 3;
     -ms-grid-column: 1;
 }
@@ -104,19 +104,19 @@
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
 }
 
 .moveButtons p {
     font-family: var(--jb-font);
     -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .moveButtons button {
@@ -126,9 +126,9 @@
     border-radius: 8px;
     cursor: pointer;
     -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     font-size: 18px;
     padding: 6px;
     display: -webkit-box;
@@ -147,18 +147,19 @@
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
     gap: 6px;
 }
+
 .testCase p {
     color: var(--accent);
     font-family: var(--space);
     font-size: 14px;
     -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .qna {
@@ -167,11 +168,11 @@
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
     -webkit-box-align: start;
-        -ms-flex-align: start;
-            align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
     gap: 12px;
     margin-bottom: 24px;
 }
@@ -194,8 +195,8 @@
     color: var(--accent);
     border-radius: 10px;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     width: -webkit-fit-content;
     width: -moz-fit-content;
     width: fit-content;
@@ -205,14 +206,20 @@
     position: absolute;
     z-index: 2;
     right: 36px;
-  }
+}
 
-  .run:hover {
+.run:hover {
     opacity: 0.9;
     background-color: rgba(78, 208, 57, 0.42);
     color: #f0f0f0;
     border: 1.9px solid transparent;
     -webkit-backdrop-filter: blur(3px);
-  backdrop-filter: blur(3px);
-  }
-  
+    backdrop-filter: blur(3px);
+}
+
+.run:active {
+    transform: scale(0.9) rotate(-2deg);
+    opacity: 0.9;
+    background-color: rgba(78, 208, 57, 0.42);
+    color: #f0f0f0;
+}

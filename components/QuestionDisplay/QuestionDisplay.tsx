@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import styles from "./QuestionDisplay.module.css";
 
 import { DataStream } from "@/pages";
@@ -14,30 +14,21 @@ import { FaAngleLeft, FaSquareCheck, FaAngleRight } from "react-icons/fa6";
 import { loadLanguage } from "@uiw/codemirror-extensions-langs";
 
 export type Languages =
-	| "shell"
 	| "c"
-	| "objectiveCpp"
+	| "cpp"
 	| "csharp"
-	| "crystal"
-	| "d"
-	| "erlang"
 	| "go"
-	| "groovy"
-	| "haskell"
 	| "java"
-	| "javascript"
 	| "julia"
-	| "commonLisp"
+	| "perl"
+	| "haskell"
+	| "javascript"
 	| "lua"
 	| "php"
-	| "pascal"
-	| "perl"
 	| "python"
-	| "r"
 	| "ruby"
+	| "r"
 	| "rust"
-	| "sql"
-	| "scala"
 	| "swift"
 	| "typescript";
 
@@ -59,6 +50,17 @@ const Question = () => {
 		setCode(value);
 		return;
 	}, []);
+
+	useEffect(() => {
+		if (num) {
+			const val = localStorage.getItem("code-" + num);
+			if (val) setCode(String(val));
+		}
+	}, [num]);
+
+	async function run() {
+
+  }
 
 	async function getQuestion() {
 		fetch("/api/question?id=" + num + "&user=" + user)
@@ -196,7 +198,9 @@ const Question = () => {
 
 				<div className={styles.codeWrapper}>
 					<p>Code Editor</p>
-          <button className={styles.run}><FaSquareCheck /> Submit</button>
+					<button className={styles.run}>
+						<FaSquareCheck /> Submit
+					</button>
 					<CodeEditor code={code} language={language} onChange={onChange} />
 					<p
 						style={{
