@@ -34,7 +34,7 @@ const ext = [
 ];
 
 type EditorProps = {
-	language?: Extension;
+	language?: any;
 	code?: string;
 	theme?: "light" | "dark" | string;
 	onChange?: Function | any;
