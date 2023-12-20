@@ -25,7 +25,6 @@ const colorPicker = await (await import("@replit/codemirror-css-color-picker"))
 	.colorPicker;
 
 import { TriggerEvent, useContextMenu } from "react-contexify";
-import { Extension } from "@uiw/react-codemirror";
 
 const ext = [
 	keymap.of([{ key: "Ctrl-Shift-f", run: openSearchPanel }, ...vscodeKeymap]),

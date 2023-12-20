@@ -29,7 +29,7 @@ const SiPrettier = dynamic<React.ComponentProps<IconType>>(
 
 const CodeMenu = () => {
   return (
-    <Menu id={"execoder"}>
+    <Menu id={"elab"}>
       <Item
         onClick={() =>
           document.getElementsByClassName("cm-content")[0].dispatchEvent(
@@ -47,22 +47,7 @@ const CodeMenu = () => {
         </RightSlot>
       </Item>
 
-      <Item
-        onClick={() =>
-          window.dispatchEvent(
-            new KeyboardEvent("keydown", {
-              altKey: true,
-              key: "f",
-            })
-          )
-        }
-      >
-        <SiPrettier style={{ marginRight: "8px" }} /> Format code
-        <RightSlot className="key">
-          <span className="alt">Alt</span> <span className="f">F</span>
-        </RightSlot>
-      </Item>
-
+      
       <Separator />
       <Item onClick={() => document.execCommand("cut")}>
         <TbCut style={{ marginRight: "8px" }} /> Cut{" "}
