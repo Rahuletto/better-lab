@@ -1,76 +1,101 @@
 .codeWrapper {
-    display: flex;
-    flex-direction: column;
-    background: var(--code-editor);
-    border: 2px solid var(--border);
-    padding: 8px 4px;
-    border-radius: 20px;
-    width: -webkit-fill-available;
-    min-height: 86vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--code-editor);
+  border: 2px solid var(--border);
+  padding: 8px 4px;
+  border-radius: 20px;
+  width: -webkit-fill-available;
+  min-height: 86vh;
 }
 
 .sideContainer {
-    background: var(--background-light);
-    border: 2px solid var(--border);
-    border-radius: 18px;
-    padding: 8px 12px;
+  background: var(--background-light);
+  border: 2px solid var(--border);
+  border-radius: 18px;
+  padding: 8px 12px;
 }
-
+.dialog {
+  background: var(--background);
+  z-index: 10;
+  width: 50vh;
+  height: 30vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid var(--border);
+  border-radius: 15px;
+}
+.dialog h1 {
+  color: var(--color);
+}
+.dialog button {
+  background-color: var(--background-dark);
+  color: var(--accent);
+  font-size: 16px;
+  font-weight: 700;
+}
+.dialog input {
+  background-color: var(--tip-color);
+  border: none;
+  border-radius: 15px;
+  color: var(--color);
+  height: 4vh;
+}
 .sideContainer p {
-    margin: 0px;
+  margin: 0px;
 }
 
 .sideContainer h3 {
-    margin: 0px !important;
-    margin-bottom: 12px !important;
+  margin: 0px !important;
+  margin-bottom: 12px !important;
 }
 
 .codeWrapper p,
 .sideContainer h3 {
-    margin: 0px;
-    user-select: none;
-    margin-bottom: 8px;
-    font-weight: 700;
-    margin-left: 12px;
-    font-size: 14px;
-    font-family: var(--jb-font) !important;
-    color: var(--tip-color);
+  margin: 0px;
+  user-select: none;
+  margin-bottom: 8px;
+  font-weight: 700;
+  margin-left: 12px;
+  font-size: 14px;
+  font-family: var(--jb-font) !important;
+  color: var(--tip-color);
 }
 
-
 .grid {
-    display: grid;
-    grid-template-columns: 0.3fr 1fr;
-    grid-template-rows: 1fr;
+  display: grid;
+  grid-template-columns: 0.3fr 1fr;
+  grid-template-rows: 1fr;
 
-    gap: 16px;
+  gap: 16px;
 }
 
 .caseChild {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 0.5fr 1fr;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.5fr 1fr;
 
-    gap: 16px;
-
+  gap: 16px;
 }
 
 .moveButtons {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .moveButtons button {
-    background: var(--background-dark);
-    border: 2px solid var(--border);
-    padding: 8px 12px;
-    color: var(--accent);
-    border-radius: 8px;
-    font-family: var(--jb-font);
-    cursor: pointer;
+  background: var(--background-dark);
+  border: 2px solid var(--border);
+  padding: 8px 12px;
+  color: var(--accent);
+  border-radius: 8px;
+  font-family: var(--jb-font);
+  cursor: pointer;
 }
 
 .moveButtons button:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
+  opacity: 0.3;
+  cursor: not-allowed;
 }

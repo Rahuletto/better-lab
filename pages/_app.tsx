@@ -1,11 +1,12 @@
 import "@/styles/globals.css";
+import 'bootstrap/dist/css/bootstrap.css';
 import "react-loading-skeleton/dist/skeleton.css";
 
 import type { AppProps } from "next/app";
 
-import { JetBrains_Mono, Inter, Space_Grotesk } from "next/font/google";
-import { useEffect } from "react";
 import { Analytics } from "@vercel/analytics/react";
+import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
+import { useEffect } from "react";
 
 const jb = JetBrains_Mono({
   fallback: ["monospace"],

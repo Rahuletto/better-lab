@@ -2,20 +2,20 @@
   --font-mono: var(--jb-font), monospace;
   font-family: var(--main-font);
 
-  --background: #12161C;
-  --background-light: #14181F;
-  --background-dark: #161B22;
+  --background: #12161c;
+  --background-light: #14181f;
+  --background-dark: #161b22;
 
-  --code-editor: #0D1117;
-  --border: #30363D;
+  --code-editor: #0d1117;
+  --border: #30363d;
 
   --color: #c8c8c8;
-  --tip-color: #30363D;
-  --accent: #A0AAB6;
+  --tip-color: #30363d;
+  --accent: #a0aab6;
 
-  --red: #D13333;
-  --green: #65D133;
-  --yellow: #FFCA63;
+  --red: #d13333;
+  --green: #65d133;
+  --yellow: #ffca63;
 }
 
 a {
@@ -37,64 +37,15 @@ input {
   box-sizing: border-box;
 }
 
-dialog form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+div {
+  background-color: var(--background) !important;
 }
-
-dialog {
-  background: #545f70;
-  border-radius: 50px;
-  border: none;
-  z-index: 20;
-}
-
-dialog div {
-  margin-bottom: 6px;
-  display: flex;
-  gap: 16px;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0px 8px;
-  border-radius: 50px;
-  color: #0e0e0e;
-}
-
-dialog form button {
-  padding: 6px 12px;
-  font-family: var(--root-font);
-  background: #c4ffcb;
-  border-radius: 50px;
-  font-weight: 700;
-  height: 38px;
-  color: #17191b;
-  transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-dialog form button:hover {
-  transform: scale(0.98);
-  cursor: pointer;
-  box-shadow: 0px 0px 24px #c4ffcb;
-}
-
-dialog form {
-  display: flex;
-  gap: 8px;
-  flex-direction: column;
-  width: 100%;
-  padding: 14px 12px;
-  border-radius: 38px;
-  color: #0e0e0e;
-}
-
 html {
   text-rendering: optimizeLegibility !important;
   background-color: var(--background);
   color: var(--color);
   padding: 18px;
 }
-
 
 ::-webkit-scrollbar {
   width: 1px;
@@ -242,12 +193,11 @@ html {
   font-weight: 800 !important;
 }
 
-
 .cm-content {
   font-family: var(--jb-font) !important;
 }
 
-.cm-tooltip.cm-tooltip-autocomplete>ul::-webkit-scrollbar {
+.cm-tooltip.cm-tooltip-autocomplete > ul::-webkit-scrollbar {
   width: 2px;
 }
 
@@ -341,7 +291,7 @@ html {
   font-weight: 600;
 }
 
-.cm-tooltip-autocomplete>ul>li {
+.cm-tooltip-autocomplete > ul > li {
   display: flex;
   gap: 6px;
   align-items: center;
@@ -351,8 +301,7 @@ html {
   outline: none !important;
 }
 
-
-input[type="color"] {
+input[type='color'] {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -363,12 +312,12 @@ input[type="color"] {
   cursor: pointer;
 }
 
-input[type="color"]::-webkit-color-swatch {
+input[type='color']::-webkit-color-swatch {
   border-radius: 2px !important;
   border: none;
 }
 
-input[type="color"]::-moz-color-swatch {
+input[type='color']::-moz-color-swatch {
   border-radius: 2px !important;
   border: none;
 }
@@ -406,7 +355,6 @@ input[type="color"]::-moz-color-swatch {
   border-radius: 16px !important;
 }
 
-
 :root {
   --contexify-menu-bgColor: var(--background) !important;
   --contexify-separator-color: var(--background-dark) !important;
@@ -436,5 +384,4 @@ html {
 
 .cm-gutters {
   background-color: transparent !important;
-
 }
