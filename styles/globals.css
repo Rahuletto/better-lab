@@ -18,43 +18,6 @@
   --yellow: #FFCA63;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-h1,
-h2,
-h3,
-h4,
-p,
-button,
-input {
-  font-family: var(--main-font);
-}
-
-* {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-}
-
-html {
-  text-rendering: optimizeLegibility !important;
-  background-color: var(--background);
-  color: var(--color);
-  padding: 18px;
-}
-
-code {
-  background: var(--background);
-  border: 1px solid var(--border);
-  padding: 4px 10px;
-  border-radius: 8px;
-  font-family: var(--jb-font);
-  font-size: 14px;
-  display: block;
-  margin: 4px 0px;
-}
 ::-webkit-scrollbar {
   width: 16px;
 }
@@ -86,19 +49,70 @@ code {
   display: none;
 }
 
-p::-moz-selection, br::-moz-selection, h1::-moz-selection, h2::-moz-selection, code::-moz-selection {
+p::-moz-selection,
+br::-moz-selection,
+h1::-moz-selection,
+h2::-moz-selection,
+code::-moz-selection {
   background-color: var(--accent);
   color: var(--background)
 }
 
-p::selection, br::selection, h1::selection, h2::selection, code::selection {
+p::selection,
+br::selection,
+h1::selection,
+h2::selection,
+code::selection {
   background-color: var(--accent);
   color: var(--background)
 }
 
-p::-moz-selection, br::-moz-selection, h1::-moz-selection,h2::-moz-selection, code::-moz-selection  {
+p::-moz-selection,
+br::-moz-selection,
+h1::-moz-selection,
+h2::-moz-selection,
+code::-moz-selection {
   background-color: var(--accent);
   color: var(--background)
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+button,
+input {
+  font-family: var(--main-font);
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html {
+  text-rendering: optimizeLegibility !important;
+  background-color: var(--background);
+  color: var(--color);
+  padding: 18px;
+}
+
+code {
+  background: var(--background);
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-family: var(--jb-font);
+  font-size: 14px;
+  display: block;
+  margin: 4px 0px;
+  white-space: pre-line;
 }
 
 .cm-tooltip-autocomplete {
@@ -153,9 +167,9 @@ p::-moz-selection, br::-moz-selection, h1::-moz-selection,h2::-moz-selection, co
 
 .cm-gutter {
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .cm-editor {
@@ -203,7 +217,7 @@ p::-moz-selection, br::-moz-selection, h1::-moz-selection,h2::-moz-selection, co
 
 .cm-tooltip-autocomplete {
   -webkit-box-shadow: 0px 0px 10px var(--background-dark) !important;
-          box-shadow: 0px 0px 10px var(--background-dark) !important;
+  box-shadow: 0px 0px 10px var(--background-dark) !important;
   border-radius: 8px;
   padding: 4px;
   background: var(--background-dark) !important;
@@ -220,8 +234,8 @@ p::-moz-selection, br::-moz-selection, h1::-moz-selection,h2::-moz-selection, co
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   gap: 6px;
 }
 
@@ -336,8 +350,8 @@ p::-moz-selection, br::-moz-selection, h1::-moz-selection,h2::-moz-selection, co
   display: flex;
   gap: 6px;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .cm-css-color-picker-wrapper {
@@ -376,7 +390,7 @@ input[type="color"]::-moz-color-swatch {
 
 .react-loading-skeleton:after {
   -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-          animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 /* CONTEXT MENU */
@@ -432,4 +446,20 @@ html {
 
 .cm-gutters {
   background-color: transparent !important;
+}
+
+@media only screen and (max-width: 690px) {
+  .cm-scroller {
+    width: 89vw
+  }
+}
+
+@media only screen and (max-width: 460px) {
+  html {
+    padding: 6px;
+  }
+
+  body {
+    margin: 0px;
+  }
 }

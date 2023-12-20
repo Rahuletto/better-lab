@@ -36,7 +36,7 @@ const Question = () => {
 	const [num, setNum] = useState<number>(75);
 	const [user, setUser] = useState<string>("401123438381");
 	const [data, setData] = useState<DataStream | null>(null);
-	const [qid, setQid] = useState(null);
+
 	const [opn, setOpn] = useState(false);
 
 	const [code, setCode] = useState("");
@@ -54,20 +54,37 @@ const Question = () => {
 	useEffect(() => {
 		if (num) {
 			const val = localStorage.getItem("code-" + num);
-			if (val) setCode(String(val));
+			if (val) {
+				setCode(String(val));
+			}
 		}
-	}, [num]);
+	}, [data]);
 
 	async function run() {
+		if (!data) return;
 
-  }
+		fetch("/api/run?user=" + user, {
+			method: "POST",
+			body: JSON.stringify({
+				qid: data?.studentData.Q_ID,
+				code: code,
+				language: "c",
+				course: {
+					name: data?.questionData.COURSE_NAME,
+					id: data?.studentData.COURSE_ID,
+				},
+			}),
+		})
+			.then((d) => d.json())
+			.then((a) => console.log(a));
+		return true;
+	}
 
 	async function getQuestion() {
 		fetch("/api/question?id=" + num + "&user=" + user)
 			.then((d) => d.json())
 			.then((a) => {
 				setData(a);
-				setQid(a.studentData.Q_ID);
 				setOpn(false);
 			});
 		return true;
@@ -198,7 +215,7 @@ const Question = () => {
 
 				<div className={styles.codeWrapper}>
 					<p>Code Editor</p>
-					<button className={styles.run}>
+					<button onClick={run} className={styles.run}>
 						<FaSquareCheck /> Submit
 					</button>
 					<CodeEditor code={code} language={language} onChange={onChange} />
