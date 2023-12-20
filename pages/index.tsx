@@ -5,7 +5,7 @@ const Home = () => {
 
 export default Home;
 
-type DataStream = {
+export type DataStream = {
 	Status: number;
 	studentData: {
 		_id: number;
