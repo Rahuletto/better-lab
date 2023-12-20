@@ -5,13 +5,14 @@
   border: 2px solid var(--border);
   padding: 8px 4px;
   border-radius: 20px;
-  height: 86.5vh;
   width: -webkit-fill-available;
+  min-height: 86vh;
 }
 
 .codeWrapper p{
   margin: 0px;
-  margin-bottom: 12px;
+  user-select: none;
+  margin-bottom: 8px;
   font-weight: 700;
   margin-left: 12px;
   font-size: 14px;

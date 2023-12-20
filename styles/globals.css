@@ -1,6 +1,6 @@
 :root {
   --font-mono: var(--jb-font), monospace;
-  font-family: "Inter";
+  font-family: var(--main-font);
 
   --background: #12161C;
   --background-light: #14181F;
@@ -21,6 +21,10 @@
 a {
   color: inherit;
   text-decoration: none;
+}
+
+h1, h2, h3, h4, p, button, input {
+  font-family: var(--main-font);
 }
 
 * {
@@ -75,6 +79,40 @@ dialog form {
   padding: 14px 12px;
   border-radius: 38px;
   color: #0e0e0e;
+}
+
+html {
+  text-rendering: optimizeLegibility !important;
+  overflow-x: hidden;
+  background-color: var(--background);
+  color: var(--color);
+}
+
+
+::-webkit-scrollbar {
+  width: 1px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-track:hover {
+  background-color: transparent;
+}
+
+/* scrollbar itself */
+::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 16px;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
 }
 
 .cm-tooltip-autocomplete {
