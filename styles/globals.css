@@ -18,6 +18,64 @@
   --yellow: #ffca63;
 }
 
+::-webkit-scrollbar {
+  width: 16px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--code-editor);
+}
+
+::-webkit-scrollbar-track:hover {
+  background-color: var(--code-editor);
+}
+
+/* scrollbar itself */
+::-webkit-scrollbar-thumb {
+  background: var(--tip-color);
+  border-radius: 16px;
+  border: 6px solid var(--code-editor);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  border: 5px solid var(--code-editor);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--code-editor);
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+p::-moz-selection,
+br::-moz-selection,
+h1::-moz-selection,
+h2::-moz-selection,
+code::-moz-selection {
+  background-color: var(--accent);
+  color: var(--background)
+}
+
+p::selection,
+br::selection,
+h1::selection,
+h2::selection,
+code::selection {
+  background-color: var(--accent);
+  color: var(--background)
+}
+
+p::-moz-selection,
+br::-moz-selection,
+h1::-moz-selection,
+h2::-moz-selection,
+code::-moz-selection {
+  background-color: var(--accent);
+  color: var(--background)
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -34,8 +92,10 @@ input {
 }
 
 * {
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
+
 
 div {
   background-color: var(--background) !important;
@@ -47,30 +107,16 @@ html {
   padding: 18px;
 }
 
-::-webkit-scrollbar {
-  width: 1px;
-}
-
-::-webkit-scrollbar-track {
-  background-color: transparent;
-}
-
-::-webkit-scrollbar-track:hover {
-  background-color: transparent;
-}
-
-/* scrollbar itself */
-::-webkit-scrollbar-thumb {
-  background: transparent;
-  border-radius: 16px;
-}
-
-::-webkit-scrollbar-corner {
-  background: transparent;
-}
-
-::-webkit-scrollbar-button {
-  display: none;
+code {
+  background: var(--background);
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-family: var(--jb-font);
+  font-size: 14px;
+  display: block;
+  margin: 4px 0px;
+  white-space: pre-line;
 }
 
 .cm-tooltip-autocomplete {
@@ -124,6 +170,9 @@ html {
 }
 
 .cm-gutter {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
 }
 
@@ -134,14 +183,16 @@ html {
 }
 
 .cm-panels {
-  bottom: 10px !important;
+  bottom: 41px !important;
+  z-index: 2;
+  position: relative !important;
   padding: 5px;
   background: var(--background-dark) !important;
   border-radius: 14px;
 }
 
 .cm-button {
-  background: var(--background-slight-dark) !important;
+  background: var(--background-dark) !important;
   border: 2px solid transparent !important;
   border-radius: 8px !important;
   font-family: var(--jb-font);
@@ -169,6 +220,7 @@ html {
 }
 
 .cm-tooltip-autocomplete {
+  -webkit-box-shadow: 0px 0px 10px var(--background-dark) !important;
   box-shadow: 0px 0px 10px var(--background-dark) !important;
   border-radius: 8px;
   padding: 4px;
@@ -182,7 +234,11 @@ html {
   border-radius: 5px;
   padding: 2px 4px;
   border: 1px solid transparent;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   gap: 6px;
 }
@@ -291,9 +347,11 @@ html {
   font-weight: 600;
 }
 
-.cm-tooltip-autocomplete > ul > li {
+.cm-tooltip-autocomplete>ul>li {
   display: flex;
   gap: 6px;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
 }
 
@@ -331,6 +389,7 @@ input[type='color']::-moz-color-swatch {
 }
 
 .react-loading-skeleton:after {
+  -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -372,6 +431,8 @@ html {
 
 .key span {
   display: inline-block;
+  -webkit-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  -o-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
   transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
   border: 1px solid var(--background-light);
   background: rgba(255, 255, 255, 0.1);
@@ -384,4 +445,20 @@ html {
 
 .cm-gutters {
   background-color: transparent !important;
+}
+
+@media only screen and (max-width: 690px) {
+  .cm-scroller {
+    width: 89vw
+  }
+}
+
+@media only screen and (max-width: 460px) {
+  html {
+    padding: 6px;
+  }
+
+  body {
+    margin: 0px;
+  }
 }

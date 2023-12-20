@@ -35,7 +35,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 	)
 		.then((dt) => dt.json())
 		.then((data) => {
-			console.log(data);
 			res.status(200).json(data);
 		});
 }
