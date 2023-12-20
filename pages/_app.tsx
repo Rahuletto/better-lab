@@ -3,7 +3,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 import type { AppProps } from "next/app";
 
-import { JetBrains_Mono, Inter } from "next/font/google";
+import { JetBrains_Mono, Inter, Space_Grotesk } from "next/font/google";
 import { useEffect } from "react";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -15,7 +15,14 @@ const jb = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--jb-font",
 });
-
+const space = Space_Grotesk({
+  fallback: ["sans-serif"],
+  weight: ["500", "700"],
+  display: "swap",
+  style: ["normal"],
+  subsets: ["latin"],
+  variable: "--space",
+});
 const inter = Inter({
   fallback: ["sans-serif"],
   weight: ["500", "700"],
@@ -60,6 +67,7 @@ export default function App({ Component, pageProps }: AppProps) {
           html {
             --jb-font: ${jb.style.fontFamily};
             --main-font: ${inter.style.fontFamily};
+            --space: ${space.style.fontFamily};
           }
 
         `}

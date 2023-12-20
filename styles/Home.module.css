@@ -8,8 +8,22 @@
   width: -webkit-fill-available;
   min-height: 86vh;
 }
+.sideContainer {
+  background: var(--background-light);
+  border: 2px solid var(--border);
+  border-radius: 18px;
+  padding: 8px 12px;
+}
 
-.codeWrapper p{
+.sideContainer p {
+  margin: 0px;
+}
+
+.sideContainer h3 {
+  margin: 0px !important;
+  margin-bottom: 12px !important;
+}
+.codeWrapper p, .sideContainer h3{
   margin: 0px;
   user-select: none;
   margin-bottom: 8px;

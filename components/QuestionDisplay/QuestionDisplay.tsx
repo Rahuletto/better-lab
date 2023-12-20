@@ -48,6 +48,8 @@ const Question = () => {
 	const [code, setCode] = useState("");
 	const [language, setLanguage] = useState(loadLanguage("c" as Languages));
 
+	const [page, setPage] = useState(0);
+
 	const onChange = useCallback((value: string) => {
 		if (num) localStorage.setItem("code-" + num, String(value));
 		setCode(value);
@@ -89,61 +91,112 @@ const Question = () => {
 			<button type="button" onClick={() => setOpn(true)}>
 				Edit
 			</button>
+
 			{data && <h2>{String(data?.questionData?.SESSION_NAME)}</h2>}
 			{data && (
 				<div
-					dangerouslySetInnerHTML={{ __html: String(data.questionData.Q_DESC) }}
+					dangerouslySetInnerHTML={{
+						__html: String(data.questionData.Q_DESC),
+					}}
 				/>
 			)}
-			<h2>Mandatory Case</h2>
-			{data &&
-				data.questionData.MANDATORY.map((e: any) => {
-					return (
-						<div key={e.id}>
-							<h3>Mandatory Case</h3>
-							<p>{e}</p>
-						</div>
-					);
-				})}
-			<h2>Test Case</h2>
-			{data &&
-				data.questionData.TESTCASES.map(
-					(e: { _id: number; INPUT: string; OUTPUT: string }) => {
-						return (
-							<div key={e._id}>
-								<h3>TEST CASE {e._id}</h3>
-								<div
-									dangerouslySetInnerHTML={{ __html: String(e.INPUT) }}
-								></div>
-								<div
-									dangerouslySetInnerHTML={{ __html: String(e.OUTPUT) }}
-								></div>
-							</div>
-						);
-					},
-				)}
-
-			<h2>Output</h2>
-			<div className={styles.codeWrapper}>
-				<p>Code Editor</p>
-				<CodeEditor code={code} language={language} onChange={onChange} />
-				<p
-					style={{
-						textAlign: "right",
-						marginRight: "12px",
-						marginBottom: 0,
-						opacity: 0.7,
-					}}
-				>
-					Powered by{" "}
-					<a
-						href="https://execoder.vercel.app"
-						target="_blank"
-						style={{ color: "#a8aceb" }}
+			<div className="grid">
+				<div className="case-child">
+					<div
+						className={styles.sideContainer}
+						style={{
+							display: "flex",
+							flexDirection: "column",
+							justifyContent: "space-between",
+						}}
 					>
-						Execoder
-					</a>
-				</p>
+						<div>
+							<h3>Mandatory Case</h3>
+							{data && (
+								<>
+									<div>
+										<p>{data.questionData.MANDATORY[page]}</p>
+									</div>
+								</>
+							)}
+						</div>
+						{data &&
+							(data.questionData.MANDATORY.length > 1 ? (
+								<div className="move-buttons">
+									<button
+										disabled={page <= 0}
+										onClick={() => setPage((i) => i - 1)}
+									>
+										{"<"}
+									</button>
+									<button
+										disabled={page >= data.questionData.MANDATORY.length - 1}
+										onClick={() => setPage((i) => i + 1)}
+									>
+										{">"}
+									</button>
+								</div>
+							) : null)}
+					</div>
+					<div className={styles.sideContainer}>
+						<h3>Test Case</h3>
+						{data &&
+							data.questionData.TESTCASES.map(
+								(e: { _id: number; INPUT: string; OUTPUT: string }) => {
+									return (
+										<div key={e._id}>
+											<p
+												style={{
+													color: "var(--accent)",
+													fontFamily: "var(--space)",
+													fontSize: 16,
+												}}
+											>
+												Input
+											</p>
+											<code
+												dangerouslySetInnerHTML={{ __html: String(e.INPUT) }}
+											></code>
+											<p
+												style={{
+													color: "var(--accent)",
+													fontFamily: "var(--space)",
+													fontSize: 16,
+												}}
+											>
+												Output
+											</p>
+											<code
+												dangerouslySetInnerHTML={{ __html: String(e.OUTPUT) }}
+											></code>
+										</div>
+									);
+								},
+							)}
+					</div>
+				</div>
+
+				<div className={styles.codeWrapper}>
+					<p>Code Editor</p>
+					<CodeEditor code={code} language={language} onChange={onChange} />
+					<p
+						style={{
+							textAlign: "right",
+							marginRight: "12px",
+							marginBottom: 0,
+							opacity: 0.7,
+						}}
+					>
+						Powered by{" "}
+						<a
+							href="https://execoder.vercel.app"
+							target="_blank"
+							style={{ color: "#a8aceb" }}
+						>
+							Execoder
+						</a>
+					</p>
+				</div>
 			</div>
 		</>
 	);

@@ -23,7 +23,13 @@ a {
   text-decoration: none;
 }
 
-h1, h2, h3, h4, p, button, input {
+h1,
+h2,
+h3,
+h4,
+p,
+button,
+input {
   font-family: var(--main-font);
 }
 
@@ -36,6 +42,7 @@ dialog form {
   flex-direction: column;
   align-items: center;
 }
+
 dialog {
   background: #545f70;
   border-radius: 50px;
@@ -83,9 +90,9 @@ dialog form {
 
 html {
   text-rendering: optimizeLegibility !important;
-  overflow-x: hidden;
   background-color: var(--background);
   color: var(--color);
+  padding: 18px;
 }
 
 
@@ -192,6 +199,7 @@ html {
   background: var(--background-light) !important;
   text-transform: capitalize;
 }
+
 .cm-textfield {
   outline: none !important;
   border: 0px none !important;
@@ -201,6 +209,7 @@ html {
   padding: 4px 8px !important;
   font-family: var(--jb-font) !important;
 }
+
 .cm-panel label {
   font-size: 14px !important;
   color: var(--accent);
@@ -215,7 +224,7 @@ html {
   background: var(--background-dark) !important;
 }
 
- .cm-tooltip li {
+.cm-tooltip li {
   color: var(--accent);
   font-family: var(--jb-font);
   font-size: 14px;
@@ -238,7 +247,7 @@ html {
   font-family: var(--jb-font) !important;
 }
 
-.cm-tooltip.cm-tooltip-autocomplete > ul::-webkit-scrollbar {
+.cm-tooltip.cm-tooltip-autocomplete>ul::-webkit-scrollbar {
   width: 2px;
 }
 
@@ -332,7 +341,7 @@ html {
   font-weight: 600;
 }
 
-.cm-tooltip-autocomplete > ul > li {
+.cm-tooltip-autocomplete>ul>li {
   display: flex;
   gap: 6px;
   align-items: center;
@@ -428,4 +437,35 @@ html {
 .cm-gutters {
   background-color: transparent !important;
 
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 0.3fr 1fr;
+  grid-template-rows: 1fr;
+
+  gap: 16px;
+}
+
+.case-child {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.5fr 1fr;
+
+  gap: 16px;
+
+}
+
+.move-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.move-buttons button {
+  background: var(--background-dark);
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  color: var(--accent);
+  border-radius: 8px;
+  font-family: var(--jb-font);
 }
