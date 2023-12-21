@@ -78,23 +78,29 @@ const Question = () => {
 	}
 
 	function handleNextQuestionOnClick() {
-		getCourseInfo();
-		(document.getElementById("wheel") as HTMLDialogElement).showModal();
+		getCourseInfo().then((a) => {
+			(document.getElementById("wheel") as HTMLDialogElement).showModal();
+		});
 	}
 	async function getCourseInfo() {
-		fetch("/api/circle?user=" + user, {
-			method: "POST",
-			body: JSON.stringify({
-				course: {
-					name: "PYTHON",
-					id: 14,
-				},
-			}),
-		})
-			.then((d) => d.json())
-			.then((a) => {
-				setCourseData(a);
-			});
+		return new Promise((resolve) => {
+			const [id, l] = lang.split("|");
+
+			fetch("/api/circle?user=" + user, {
+				method: "POST",
+				body: JSON.stringify({
+					course: {
+						name: l,
+						id: Number(id),
+					},
+				}),
+			})
+				.then((d) => d.json())
+				.then((a) => {
+					setCourseData(a);
+					resolve(true);
+				});
+		});
 	}
 
 	function dialogHandler(e: MouseEvent | any) {
