@@ -23,7 +23,7 @@ const Question = () => {
 	const [user, setUser] = useState<string>();
 	const [data, setData] = useState<DataStream | null>(null);
 	const [res, setRes] = useState<CompileMsg | null>(null);
-
+  const [nextQuestion, setNextQuestion] = useState(false);
 	const [opn, setOpn] = useState(false);
 
 	const [code, setCode] = useState("");
@@ -76,7 +76,10 @@ const Question = () => {
 			});
 		return true;
 	}
-
+  function handleNextQuestionOnClick() {
+    getCourseInfo();
+    setNextQuestion(true);
+  }
 	async function getCourseInfo() {
 		fetch("/api/circle?user=" + user, {
 			method: "POST",
@@ -141,7 +144,9 @@ const Question = () => {
 					</div>
 				</div>
 			</dialog>
-
+      <dialog className={styles.dialog} open={nextQuestion}>
+        {courseData && <QuestionsProgress courseData={courseData} />}
+      </dialog>
 			<div className={styles.qna}>
 				{data && <h2>{String(data?.questionData?.SESSION_NAME)}</h2>}
 				{data && (
@@ -170,7 +175,16 @@ const Question = () => {
 						onClick={() => setOpn(true)}
 					>
 						Settings
-					</button>
+        </button>
+        </div>
+        <div className="col-6 d-flex justify-content-end">
+          <button
+            style={{ width: '6vw', textAlign: 'center' }}
+            className={styles.closebutton}
+            onClick={handleNextQuestionOnClick}
+          >
+            Next Question
+  					</button>
 				</div>
 			</div>
 			<div className={styles.grid}>
