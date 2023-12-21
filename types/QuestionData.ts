@@ -1,4 +1,4 @@
-export type DataStream = {
+export type QuestionData = {
 	Status: number;
 	studentData: {
 		_id: number;

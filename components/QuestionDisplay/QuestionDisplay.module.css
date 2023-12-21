@@ -234,6 +234,7 @@
   gap: 12px;
   margin-bottom: 24px;
   color: var(--color);
+  padding: 7px 14px;
 }
 
 .qna h2 {
@@ -408,13 +409,17 @@
 
 @media only screen and (max-width: 620px) {
   .grid {
-    grid-template-columns: 1fr;
-    grid-template-rows: 0.3fr 1fr;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .qna {
+    padding: 0px;
   }
 
   .caseChild {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
   }
 
 }

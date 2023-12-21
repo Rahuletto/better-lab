@@ -1,4 +1,4 @@
-export type CompileMsg = {
+export type CompilerResponse = {
     Status: number,
     msg: string | null,
     result: {

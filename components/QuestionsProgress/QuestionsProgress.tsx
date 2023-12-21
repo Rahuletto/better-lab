@@ -1,9 +1,18 @@
 import { useState } from "react";
 import styles from "./QuestionProgress.module.css";
+
+import { CourseInfo } from "@/types";
+
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
-const QuestionsProgress = ({ courseData, setNum, num }) => {
+
+const QuestionsProgress = ({
+	courseData,
+	setNum,
+	num,
+}: { courseData: CourseInfo; setNum: Function; num: number | undefined }) => {
 	const [index, setIndex] = useState(0);
-	function handleOnClick(e) {
+
+	function handleOnClick(e: string) {
 		if (e == "next" && index < courseData.flare.children.length - 1) {
 			setIndex(index + 1);
 		} else if (index > 0) {

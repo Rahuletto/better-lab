@@ -1,10 +1,18 @@
 import { useCallback, useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
 import styles from "./QuestionDisplay.module.css";
 
-import { CompileMsg } from "@/types/CompileMsg";
-import { DataStream } from "@/types/DataStream";
+import {
+	Languages,
+	QuestionData,
+	CompilerResponse,
+	RegisteredCourse,
+	CourseInfo,
+} from "@/types";
 
-import dynamic from "next/dynamic";
+import { loadLanguage } from "@uiw/codemirror-extensions-langs";
+
 const CodeEditor = dynamic(
 	() => import("../CodeEditor/Editor").then((mod) => mod.default),
 	{ ssr: false },
@@ -16,10 +24,6 @@ const QuestionsProgress = dynamic(
 		),
 	{ ssr: false },
 );
-const RiEmotionHappyFill = dynamic<React.ComponentProps<IconType>>(
-	() => import("react-icons/ri").then((mod) => mod.RiEmotionHappyFill),
-	{ ssr: false }
-  );
 
 import {
 	FaAngleLeft,
@@ -27,78 +31,61 @@ import {
 	FaGear,
 	FaSquareCheck,
 } from "react-icons/fa6";
-
-import { Languages } from "@/types/Languages";
-import { loadLanguage } from "@uiw/codemirror-extensions-langs";
-import { useRouter } from "next/router";
 import { TbProgressBolt } from "react-icons/tb";
-import { IconType } from "react-icons";
+import { RiEmotionHappyFill } from "react-icons/ri";
 
 const Question = () => {
 	const router = useRouter();
 
-	const [num, setNum] = useState<number>();
-	const [user, setUser] = useState<string>();
-	const [data, setData] = useState<DataStream | null>(null);
-	const [registered, setRegistered] = useState<any>(null);
+	const [num, setNum] = useState<number>(); // Question number
+	const [user, setUser] = useState<string>(); // UserID
 
-	const [res, setRes] = useState<CompileMsg | null>(null);
+	const [qData, setQData] = useState<QuestionData | null>(null); // Question Data
+	const [regData, setRegData] = useState<RegisteredCourse | null>(null); // Registered Course
+	const [compileData, setCompileData] = useState<CompilerResponse | null>(null); // Compiler Response
 
-	const [lang, setlang] = useState("11|C");
+	const [courseId, setCourseId] = useState("11|C"); // The course they currently working on
 
-	const [code, setCode] = useState("");
-	const [language, setLanguage] = useState(loadLanguage("c" as Languages));
+	const [code, setCode] = useState(""); // The code
+	const [language, setLanguage] = useState(
+		loadLanguage(("c" as Languages) || "shell"),
+	); // Language of such course in codeblock
 
-	const [page, setPage] = useState(0);
-	const [testpage, setTest] = useState(0);
-	const [courseData, setCourseData] = useState<any>(null);
+	const [courseData, setCourseData] = useState<CourseInfo | null>(null); // All course data (the wheel)
 
+	const [mandatoryPage, setMandatoryPage] = useState(0); // Mandatory case pagination
+	const [tcasePage, setTCasePage] = useState(0); // Test case pagination
+
+	// Changes happen in Codeblock happens here
 	const onChange = useCallback((value: string) => {
 		if (num && value)
 			localStorage.setItem(
-				"code-" + lang.split("|")[1] + "-" + num,
+				"code-" + courseId.split("|")[1] + "-" + num,
 				String(value),
 			);
 		setCode(value);
 		return;
 	}, []);
 
-	async function getQuestion(n: number) {
-		const cid = lang.split("|")[0];
-		const reg = registered.courses.find((a: any) => a.COURSE_ID == cid);
+	// Initial Render
+	useEffect(() => {
+		const us = localStorage.getItem("userid");
+		if (!us) router.push("/login");
+		else setUser(us);
 
-		fetch("/api/question?id=" + n + "&user=" + user, {
-			method: "POST",
-			body: JSON.stringify({
-				course: {
-					id: reg.COURSE_ID,
-					name: reg.COURSE_NAME,
-				},
-			}),
-		})
-			.then((d) => d.json())
-			.then((a: DataStream) => {
-				setData(a);
-				if (a.studentData.CODE[0]?.value) {
-					setCode(a.studentData.CODE[0].value);
-					localStorage.setItem(
-						"code-" + lang.split("|")[1] + "-" + n,
-						String(a.studentData.CODE[0].value),
-					);
-				}
-			});
-		return true;
-	}
+		const lan = localStorage.getItem("course");
+		if (lan) setCourseId(lan);
+	}, []);
 
 	useEffect(() => {
-		setPage(0)
-		setTest(0)
-		
+		setMandatoryPage(0);
+		setTCasePage(0);
+
 		setTimeout(() => {
 			setCode("");
 			if (num) {
 				const cd = localStorage.getItem(
-					"code-" + lang.split("|")[1] + "-" + num,
+					"code-" + courseId.split("|")[1] + "-" + num,
 				);
 				if (cd) setCode(cd);
 			}
@@ -108,13 +95,60 @@ const Question = () => {
 			getQuestion(num);
 			(document.getElementById("wheel") as HTMLDialogElement).close();
 		}
-		setRes(null)
-	}, [num, lang]);
+		setCompileData(null);
+	}, [num, courseId]);
 
 	useEffect(() => {
-		const l = lang.split("|")[1];
-		setLanguage(loadLanguage(l.toLowerCase() as Languages));
-	}, [lang]);
+		const l = courseId.split("|")[1];
+		setLanguage(loadLanguage((l.toLowerCase() as Languages) || "shell"));
+	}, [courseId]);
+
+	useEffect(() => {
+		if (user) {
+			fetch("/api/getreg?user=" + user)
+				.then((d) => d.json())
+				.then((a) => {
+					setRegData(a);
+				});
+
+			const wheel = document.getElementById("wheel") as HTMLDialogElement;
+			const settings = document.getElementById("settings") as HTMLDialogElement;
+
+			wheel?.addEventListener("click", (e: any) => {
+				dialogHandler(e);
+			});
+			settings?.addEventListener("click", (e: any) => {
+				dialogHandler(e);
+			});
+		}
+	}, [user]);
+
+	async function getQuestion(n: number) {
+		const cid = courseId.split("|")[0];
+		const reg = regData?.courses.find((a: any) => a.COURSE_ID == cid);
+
+		fetch("/api/question?id=" + n + "&user=" + user, {
+			method: "POST",
+			body: JSON.stringify({
+				course: {
+					id: reg?.COURSE_ID,
+					name: reg?.COURSE_NAME,
+				},
+			}),
+		})
+			.then((d) => d.json())
+			.then((a: QuestionData) => {
+				setQData(a);
+				if (a.studentData.CODE[0]?.value) {
+					setCode(a.studentData.CODE[0].value);
+					localStorage.setItem(
+						"code-" + courseId.split("|")[1] + "-" + n,
+						String(a.studentData.CODE[0].value),
+					);
+				}
+			});
+		return true;
+	}
 
 	function handleNextQuestionOnClick() {
 		getCourseInfo().then((a) => {
@@ -124,7 +158,7 @@ const Question = () => {
 
 	async function getCourseInfo() {
 		return new Promise((resolve) => {
-			const [id, l] = lang.split("|");
+			const [id, l] = courseId.split("|");
 			if (user) {
 				fetch("/api/circle?user=" + user, {
 					method: "POST",
@@ -144,44 +178,24 @@ const Question = () => {
 		});
 	}
 
-	useEffect(() => {
-		if (user) {
-			fetch("/api/getreg?user=" + user)
-				.then((d) => d.json())
-				.then((a) => {
-					setRegistered(a);
-				});
-
-			const wheel = document.getElementById("wheel") as HTMLDialogElement;
-			const settings = document.getElementById("settings") as HTMLDialogElement;
-
-			wheel?.addEventListener("click", (e: any) => {
-				dialogHandler(e);
-			});
-			settings?.addEventListener("click", (e: any) => {
-				dialogHandler(e);
-			});
-		}
-	}, [user]);
-
 	async function run() {
-		if (!data) return;
+		if (!qData) return;
 		const box = document.getElementById("result");
 		fetch("/api/run?user=" + user + "&id=" + num, {
 			method: "POST",
 			body: JSON.stringify({
-				qid: data?.studentData.Q_ID,
+				qid: qData?.studentData.Q_ID,
 				code: code,
-				language: lang.split("|")[1].toLowerCase(),
+				language: courseId.split("|")[1].toLowerCase(),
 				course: {
-					name: data?.questionData.COURSE_NAME,
-					id: data?.studentData.COURSE_ID,
+					name: qData?.questionData.COURSE_NAME,
+					id: qData?.studentData.COURSE_ID,
 				},
 			}),
 		})
 			.then((d) => d.json())
 			.then((a) => {
-				setRes(a);
+				setCompileData(a);
 				box?.scrollIntoView({ behavior: "smooth" });
 			});
 		return true;
@@ -203,17 +217,8 @@ const Question = () => {
 		if (clickedInDialog === false) e.target.close();
 	}
 
-	useEffect(() => {
-		const us = localStorage.getItem("userid");
-		if (!us) router.push("/login");
-		else setUser(us);
-
-		const lan = localStorage.getItem("course");
-		if (lan) setlang(lan);
-	}, []);
-
 	return (
-		<>
+		<main>
 			<dialog className={styles.dialog} id="settings" style={{ paddingBottom: "24px !important" }}>
 				<div className="container d-flex flex-column justify-content-around">
 					<div className="row">
@@ -252,12 +257,12 @@ const Question = () => {
 								</div>
 								<div style={{ display: "flex", gap: 8, alignItems: "center" }}>
 									<p style={{ margin: 0, color: "var(--level-text)" }}>Course: </p>
-									<select value={lang} onChange={(e) => {
+									<select value={courseId} onChange={(e) => {
 										localStorage.setItem('course', e.target.value)
-										setlang(e.target.value)
+										setCourseId(e.target.value)
 										}}>
-										{registered &&
-											registered.courses.map(
+										{regData &&
+											regData.courses.map(
 												(
 													el: { COURSE_ID: number; COURSE_NAME: string },
 													index: number,
@@ -293,11 +298,11 @@ const Question = () => {
 				</div>
 			</dialog>
 			<div className={styles.qna}>
-				{data && <h2>{String(data?.questionData?.SESSION_NAME)}</h2>}
-				{data && (
+				{qData && <h2>{String(qData?.questionData?.SESSION_NAME)}</h2>}
+				{qData && (
 					<div
 						dangerouslySetInnerHTML={{
-							__html: String(data.questionData.Q_DESC),
+							__html: String(qData.questionData.Q_DESC),
 						}}
 					/>
 				)}
@@ -345,56 +350,56 @@ const Question = () => {
 					</button>
 				</div>
 			</div>
-			{(data?.studentData.STATUS == 2 || res?.result.evalPercentage == "100.0") && (
+			{(qData?.studentData.STATUS == 2 || compileData?.result.evalPercentage == "100.0") && (
 				<div className={styles.completed}>
 					<RiEmotionHappyFill style={{fontSize: 18}} /><p> You have completed this exercise! YAY</p>
 				</div>
 			)}
 			<div className={styles.grid}>
 				<div className={styles.caseChild}>
-					<div className={styles.sideContainer} style={(data?.studentData.STATUS == 2 || res?.result.evalPercentage == "100.0") ? {borderColor: "var(--green)"} : {}}>
+					<div className={styles.sideContainer} style={(qData?.studentData.STATUS == 2 || compileData?.result.evalPercentage == "100.0") ? {borderColor: "var(--green)"} : {}}>
 						<div>
 							<h3>Mandatory Case</h3>
-							{data && (
+							{qData && (
 								<>
 									<div>
-										<p>{data.questionData.MANDATORY[page]}</p>
+										<p>{qData.questionData.MANDATORY[mandatoryPage]}</p>
 									</div>
 								</>
 							)}
 						</div>
-						{data &&
-							(data.questionData.MANDATORY.length > 1 ? (
+						{qData &&
+							(qData.questionData.MANDATORY.length > 1 ? (
 								<div className={styles.moveButtons}>
 									<button
-										disabled={page <= 0}
-										onClick={() => setPage((i) => i - 1)}
+										disabled={mandatoryPage <= 0}
+										onClick={() => setMandatoryPage((i) => i - 1)}
 									>
 										<FaAngleLeft />
 									</button>
 									<p>
-										{page + 1}/{data.questionData.MANDATORY.length}
+										{mandatoryPage + 1}/{qData.questionData.MANDATORY.length}
 									</p>
 									<button
-										disabled={page >= data.questionData.MANDATORY.length - 1}
-										onClick={() => setPage((i) => i + 1)}
+										disabled={mandatoryPage >= qData.questionData.MANDATORY.length - 1}
+										onClick={() => setMandatoryPage((i) => i + 1)}
 									>
 										<FaAngleRight />
 									</button>
 								</div>
 							) : null)}
 					</div>
-					<div className={styles.sideContainer} style={(data?.studentData.STATUS == 2 || res?.result.evalPercentage == "100.0") ? {borderColor: "var(--green)"} : {}}>
+					<div className={styles.sideContainer} style={(qData?.studentData.STATUS == 2 || compileData?.result.evalPercentage == "100.0") ? {borderColor: "var(--green)"} : {}}>
 						<div>
 							<h3>Test Case</h3>
-							{data && (
+							{qData && (
 								<div className={styles.testCase}>
 									<div>
 										<p>Input</p>
 										<code
 											dangerouslySetInnerHTML={{
 												__html: String(
-													data.questionData.TESTCASES[testpage].INPUT,
+													qData.questionData.TESTCASES[tcasePage].INPUT,
 												),
 											}}
 										></code>
@@ -404,7 +409,7 @@ const Question = () => {
 										<code
 											dangerouslySetInnerHTML={{
 												__html: String(
-													data.questionData.TESTCASES[testpage].OUTPUT,
+													qData.questionData.TESTCASES[tcasePage].OUTPUT,
 												),
 											}}
 										></code>
@@ -412,23 +417,23 @@ const Question = () => {
 								</div>
 							)}
 						</div>
-						{data &&
-							(data.questionData.TESTCASES.length > 1 ? (
+						{qData &&
+							(qData.questionData.TESTCASES.length > 1 ? (
 								<div className={styles.moveButtons}>
 									<button
-										disabled={testpage <= 0}
-										onClick={() => setTest((i) => i - 1)}
+										disabled={tcasePage <= 0}
+										onClick={() => setTCasePage((i) => i - 1)}
 									>
 										<FaAngleLeft />
 									</button>
 									<p>
-										{testpage + 1}/{data.questionData.TESTCASES.length}
+										{tcasePage + 1}/{qData.questionData.TESTCASES.length}
 									</p>
 									<button
 										disabled={
-											testpage >= data.questionData.TESTCASES.length - 1
+											tcasePage >= qData.questionData.TESTCASES.length - 1
 										}
-										onClick={() => setTest((i) => i + 1)}
+										onClick={() => setTCasePage((i) => i + 1)}
 									>
 										<FaAngleRight />
 									</button>
@@ -437,9 +442,9 @@ const Question = () => {
 					</div>
 				</div>
 
-				<div className={styles.codeWrapper} style={(data?.studentData.STATUS == 2 || res?.result.evalPercentage == "100.0") ? {borderColor: "var(--green)"} : {}}>
+				<div className={styles.codeWrapper} style={(qData?.studentData.STATUS == 2 || compileData?.result.evalPercentage == "100.0") ? {borderColor: "var(--green)"} : {}}>
 					<p>Code Editor</p>
-					<button onClick={run} disabled={code == "" || data?.studentData.STATUS == 2} className={styles.run}>
+					<button onClick={run} disabled={code == "" || qData?.studentData.STATUS == 2} className={styles.run}>
 						<FaSquareCheck /> Submit
 					</button>
 					<CodeEditor code={code} language={language} onChange={onChange} />
@@ -465,26 +470,26 @@ const Question = () => {
 				</div>
 			</div>
 			<div id="result">
-				{res && (
+				{compileData && (
 					<div className={styles.result} style={
-						res.result.evalPercentage == "100.0"
+						compileData.result.evalPercentage == "100.0"
 							? { borderColor: "var(--green)" }
-							: ( res.result.errorMsg ? { borderColor: "var(--red)" } : {})
+							: ( compileData.result.errorMsg ? { borderColor: "var(--red)" } : {})
 					}>
 						<h2
 							style={
-								res.result.statusCode != "200"
+								compileData.result.statusCode != "200"
 									? { color: "var(--red)" }
 									: { color: "var(--green)" }
 							}
 						>
-							{res.result.evalPercentage}%
+							{compileData.result.evalPercentage}%
 						</h2>
-						{res.result.errorMsg ? (
-							<pre className={styles.error}>{res.result.errorMsg}</pre>
+						{compileData.result.errorMsg ? (
+							<pre className={styles.error}>{compileData.result.errorMsg}</pre>
 						) : (
 							<div className={styles.resVar}>
-								{res.result.statusArray.map((el, ind) => {
+								{compileData.result.statusArray.map((el, ind) => {
 									return (
 										<div className={el.color} key={ind}>
 											<p>{el.msg}</p>
@@ -496,7 +501,7 @@ const Question = () => {
 					</div>
 				)}
 			</div>
-		</>
+		</main>
 	);
 };
 

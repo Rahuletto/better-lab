@@ -1,3 +1,4 @@
+import { CourseInfo } from "@/types";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -40,7 +41,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 		},
 	)
 		.then((dt) => dt.json())
-		.then((data) => {
+		.then((data: CourseInfo) => {
 			res.status(200).json(data);
 		});
 }
