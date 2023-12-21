@@ -426,6 +426,10 @@
     padding: 0px;
   }
 
+  .dialog input {
+    width: 150px;
+  }
+
   .caseChild {
     display: flex;
     flex-direction: column;

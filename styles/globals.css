@@ -511,15 +511,36 @@ html {
   margin: 0px;
 }
 
-@media only screen and (max-width: 690px) {
+#wheel-div {
+  overflow: none;
+}
+
+@media only screen and (max-width: 910px) {
   .cm-scroller {
-    width: 89vw;
+    max-width: initial;
+    width: 90vw;
+  }
+}
+@media only screen and (max-width: 690px) {
+
+  .cm-scroller {
+    max-width: initial;
+    width: 87vw;
+  }
+
+  #wheel-div {
+    overflow: auto;
   }
 }
 
 @media only screen and (max-width: 460px) {
   html {
     padding: 6px;
+  }
+
+  .cm-scroller {
+    max-width: initial;
+    width: 90vw;
   }
 
   body {
