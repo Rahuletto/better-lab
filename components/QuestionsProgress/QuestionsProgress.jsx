@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./QuestionProgress.module.css";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
-const QuestionsProgress = ({ courseData, setNum }) => {
+const QuestionsProgress = ({ courseData, setNum, num }) => {
 	const [index, setIndex] = useState(0);
 	function handleOnClick(e) {
 		if (e == "next" && index < courseData.flare.children.length - 1) {
@@ -35,13 +35,14 @@ const QuestionsProgress = ({ courseData, setNum }) => {
 											onClick={() => {
 												setNum(Number(el.name));
 											}}
-											className={
+											className={[
 												el.status == 2
 													? styles.greenSquare
 													: el.status == 1
 													  ? styles.yellowSquare
-													  : styles.redSquare
-											}
+													  : styles.redSquare,
+												num == Number(el.name) ? styles.active : "",
+											].join(" ")}
 										></div>
 									</>
 								);
@@ -63,13 +64,14 @@ const QuestionsProgress = ({ courseData, setNum }) => {
 											onClick={() => {
 												setNum(Number(el.children[0].name));
 											}}
-											className={
+											className={[
 												el.children[0].status == 2
 													? styles.greenSquare
 													: el.children[0].status == 1
 													  ? styles.yellowSquare
-													  : styles.redSquare
-											}
+													  : styles.redSquare,
+												num == Number(el.children[0].name) ? styles.active : "",
+											].join(" ")}
 										></div>
 									</>
 								);
@@ -91,13 +93,14 @@ const QuestionsProgress = ({ courseData, setNum }) => {
 											onClick={() => {
 												setNum(Number(el.children[0].children[0].name));
 											}}
-											className={
+											className={[
 												el.children[0].children[0].status == 2
 													? styles.greenSquare
 													: el.children[0].children[0].status == 1
 													  ? styles.yellowSquare
-													  : styles.redSquare
-											}
+													  : styles.redSquare,
+												num == Number(el.children[0].children[0].name) ? styles.active : "",
+											].join(" ")}
 										></div>
 									</>
 								);
@@ -114,7 +117,7 @@ const QuestionsProgress = ({ courseData, setNum }) => {
 				>
 					<FaAngleLeft />
 				</button>
-				<p style={{margin: 0, color: "var(--color)"}}>
+				<p style={{ margin: 0, color: "var(--color)" }}>
 					{index + 1}/{courseData.flare.children.length}
 				</p>
 				<button

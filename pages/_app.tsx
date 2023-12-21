@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import "react-loading-skeleton/dist/skeleton.css";
 
 import type { AppProps } from "next/app";
+import Head from "next/head"
 
 import { Analytics } from "@vercel/analytics/react";
 import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
@@ -74,6 +75,10 @@ export default function App({ Component, pageProps }: AppProps) {
         `}
 
       </style>
+
+      <Head>
+        <title>Better-Lab</title>
+      </Head>
 
       <Analytics />
       <Component {...pageProps} />

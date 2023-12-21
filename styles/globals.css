@@ -197,6 +197,7 @@ pre {
   font-size: 15px;
   outline: none;
   min-height: 75vh !important;
+  max-width: 70.8vw;
   max-height: -webkit-fill-available !important;
 }
 

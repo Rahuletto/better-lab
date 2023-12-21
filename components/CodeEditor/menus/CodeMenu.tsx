@@ -6,26 +6,22 @@ import { IconType } from "react-icons";
 
 const BiSearch = dynamic<React.ComponentProps<IconType>>(
   () => import("react-icons/bi").then((mod) => mod.BiSearch),
-  { ssr: true }
+  { ssr: false }
 );
 const BiSolidCopy = dynamic<React.ComponentProps<IconType>>(
   () => import("react-icons/bi").then((mod) => mod.BiSolidCopy),
-  { ssr: true }
+  { ssr: false }
 );
 const TbCut = dynamic<React.ComponentProps<IconType>>(
   () => import("react-icons/tb").then((mod) => mod.TbCut),
-  { ssr: true }
+  { ssr: false }
 );
 
 const LuClipboardPaste = dynamic<React.ComponentProps<IconType>>(
   () => import("react-icons/lu").then((mod) => mod.LuClipboardPaste),
-  { ssr: true }
+  { ssr: false }
 );
 
-const SiPrettier = dynamic<React.ComponentProps<IconType>>(
-  () => import("react-icons/si").then((mod) => mod.SiPrettier),
-  { ssr: true }
-);
 
 const CodeMenu = () => {
   return (

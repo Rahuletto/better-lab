@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
 import styles from "./QuestionDisplay.module.css";
-import { RiEmotionHappyFill } from "react-icons/ri";
 
 import { CompileMsg } from "@/types/CompileMsg";
 import { DataStream } from "@/types/DataStream";
@@ -17,6 +16,10 @@ const QuestionsProgress = dynamic(
 		),
 	{ ssr: false },
 );
+const RiEmotionHappyFill = dynamic<React.ComponentProps<IconType>>(
+	() => import("react-icons/ri").then((mod) => mod.RiEmotionHappyFill),
+	{ ssr: false }
+  );
 
 import {
 	FaAngleLeft,
@@ -29,6 +32,7 @@ import { Languages } from "@/types/Languages";
 import { loadLanguage } from "@uiw/codemirror-extensions-langs";
 import { useRouter } from "next/router";
 import { TbProgressBolt } from "react-icons/tb";
+import { IconType } from "react-icons";
 
 const Question = () => {
 	const router = useRouter();
@@ -101,6 +105,7 @@ const Question = () => {
 			getQuestion(num);
 			(document.getElementById("wheel") as HTMLDialogElement).close();
 		}
+		setRes(null)
 	}, [num, lang]);
 
 	useEffect(() => {
@@ -206,7 +211,7 @@ const Question = () => {
 
 	return (
 		<>
-			<dialog className={styles.dialog} id="settings" style={{paddingBottom: "24px !important"}}>
+			<dialog className={styles.dialog} id="settings" style={{ paddingBottom: "24px !important" }}>
 				<div className="container d-flex flex-column justify-content-around">
 					<div className="row">
 						<h1>Settings</h1>
@@ -278,6 +283,7 @@ const Question = () => {
 					{courseData && (
 						<QuestionsProgress
 							setNum={setNum}
+							num={num}
 							courseData={courseData}
 						/>
 					)}
