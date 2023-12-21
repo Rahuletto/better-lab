@@ -79,7 +79,12 @@ const Question = () => {
 			getQuestion(num);
 			(document.getElementById("wheel") as HTMLDialogElement).close();
 		}
-	}, [num]);
+	}, [num, lang]);
+
+	useEffect(() => {
+		const l = lang.split("|")[1];
+		setLanguage(loadLanguage((l.toLowerCase()) as Languages))
+	}, [lang])
 
 	async function run() {
 		if (!data) return;
