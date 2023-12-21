@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./QuestionProgress.module.css";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
-const QuestionsProgress = ({ courseData, setData, user }) => {
+const QuestionsProgress = ({ courseData, setNum }) => {
 	const [index, setIndex] = useState(0);
 	function handleOnClick(e) {
 		if (e == "next" && index < courseData.flare.children.length - 1) {
@@ -9,15 +9,6 @@ const QuestionsProgress = ({ courseData, setData, user }) => {
 		} else if (index > 0) {
 			setIndex(index - 1);
 		}
-	}
-
-	async function getQuestion() {
-		fetch("/api/question?id=" + num + "&user=" + user)
-			.then((d) => d.json())
-			.then((a) => {
-				setData(a);
-			});
-		return true;
 	}
 
 	return (

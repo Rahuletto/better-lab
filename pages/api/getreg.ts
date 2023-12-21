@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
 	// Get url query parameters
 	const { user } = req.query;
-
+	
 	const json = {
 		info: {
 			USER_ID: user,

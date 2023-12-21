@@ -32,14 +32,14 @@ import { TbProgressBolt } from "react-icons/tb";
 const Question = () => {
 	const router = useRouter();
 
-	const [num, setNum] = useState<number>(75);
+	const [num, setNum] = useState<number>(2);
 	const [user, setUser] = useState<string>();
 	const [data, setData] = useState<DataStream | null>(null);
 	const [registered, setRegistered] = useState<any>(null);
 
 	const [res, setRes] = useState<CompileMsg | null>(null);
 
-	const [lang, setlang] = useState("C|11");
+	const [lang, setlang] = useState("11|C");
 
 	const [code, setCode] = useState("");
 	const [language, setLanguage] = useState(loadLanguage("c" as Languages));
@@ -53,6 +53,19 @@ const Question = () => {
 		setCode(value);
 		return;
 	}, []);
+
+	async function getQuestion(n: number) {
+		fetch("/api/question?id=" + n + "&user=" + user)
+			.then((d) => d.json())
+			.then((a) => {
+				setData(a);
+			});
+		return true;
+	}
+
+	useEffect(() => {
+		if (user) getQuestion(num);
+	}, [num]);
 
 	async function run() {
 		if (!data) return;
@@ -85,21 +98,22 @@ const Question = () => {
 	async function getCourseInfo() {
 		return new Promise((resolve) => {
 			const [id, l] = lang.split("|");
-
-			fetch("/api/circle?user=" + user, {
-				method: "POST",
-				body: JSON.stringify({
-					course: {
-						name: l,
-						id: Number(id),
-					},
-				}),
-			})
-				.then((d) => d.json())
-				.then((a) => {
-					setCourseData(a);
-					resolve(true);
-				});
+			if (user) {
+				fetch("/api/circle?user=" + user, {
+					method: "POST",
+					body: JSON.stringify({
+						course: {
+							name: l,
+							id: Number(id),
+						},
+					}),
+				})
+					.then((d) => d.json())
+					.then((a) => {
+						setCourseData(a);
+						resolve(true);
+					});
+			}
 		});
 	}
 
@@ -123,23 +137,27 @@ const Question = () => {
 		const us = localStorage.getItem("userid");
 		if (!us) router.push("/login");
 		else setUser(us);
-
-		fetch("/api/getreg?user=" + user)
-			.then((d) => d.json())
-			.then((a) => {
-				setRegistered(a);
-			});
-
-		const wheel = document.getElementById("wheel") as HTMLDialogElement;
-		const settings = document.getElementById("settings") as HTMLDialogElement;
-
-		wheel?.addEventListener("click", (e: any) => {
-			dialogHandler(e);
-		});
-		settings?.addEventListener("click", (e: any) => {
-			dialogHandler(e);
-		});
 	}, []);
+
+	useEffect(() => {
+		if (user) {
+			fetch("/api/getreg?user=" + user)
+				.then((d) => d.json())
+				.then((a) => {
+					setRegistered(a);
+				});
+
+			const wheel = document.getElementById("wheel") as HTMLDialogElement;
+			const settings = document.getElementById("settings") as HTMLDialogElement;
+
+			wheel?.addEventListener("click", (e: any) => {
+				dialogHandler(e);
+			});
+			settings?.addEventListener("click", (e: any) => {
+				dialogHandler(e);
+			});
+		}
+	}, [user]);
 
 	return (
 		<>
@@ -211,8 +229,7 @@ const Question = () => {
 				<div id="wheel-div">
 					{courseData && (
 						<QuestionsProgress
-							user={user}
-							setData={setData}
+							setNum={setNum}
 							courseData={courseData}
 						/>
 					)}
@@ -229,12 +246,12 @@ const Question = () => {
 				)}
 			</div>
 			<div
-				className="row d-flex justify-content-between mb-2 sticky-bottom"
-				style={{ bottom: "10px !important", zIndex: 3 }}
+				className="row d-flex justify-content-between mb-2"
+				style={{ position: "sticky", bottom: "10px", zIndex: 3 }}
 			>
 				<div
 					className="d-flex g-6 justify-content-end"
-					style={{ gap: 8, bottom: "10px !important" }}
+					style={{ gap: 8 }}
 				>
 					<button
 						className={styles.closebutton}
