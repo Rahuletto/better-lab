@@ -545,3 +545,13 @@ button:active {
 button {
   transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
 }
+
+header h1 {
+  color: var(--accent);
+  font-family: var(--jb-font);
+  padding: 8px 16px;
+}
+
+header {
+  border-bottom: 2px solid var(--border);
+}

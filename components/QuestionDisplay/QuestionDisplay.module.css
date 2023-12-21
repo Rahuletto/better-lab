@@ -31,9 +31,11 @@
   -ms-flex-pack: justify;
   justify-content: space-between;
 }
+
 .sideContainer p {
   color: var(--color);
 }
+
 .dialog {
   background: var(--background);
   z-index: 10;
@@ -43,18 +45,21 @@
   border-radius: 18px;
   padding: 14px 24px !important;
 }
+
 .dialog h1 {
   color: var(--color);
   font-weight: 500;
   font-size: 32px;
   padding: 0px !important;
 }
+
 .dialog button {
   background-color: var(--background-dark);
   color: var(--accent);
   font-size: 16px;
   font-weight: 700;
 }
+
 .dialog input {
   background-color: rgba(48, 54, 61, 0.5);
   border: none;
@@ -63,6 +68,7 @@
   padding: 4px 8px !important;
   width: auto;
 }
+
 .dialog select {
   background-color: rgba(48, 54, 61, 0.5);
   border: none;
@@ -119,12 +125,12 @@
   gap: 20px;
 }
 
-.grid > *:nth-child(1) {
+.grid>*:nth-child(1) {
   -ms-grid-row: 1;
   -ms-grid-column: 1;
 }
 
-.grid > *:nth-child(2) {
+.grid>*:nth-child(2) {
   -ms-grid-row: 1;
   -ms-grid-column: 3;
 }
@@ -139,12 +145,12 @@
   gap: 20px;
 }
 
-.caseChild > *:nth-child(1) {
+.caseChild>*:nth-child(1) {
   -ms-grid-row: 1;
   -ms-grid-column: 1;
 }
 
-.caseChild > *:nth-child(2) {
+.caseChild>*:nth-child(2) {
   -ms-grid-row: 3;
   -ms-grid-column: 1;
 }
@@ -281,6 +287,7 @@
   flex-direction: column;
   margin-top: 12px;
 }
+
 .run {
   cursor: pointer;
   font-family: var(--main-font);
@@ -325,6 +332,7 @@
   -webkit-backdrop-filter: blur(3px);
   backdrop-filter: blur(3px);
 }
+
 .run:disabled:active {
   transform: none !important;
   opacity: 0.9;
@@ -381,6 +389,7 @@
 .result h2 {
   margin: 0px;
 }
+
 .resVar {
   display: grid;
   width: fit-content;
@@ -421,16 +430,17 @@
     display: flex;
     flex-direction: column;
   }
-
 }
 
 @media only screen and (max-width: 460px) {
   .qna {
     padding: 18px;
   }
+
   .run {
     right: 18px !important;
   }
+
   .dialog {
     width: max-content;
   }

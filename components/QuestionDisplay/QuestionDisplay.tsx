@@ -218,6 +218,10 @@ const Question = () => {
 	}
 
 	return (
+		<>
+		<header>
+			<h1>Better-Lab</h1>
+		</header>
 		<main>
 			<dialog className={styles.dialog} id="settings" style={{ paddingBottom: "24px !important" }}>
 				<div className="container d-flex flex-column justify-content-around">
@@ -502,6 +506,7 @@ const Question = () => {
 				)}
 			</div>
 		</main>
+		</>
 	);
 };
 
