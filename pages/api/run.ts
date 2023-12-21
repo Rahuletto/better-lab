@@ -18,6 +18,10 @@ export default async function handler(
 		course: { name: string; id: number };
 	} = JSON.parse(req.body);
 
+	if(!user) return res.status(400).json({ error: "Missing query arguments", status: 400, reason: "The server cannot or will not process the request due to something that is perceived to be a client error" })
+    if(!code || !language || !qid || !course) return res.status(400).json({ error: "Missing body arguments", status: 400, reason: "The server cannot or will not process the request due to something that is perceived to be a client error" })
+
+
 	const json = {
 		language: language,
 		input: "0",

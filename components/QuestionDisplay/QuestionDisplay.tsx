@@ -55,7 +55,18 @@ const Question = () => {
 	}, []);
 
 	async function getQuestion(n: number) {
-		fetch("/api/question?id=" + n + "&user=" + user)
+		const cid = lang.split("|")[0];
+		const reg = registered.courses.find((a: any) => a.COURSE_ID == cid);
+
+		fetch("/api/question?id=" + n + "&user=" + user, {
+			method: "POST",
+			body: JSON.stringify({
+				course: {
+					id: reg.COURSE_ID,
+					name: reg.COURSE_NAME,
+				},
+			}),
+		})
 			.then((d) => d.json())
 			.then((a) => {
 				setData(a);

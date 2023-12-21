@@ -3,7 +3,8 @@ import type { NextApiRequest, NextApiResponse } from "next";
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
 	// Get url query parameters
 	const { user } = req.query;
-	
+	if(!user) return res.status(400).json({ error: "Missing query arguments", status: 400, reason: "The server cannot or will not process the request due to something that is perceived to be a client error" })
+
 	const json = {
 		info: {
 			USER_ID: user,

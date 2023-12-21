@@ -65,7 +65,13 @@ p::selection,
 br::selection,
 h1::selection,
 h2::selection,
-code::selection {
+h3::selection,
+code::selection,
+li::selection,
+ul::selection,
+sup::selection,
+sub::selection,
+strong::selection {
   background-color: var(--accent);
   color: var(--background);
 }
@@ -74,7 +80,13 @@ p::-moz-selection,
 br::-moz-selection,
 h1::-moz-selection,
 h2::-moz-selection,
-code::-moz-selection {
+h3::-moz-selection,
+code::-moz-selection,
+li::-moz-selection,
+ul::-moz-selection,
+sup::-moz-selection,
+sub::-moz-selection,
+strong::-moz-selection {
   background-color: var(--accent);
   color: var(--background);
 }
@@ -100,13 +112,20 @@ h3,
 h4,
 p,
 button,
-input, select {
+input,
+select,
+li,
+ul,
+sup,
+sub,
+strong {
   font-family: var(--main-font) !important;
 }
 
 button {
   font-weight: 500 !important;
 }
+
 * {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -276,7 +295,7 @@ pre {
   font-family: var(--jb-font) !important;
 }
 
-.cm-tooltip.cm-tooltip-autocomplete > ul::-webkit-scrollbar {
+.cm-tooltip.cm-tooltip-autocomplete>ul::-webkit-scrollbar {
   width: 2px;
 }
 
@@ -370,7 +389,7 @@ pre {
   font-weight: 600;
 }
 
-.cm-tooltip-autocomplete > ul > li {
+.cm-tooltip-autocomplete>ul>li {
   display: flex;
   gap: 6px;
   -webkit-box-align: center;
@@ -408,6 +427,7 @@ input[type='color']::-moz-color-swatch {
 input {
   cursor: text;
 }
+
 select {
   cursor: pointer;
 }

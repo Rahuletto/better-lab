@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
 	// Get url query parameters
 	const { user, pass } = JSON.parse(req.body);
+    if(!pass || !user) return res.status(400).json({ error: "Missing body arguments", status: 400, reason: "The server cannot or will not process the request due to something that is perceived to be a client error" })
 
 	const json = { USER_ID: user, PASSWORD: pass, KEY: "john" };
 

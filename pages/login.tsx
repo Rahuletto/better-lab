@@ -23,8 +23,8 @@ export default function Login() {
 			.then(
 				(
 					a:
-						| { Status: number; msg: string }
-						| { Status: number; success: boolean; token: string },
+						| { Status: 1; msg: string }
+						| { Status: 0; success: boolean; token: string },
 				) => {
 					if (a.Status == 1){ 
 						setError(2);
@@ -32,6 +32,7 @@ export default function Login() {
 					router.push("/")
 				}
 					else if(a.Status == 0) {
+						localStorage.setItem('token', a.token)
 						setError(1)
 					}
 				},

@@ -26,12 +26,12 @@ const QuestionsProgress = ({ courseData, setNum }) => {
 					</div>
 					<div className="col-9 d-flex" style={{ gap: 4 }}>
 						{courseData &&
-							courseData?.flare.children[index].children.map((el, index) => {
+							courseData?.flare.children[index].children.map((el, i) => {
 								return (
 									<>
 										<div
 											title={"Question " + el.name}
-											key={index}
+											key={i}
 											onClick={() => {
 												setNum(Number(el.name));
 											}}
@@ -54,12 +54,12 @@ const QuestionsProgress = ({ courseData, setNum }) => {
 					</div>
 					<div className="col-9 d-flex" style={{ gap: 4 }}>
 						{courseData &&
-							courseData?.flare.children[index].children.map((el, index) => {
+							courseData?.flare.children[index].children.map((el, i) => {
 								return (
 									<>
 										<div
 											title={"Question " + el.children[0].name}
-											key={index}
+											key={i}
 											onClick={() => {
 												setNum(Number(el.children[0].name));
 											}}
@@ -82,12 +82,12 @@ const QuestionsProgress = ({ courseData, setNum }) => {
 					</div>
 					<div className="col-9 d-flex" style={{ gap: 4 }}>
 						{courseData &&
-							courseData?.flare.children[index].children.map((el, index) => {
+							courseData?.flare.children[index].children.map((el, i) => {
 								return (
 									<>
 										<div
 											title={"Question " + el.children[0].children[0].name}
-											key={index}
+											key={i}
 											onClick={() => {
 												setNum(Number(el.children[0].children[0].name));
 											}}

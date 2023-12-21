@@ -2,7 +2,12 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
 	const { user } = req.query;
-  const { course }: {course : {id: number, name: string}} = JSON.parse(req.body)
+  const { course }: {course : {id: number, name: string}} = JSON.parse(req.body);
+
+  if(!user) return res.status(400).json({ error: "Missing query arguments", status: 400, reason: "The server cannot or will not process the request due to something that is perceived to be a client error" })
+  if(!course) return res.status(400).json({ error: "Missing body arguments", status: 400, reason: "The server cannot or will not process the request due to something that is perceived to be a client error" })
+
+
 	const json = {
 		info: {
 			USER_ID: user,
