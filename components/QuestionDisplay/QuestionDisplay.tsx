@@ -27,7 +27,7 @@ const Question = () => {
 	const router = useRouter();
 
 	const [num, setNum] = useState<number>(75);
-	const [user, setUser] = useState<string>("401123438381");
+	const [user, setUser] = useState<string>();
 	const [data, setData] = useState<DataStream | null>(null);
 	const [res, setRes] = useState<CompileMsg | null>(null);
 	const [nextQuestion, setNextQuestion] = useState(false);
@@ -41,10 +41,6 @@ const Question = () => {
 	const [courseData, setCourseData] = useState<any>(null);
 
 	const onChange = useCallback((value: string) => {
-		// const us = localStorage.getItem("userno");
-		// if (!us) return router.push("/login");
-		// else setUser(us);
-
 		if (num) localStorage.setItem("code-" + num, String(value));
 		setCode(value);
 		return;
@@ -99,13 +95,17 @@ const Question = () => {
 			.then((d) => d.json())
 			.then((a) => {
 				setCourseData(a);
-        console.log(a)
+				console.log(a);
 			});
 	}
 
 	useEffect(() => {
-		console.log(courseData);
-	}, [courseData]);
+    const us = localStorage.getItem("userid");
+		if (!us) router.push("/login");
+		else setUser(us);
+
+
+	}, []);
 
 	return (
 		<>
@@ -120,18 +120,21 @@ const Question = () => {
 							method="dialog"
 							className="container d-flex flex-column"
 						>
+              
+              <div style={{display: 'flex', gap: 8}}>
 							<input
+                style={{opacity: 0.9, color: "#b1b1b1", cursor: "not-allowed"}}
+                disabled={true}
 								className="col-12 p-2"
 								pattern="[0-9]{12}"
 								value={user}
 								onChange={(e) => setUser(e.target?.value)}
 							/>
-							<input
-								value={num}
-								className="col-12 p-2"
-								type="number"
-								onChange={(e) => setNum(Number(e.target?.value))}
-							/>
+							<button
+								className={styles.logout}
+								onClick={() => localStorage.setItem('userid', "")}
+							>Logout</button>
+              </div>
 						</form>
 					</div>
 					<div className="row d-flex justify-content-end mt-3">
