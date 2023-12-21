@@ -36,8 +36,6 @@ const Question = () => {
 	const [user, setUser] = useState<string>();
 	const [data, setData] = useState<DataStream | null>(null);
 	const [res, setRes] = useState<CompileMsg | null>(null);
-	const [nextQuestion, setNextQuestion] = useState(false);
-	const [opn, setOpn] = useState(false);
 
 	const [code, setCode] = useState("");
 	const [language, setLanguage] = useState(loadLanguage("c" as Languages));
@@ -77,7 +75,7 @@ const Question = () => {
 
 	function handleNextQuestionOnClick() {
 		getCourseInfo();
-		setNextQuestion(true);
+		(document.getElementById("wheel") as HTMLDialogElement).showModal();
 	}
 	async function getCourseInfo() {
 		fetch("/api/circle?user=" + user, {
@@ -95,15 +93,37 @@ const Question = () => {
 			});
 	}
 
+	function dialogHandler(e: MouseEvent | any) {
+		if (e.target?.tagName !== "DIALOG")
+			//This prevents issues with forms
+			return;
+
+		const rect = e.target.getBoundingClientRect();
+
+		const clickedInDialog =
+			rect.top <= e.clientY &&
+			e.clientY <= rect.top + rect.height &&
+			rect.left <= e.clientX &&
+			e.clientX <= rect.left + rect.width;
+
+		if (clickedInDialog === false) e.target.close();
+	}
+
 	useEffect(() => {
 		const us = localStorage.getItem("userid");
 		if (!us) router.push("/login");
 		else setUser(us);
+
+		const wheel = document.getElementById("wheel") as HTMLDialogElement;
+		const settings = document.getElementById("settings") as HTMLDialogElement;
+
+		wheel?.addEventListener("click", (e: any) => {dialogHandler(e)});
+		settings?.addEventListener("click", (e: any) => {dialogHandler(e)});
 	}, []);
 
 	return (
 		<>
-			<dialog className={styles.dialog} open={opn}>
+			<dialog className={styles.dialog} id="settings">
 				<div className="container d-flex flex-column justify-content-around">
 					<div className="row">
 						<h1>Settings</h1>
@@ -150,7 +170,11 @@ const Question = () => {
 							<button
 								className=" btn btn-secondary"
 								type="button"
-								onClick={() => setOpn(false)}
+								onClick={() =>
+									(
+										document.getElementById("settings") as HTMLDialogElement
+									).close()
+								}
 							>
 								Close
 							</button>
@@ -158,14 +182,16 @@ const Question = () => {
 					</div>
 				</div>
 			</dialog>
-			<dialog className={styles.dialog} open={nextQuestion}>
-				{courseData && (
-					<QuestionsProgress
-						user={user}
-						setData={setData}
-						courseData={courseData}
-					/>
-				)}
+			<dialog className={styles.dialog} id="wheel">
+				<div id="wheel-div">
+					{courseData && (
+						<QuestionsProgress
+							user={user}
+							setData={setData}
+							courseData={courseData}
+						/>
+					)}
+				</div>
 			</dialog>
 			<div className={styles.qna}>
 				{data && <h2>{String(data?.questionData?.SESSION_NAME)}</h2>}
@@ -195,7 +221,11 @@ const Question = () => {
 							padding: "8px 12px",
 							fontSize: 18,
 						}}
-						onClick={() => setOpn(true)}
+						onClick={() =>
+							(
+								document.getElementById("settings") as HTMLDialogElement
+							).showModal()
+						}
 						title="Settings"
 					>
 						<FaGear />
