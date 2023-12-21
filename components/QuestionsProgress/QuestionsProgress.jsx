@@ -1,4 +1,3 @@
-import { useSelectedLayoutSegments } from 'next/navigation';
 import styles from './QuestionProgress.module.css';
 const QuestionsProgress = (props) => {
   console.log(props.courseData && props.courseData?.flare.children[0].children);
