@@ -3,6 +3,8 @@
   min-width: 25px;
   max-width: 25px;
   border-radius: 4px;
+  transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  cursor: pointer;
 }
 .greenSquare {
   background-color: var(--green) !important;
@@ -14,12 +16,23 @@
   background-color: var(--red) !important;
 }
 
+.greenSquare:hover, .yellowSquare:hover, .redSquare:hover {
+  transform: scale(0.95);
+  opacity: 0.9
+}
+
+.greenSquare:active, .yellowSquare:active, .redSquare:active {
+  transform: scale(0.9);
+  opacity: 0.8
+}
+
 .levelTitle {
   color: var(--level-text);
   font-size: 16px;
   margin: 0px;
   font-weight: 500;
   font-family: var(--main-font);
+  user-select: none;
 }
 .pagination {
   background: var(--background-dark);

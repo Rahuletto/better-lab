@@ -29,15 +29,20 @@ const QuestionsProgress = ({ courseData, setNum }) => {
 							courseData?.flare.children[index].children.map((el, index) => {
 								return (
 									<>
-										{el.status == 2 && (
-											<div key={index} className={styles.greenSquare}></div>
-										)}
-										{el.status == 1 && (
-											<div key={index} className={styles.yellowSquare}></div>
-										)}
-										{el.status == 0 && (
-											<div key={index} className={styles.redSquare}></div>
-										)}
+										<div
+											title={"Question " + el.name}
+											key={index}
+											onClick={() => {
+												setNum(Number(el.name));
+											}}
+											className={
+												el.status == 2
+													? styles.greenSquare
+													: el.status == 1
+													  ? styles.yellowSquare
+													  : styles.redSquare
+											}
+										></div>
 									</>
 								);
 							})}
@@ -49,18 +54,23 @@ const QuestionsProgress = ({ courseData, setNum }) => {
 					</div>
 					<div className="col-9 d-flex" style={{ gap: 4 }}>
 						{courseData &&
-							courseData?.flare.children[0].children.map((el, index) => {
+							courseData?.flare.children[index].children.map((el, index) => {
 								return (
 									<>
-										{el.children[0].status == 2 && (
-											<div key={index} className={styles.greenSquare}></div>
-										)}
-										{el.children[0].status == 1 && (
-											<div key={index} className={styles.yellowSquare}></div>
-										)}
-										{el.children[0].status == 0 && (
-											<div key={index} className={styles.redSquare}></div>
-										)}
+										<div
+											title={"Question " + el.children[0].name}
+											key={index}
+											onClick={() => {
+												setNum(Number(el.children[0].name));
+											}}
+											className={
+												el.children[0].status == 2
+													? styles.greenSquare
+													: el.children[0].status == 1
+													  ? styles.yellowSquare
+													  : styles.redSquare
+											}
+										></div>
 									</>
 								);
 							})}
@@ -72,18 +82,23 @@ const QuestionsProgress = ({ courseData, setNum }) => {
 					</div>
 					<div className="col-9 d-flex" style={{ gap: 4 }}>
 						{courseData &&
-							courseData?.flare.children[0].children.map((el, index) => {
+							courseData?.flare.children[index].children.map((el, index) => {
 								return (
 									<>
-										{el.children[0].children[0].status == 2 && (
-											<div key={index} className={styles.greenSquare}></div>
-										)}
-										{el.children[0].children[0].status == 1 && (
-											<div key={index} className={styles.yellowSquare}></div>
-										)}
-										{el.children[0].children[0].status == 0 && (
-											<div key={index} className={styles.redSquare}></div>
-										)}
+										<div
+											title={"Question " + el.children[0].children[0].name}
+											key={index}
+											onClick={() => {
+												setNum(Number(el.children[0].children[0].name));
+											}}
+											className={
+												el.children[0].children[0].status == 2
+													? styles.greenSquare
+													: el.children[0].children[0].status == 1
+													  ? styles.yellowSquare
+													  : styles.redSquare
+											}
+										></div>
 									</>
 								);
 							})}

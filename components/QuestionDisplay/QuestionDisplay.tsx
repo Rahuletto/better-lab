@@ -32,7 +32,7 @@ import { TbProgressBolt } from "react-icons/tb";
 const Question = () => {
 	const router = useRouter();
 
-	const [num, setNum] = useState<number>(2);
+	const [num, setNum] = useState<number>();
 	const [user, setUser] = useState<string>();
 	const [data, setData] = useState<DataStream | null>(null);
 	const [registered, setRegistered] = useState<any>(null);
@@ -64,7 +64,10 @@ const Question = () => {
 	}
 
 	useEffect(() => {
-		if (user) getQuestion(num);
+		if (user && num) {
+			getQuestion(num);
+			(document.getElementById("wheel") as HTMLDialogElement).close();
+		}
 	}, [num]);
 
 	async function run() {
