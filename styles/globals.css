@@ -71,7 +71,7 @@ li::selection,
 ul::selection,
 sup::selection,
 sub::selection,
-strong::selection {
+strong::selection,i::selection {
   background-color: var(--accent);
   color: var(--background);
 }
@@ -86,7 +86,7 @@ li::-moz-selection,
 ul::-moz-selection,
 sup::-moz-selection,
 sub::-moz-selection,
-strong::-moz-selection {
+strong::-moz-selection, i::-moz-selection {
   background-color: var(--accent);
   color: var(--background);
 }

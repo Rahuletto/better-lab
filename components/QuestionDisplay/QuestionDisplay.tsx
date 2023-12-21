@@ -49,11 +49,13 @@ const Question = () => {
 	const [courseData, setCourseData] = useState<any>(null);
 
 	const onChange = useCallback((value: string) => {
-		if (num) localStorage.setItem("code-" + num, String(value));
+		if (num && value)
+			localStorage.setItem(
+				"code-" + lang.split("|")[1] + "-" + num,
+				String(value),
+			);
 		setCode(value);
 		return;
-
-
 	}, []);
 
 	async function getQuestion(n: number) {
@@ -70,13 +72,30 @@ const Question = () => {
 			}),
 		})
 			.then((d) => d.json())
-			.then((a) => {
+			.then((a: DataStream) => {
 				setData(a);
+				if (a.studentData.CODE[0]?.value) {
+					setCode(a.studentData.CODE[0].value);
+					localStorage.setItem(
+						"code-" + lang.split("|")[1] + "-" + n,
+						String(a.studentData.CODE[0].value),
+					);
+				}
 			});
 		return true;
 	}
 
 	useEffect(() => {
+		setTimeout(() => {
+			setCode("");
+			if (num) {
+				const cd = localStorage.getItem(
+					"code-" + lang.split("|")[1] + "-" + num,
+				);
+				if (cd) setCode(cd);
+			}
+		}, 1000);
+
 		if (user && num) {
 			getQuestion(num);
 			(document.getElementById("wheel") as HTMLDialogElement).close();
@@ -87,7 +106,6 @@ const Question = () => {
 		const l = lang.split("|")[1];
 		setLanguage(loadLanguage(l.toLowerCase() as Languages));
 	}, [lang]);
-
 
 	function handleNextQuestionOnClick() {
 		getCourseInfo().then((a) => {
@@ -145,7 +163,7 @@ const Question = () => {
 			body: JSON.stringify({
 				qid: data?.studentData.Q_ID,
 				code: code,
-				language: lang.split('|')[1].toLowerCase(),
+				language: lang.split("|")[1].toLowerCase(),
 				course: {
 					name: data?.questionData.COURSE_NAME,
 					id: data?.studentData.COURSE_ID,
@@ -159,7 +177,6 @@ const Question = () => {
 			});
 		return true;
 	}
-
 
 	function dialogHandler(e: MouseEvent | any) {
 		if (e.target?.tagName !== "DIALOG")
@@ -184,10 +201,7 @@ const Question = () => {
 
 		const lan = localStorage.getItem("course");
 		if (lan) setlang(lan);
-
 	}, []);
-
-
 
 	return (
 		<>

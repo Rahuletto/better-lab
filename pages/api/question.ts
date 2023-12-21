@@ -11,8 +11,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 				"The server cannot or will not process the request due to something that is perceived to be a client error",
 		});
 
-	const { course}: { course: { id: number; name: string }} =
-		JSON.parse(req.body);
+	const { course }: { course: { id: number; name: string } } = JSON.parse(
+		req.body,
+	);
 	const json = {
 		ROLE: "S",
 		info: {
