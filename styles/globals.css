@@ -100,7 +100,7 @@ h3,
 h4,
 p,
 button,
-input {
+input, select {
   font-family: var(--main-font) !important;
 }
 
@@ -405,6 +405,13 @@ input[type='color']::-moz-color-swatch {
 
 /* SKELETON */
 
+input {
+  cursor: text;
+}
+select {
+  cursor: pointer;
+}
+
 .react-loading-skeleton {
   --base-color: #454a55 !important;
   --highlight-color: #666b7a !important;
@@ -518,4 +525,12 @@ dialog::backdrop {
 button:disabled {
   opacity: 0.7;
   cursor: not-allowed;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+button {
+  transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
 }

@@ -35,7 +35,11 @@ const Question = () => {
 	const [num, setNum] = useState<number>(75);
 	const [user, setUser] = useState<string>();
 	const [data, setData] = useState<DataStream | null>(null);
+	const [registered, setRegistered] = useState<any>(null);
+
 	const [res, setRes] = useState<CompileMsg | null>(null);
+
+	const [lang, setlang] = useState("C|11");
 
 	const [code, setCode] = useState("");
 	const [language, setLanguage] = useState(loadLanguage("c" as Languages));
@@ -114,16 +118,26 @@ const Question = () => {
 		if (!us) router.push("/login");
 		else setUser(us);
 
+		fetch("/api/getreg?user=" + user)
+			.then((d) => d.json())
+			.then((a) => {
+				setRegistered(a);
+			});
+
 		const wheel = document.getElementById("wheel") as HTMLDialogElement;
 		const settings = document.getElementById("settings") as HTMLDialogElement;
 
-		wheel?.addEventListener("click", (e: any) => {dialogHandler(e)});
-		settings?.addEventListener("click", (e: any) => {dialogHandler(e)});
+		wheel?.addEventListener("click", (e: any) => {
+			dialogHandler(e);
+		});
+		settings?.addEventListener("click", (e: any) => {
+			dialogHandler(e);
+		});
 	}, []);
 
 	return (
 		<>
-			<dialog className={styles.dialog} id="settings">
+			<dialog className={styles.dialog} id="settings" style={{paddingBottom: "24px !important"}}>
 				<div className="container d-flex flex-column justify-content-around">
 					<div className="row">
 						<h1>Settings</h1>
@@ -134,52 +148,57 @@ const Question = () => {
 							method="dialog"
 							className="container d-flex flex-column"
 						>
-							<div style={{ display: "flex", gap: 8 }}>
-								<input
-									style={{
-										opacity: 0.9,
-										color: "#b1b1b1",
-										cursor: "not-allowed",
-									}}
-									disabled={true}
-									className="col-12 p-2"
-									pattern="[0-9]{12}"
-									value={user}
-									onChange={(e) => setUser(e.target?.value)}
-								/>
-								<button
-									className={styles.logout}
-									onClick={() => {
-										localStorage.setItem("userid", "");
-										router.push("/login");
-									}}
-								>
-									Logout
-								</button>
+							<div className={styles.settingFlex}>
+							
+								<div style={{ display: "flex", gap: 8 }}>
+									<input
+										style={{
+											opacity: 0.9,
+											color: "#b1b1b1",
+											cursor: "not-allowed",
+										}}
+										disabled={true}
+										className="col-12 p-2"
+										pattern="[0-9]{12}"
+										value={user}
+										onChange={(e) => setUser(e.target?.value)}
+									/>
+									<button
+										className={styles.logout}
+										onClick={() => {
+											localStorage.setItem("userid", "");
+											router.push("/login");
+										}}
+									>
+										Logout
+									</button>
+								</div>
+								<div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+									<p style={{ margin: 0, color: "var(--level-text)" }}>Course: </p>
+									<select value={lang} onChange={(e) => setlang(e.target.value)}>
+										{registered &&
+											registered.courses.map(
+												(
+													el: { COURSE_ID: number; COURSE_NAME: string },
+													index: number,
+												) => {
+													return (
+														<option
+														style={{ textTransform: "capitalize" }}
+															key={index}
+															value={`${el.COURSE_ID}|${el.COURSE_NAME}`}
+														>
+															{el.COURSE_NAME.toLowerCase()}
+														</option>
+													);
+												},
+											)}
+									</select>
+								</div>
 							</div>
 						</form>
 					</div>
-					<div className="row d-flex justify-content-end mt-3">
-						<div
-							style={{
-								display: "flex",
-								justifyContent: "flex-end",
-								padding: 0,
-							}}
-						>
-							<button
-								className=" btn btn-secondary"
-								type="button"
-								onClick={() =>
-									(
-										document.getElementById("settings") as HTMLDialogElement
-									).close()
-								}
-							>
-								Close
-							</button>
-						</div>
-					</div>
+					
 				</div>
 			</dialog>
 			<dialog className={styles.dialog} id="wheel">
@@ -335,7 +354,7 @@ const Question = () => {
 
 				<div className={styles.codeWrapper}>
 					<p>Code Editor</p>
-					<button onClick={run} className={styles.run}>
+					<button onClick={run} disabled={code == ""} className={styles.run}>
 						<FaSquareCheck /> Submit
 					</button>
 					<CodeEditor code={code} language={language} onChange={onChange} />
