@@ -105,7 +105,7 @@ const QuestionsProgress = ({ courseData, setNum }) => {
 					</div>
 				</div>
 			</div>
-			<div className="d-flex justify-content-between">
+			<div className="d-flex justify-content-between align-items-center">
 				<button
 					type="button"
 					onClick={() => handleOnClick("previous")}
@@ -114,6 +114,9 @@ const QuestionsProgress = ({ courseData, setNum }) => {
 				>
 					<FaAngleLeft />
 				</button>
+				<p style={{margin: 0, color: "var(--color)"}}>
+					{index + 1}/{courseData.flare.children.length}
+				</p>
 				<button
 					type="button"
 					onClick={() => handleOnClick("next")}

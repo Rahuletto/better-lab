@@ -5,7 +5,7 @@ export default async function handler(
 	res: NextApiResponse,
 ) {
 	// Get url query parameters
-	const { user } = req.query;
+	const { user, id } = req.query;
 	const {
 		code,
 		language,
@@ -20,7 +20,6 @@ export default async function handler(
 
 	if(!user) return res.status(400).json({ error: "Missing query arguments", status: 400, reason: "The server cannot or will not process the request due to something that is perceived to be a client error" })
     if(!code || !language || !qid || !course) return res.status(400).json({ error: "Missing body arguments", status: 400, reason: "The server cannot or will not process the request due to something that is perceived to be a client error" })
-
 
 	const json = {
 		language: language,
@@ -44,7 +43,7 @@ export default async function handler(
 		studentData: {
 			COURSE_ID: course.id,
 			Q_ID: qid,
-			SEQUENCE_ID: 293,
+			SEQUENCE_ID: Number(id),
 			COURSE_NAME: course.name,
 		},
 		tempCode: code,
@@ -63,6 +62,8 @@ export default async function handler(
 
 	const runJSONData = JSON.stringify(runJSON);
 
+	console.log(json, runJSON)
+
 	fetch(
 		"https://dld.srmist.edu.in/ktretelab2023/elabserver/ict/student/questionview/savelogs",
 		{
@@ -78,7 +79,11 @@ export default async function handler(
 				"Sec-Fetch-Site": "same-origin",
 			},
 		},
-	);
+	).then((dt) => dt.json())
+	.then(a => console.log(a))
+	.catch((error) => {
+		res.json(error);
+	});
 
 	const response = await fetch(
 		"https://dld.srmist.edu.in/ktretelab2023/elabserver/ict/student/questionview/evaluate",
@@ -102,6 +107,7 @@ export default async function handler(
 		});
 
 	return new Promise<void>((resolve, reject) => {
+		console.log(response)
 		res.status(200).send(response);
 		resolve();
 	});

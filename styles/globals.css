@@ -161,36 +161,24 @@ pre {
   font-size: 14px;
 }
 
-.cm-tooltip-autocomplete {
-  border-radius: 8px;
-  padding: 4px;
-  background: var(--background-dark) !important;
-}
-
-.cm-tooltip li {
-  color: var(--accent);
-  font-family: var(--jb-font);
-  font-size: 14px;
-  border-radius: 5px;
-  padding: 2px 4px;
-  border: 1px solid transparent;
-}
-
 .cm-tooltip li[aria-selected] {
   color: var(--background-light) !important;
   background: var(--accent) !important;
   font-weight: 800 !important;
+  font-family: var(--jb-font) !important;
 }
 
 .cm-tooltip-autocomplete {
   border-radius: 8px;
   padding: 4px;
   background: var(--background-light) !important;
+  
+  font-family: var(--jb-font) !important;
 }
 
 .cm-tooltip li {
   color: var(--accent);
-  font-family: var(--jb-font);
+  font-family: var(--jb-font) !important;
   font-size: 14px;
   border-radius: 5px;
   padding: 2px 4px;
@@ -201,6 +189,7 @@ pre {
   color: var(--accent) !important;
   background: var(--background-dark) !important;
   font-weight: 800 !important;
+  font-family: var(--jb-font) !important;
 }
 
 .cm-scroller {

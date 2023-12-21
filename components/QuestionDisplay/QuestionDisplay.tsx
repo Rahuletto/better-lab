@@ -52,6 +52,8 @@ const Question = () => {
 		if (num) localStorage.setItem("code-" + num, String(value));
 		setCode(value);
 		return;
+
+
 	}, []);
 
 	async function getQuestion(n: number) {
@@ -83,37 +85,16 @@ const Question = () => {
 
 	useEffect(() => {
 		const l = lang.split("|")[1];
-		setLanguage(loadLanguage((l.toLowerCase()) as Languages))
-	}, [lang])
+		setLanguage(loadLanguage(l.toLowerCase() as Languages));
+	}, [lang]);
 
-	async function run() {
-		if (!data) return;
-		const box = document.getElementById("result");
-		fetch("/api/run?user=" + user, {
-			method: "POST",
-			body: JSON.stringify({
-				qid: data?.studentData.Q_ID,
-				code: code,
-				language: "c",
-				course: {
-					name: data?.questionData.COURSE_NAME,
-					id: data?.studentData.COURSE_ID,
-				},
-			}),
-		})
-			.then((d) => d.json())
-			.then((a) => {
-				setRes(a);
-				box?.scrollIntoView({ behavior: "smooth" });
-			});
-		return true;
-	}
 
 	function handleNextQuestionOnClick() {
 		getCourseInfo().then((a) => {
 			(document.getElementById("wheel") as HTMLDialogElement).showModal();
 		});
 	}
+
 	async function getCourseInfo() {
 		return new Promise((resolve) => {
 			const [id, l] = lang.split("|");
@@ -136,6 +117,50 @@ const Question = () => {
 		});
 	}
 
+	useEffect(() => {
+		if (user) {
+			fetch("/api/getreg?user=" + user)
+				.then((d) => d.json())
+				.then((a) => {
+					setRegistered(a);
+				});
+
+			const wheel = document.getElementById("wheel") as HTMLDialogElement;
+			const settings = document.getElementById("settings") as HTMLDialogElement;
+
+			wheel?.addEventListener("click", (e: any) => {
+				dialogHandler(e);
+			});
+			settings?.addEventListener("click", (e: any) => {
+				dialogHandler(e);
+			});
+		}
+	}, [user]);
+
+	async function run() {
+		if (!data) return;
+		const box = document.getElementById("result");
+		fetch("/api/run?user=" + user + "&id=" + num, {
+			method: "POST",
+			body: JSON.stringify({
+				qid: data?.studentData.Q_ID,
+				code: code,
+				language: lang.split('|')[1].toLowerCase(),
+				course: {
+					name: data?.questionData.COURSE_NAME,
+					id: data?.studentData.COURSE_ID,
+				},
+			}),
+		})
+			.then((d) => d.json())
+			.then((a) => {
+				setRes(a);
+				box?.scrollIntoView({ behavior: "smooth" });
+			});
+		return true;
+	}
+
+
 	function dialogHandler(e: MouseEvent | any) {
 		if (e.target?.tagName !== "DIALOG")
 			//This prevents issues with forms
@@ -156,27 +181,13 @@ const Question = () => {
 		const us = localStorage.getItem("userid");
 		if (!us) router.push("/login");
 		else setUser(us);
+
+		const lan = localStorage.getItem("course");
+		if (lan) setlang(lan);
+
 	}, []);
 
-	useEffect(() => {
-		if (user) {
-			fetch("/api/getreg?user=" + user)
-				.then((d) => d.json())
-				.then((a) => {
-					setRegistered(a);
-				});
 
-			const wheel = document.getElementById("wheel") as HTMLDialogElement;
-			const settings = document.getElementById("settings") as HTMLDialogElement;
-
-			wheel?.addEventListener("click", (e: any) => {
-				dialogHandler(e);
-			});
-			settings?.addEventListener("click", (e: any) => {
-				dialogHandler(e);
-			});
-		}
-	}, [user]);
 
 	return (
 		<>
@@ -218,7 +229,10 @@ const Question = () => {
 								</div>
 								<div style={{ display: "flex", gap: 8, alignItems: "center" }}>
 									<p style={{ margin: 0, color: "var(--level-text)" }}>Course: </p>
-									<select value={lang} onChange={(e) => setlang(e.target.value)}>
+									<select value={lang} onChange={(e) => {
+										localStorage.setItem('course', e.target.value)
+										setlang(e.target.value)
+										}}>
 										{registered &&
 											registered.courses.map(
 												(
