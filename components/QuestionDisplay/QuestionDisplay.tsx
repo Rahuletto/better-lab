@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useState } from 'react';
-import styles from './QuestionDisplay.module.css';
-
 import { CompileMsg } from '@/types/CompileMsg';
 import { DataStream } from '@/types/DataStream';
+import { useCallback, useEffect, useState } from 'react';
+import QuestionsProgress from '../../components/QuestionsProgress/QuestionsProgress';
+import styles from './QuestionDisplay.module.css';
 
 import dynamic from 'next/dynamic';
 const CodeEditor = dynamic(
@@ -20,7 +20,7 @@ const Question = () => {
   const [user, setUser] = useState<string>('401123438381');
   const [data, setData] = useState<DataStream | null>(null);
   const [res, setRes] = useState<CompileMsg | null>(null);
-
+  const [nextQuestion, setNextQuestion] = useState(false);
   const [opn, setOpn] = useState(false);
 
   const [code, setCode] = useState('');
@@ -69,9 +69,11 @@ const Question = () => {
       });
     return true;
   }
-
+  function handleNextQuestionOnClick() {
+    getCourseInfo();
+    setNextQuestion(true);
+  }
   async function getCourseInfo() {
-    console.log('hello');
     fetch('/api/circle?user=' + user)
       .then((d) => d.json())
       .then((a) => {
@@ -117,7 +119,9 @@ const Question = () => {
           </div>
         </div>
       </dialog>
-
+      <dialog className={styles.dialog} open={nextQuestion}>
+        {courseData && <QuestionsProgress courseData={courseData} />}
+      </dialog>
       <div className={styles.qna}>
         {data && <h2>{String(data?.questionData?.SESSION_NAME)}</h2>}
         {data && (
@@ -138,7 +142,15 @@ const Question = () => {
             Show More
           </button>
         </div>
-        <div className="col-6">hello</div>
+        <div className="col-6 d-flex justify-content-end">
+          <button
+            style={{ width: '6vw', textAlign: 'center' }}
+            className={styles.closebutton}
+            onClick={handleNextQuestionOnClick}
+          >
+            Next Question
+          </button>
+        </div>
       </div>
       <div className={styles.grid}>
         <div className={styles.caseChild}>
