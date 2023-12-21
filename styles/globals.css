@@ -2,8 +2,8 @@
   --font-mono: var(--jb-font), monospace;
   font-family: var(--main-font);
 
-  --background: #12161C;
-  --background-light: #14181F;
+  --background: #12161c;
+  --background-light: #14181f;
   --background-dark: #161b22;
 
   --code-editor: #0d1117;
@@ -12,6 +12,7 @@
   --color: #c8c8c8;
   --tip-color: #30363d;
   --accent: #a0aab6;
+  --level-text: #a8aaac;
 
   --red: #d13333;
   --green: #65d133;
@@ -57,7 +58,7 @@ h1::-moz-selection,
 h2::-moz-selection,
 code::-moz-selection {
   background-color: var(--accent);
-  color: var(--background)
+  color: var(--background);
 }
 
 p::selection,
@@ -66,7 +67,7 @@ h1::selection,
 h2::selection,
 code::selection {
   background-color: var(--accent);
-  color: var(--background)
+  color: var(--background);
 }
 
 p::-moz-selection,
@@ -75,7 +76,7 @@ h1::-moz-selection,
 h2::-moz-selection,
 code::-moz-selection {
   background-color: var(--accent);
-  color: var(--background)
+  color: var(--background);
 }
 
 pre::selection {
@@ -369,7 +370,7 @@ pre {
   font-weight: 600;
 }
 
-.cm-tooltip-autocomplete>ul>li {
+.cm-tooltip-autocomplete > ul > li {
   display: flex;
   gap: 6px;
   -webkit-box-align: center;
@@ -472,20 +473,20 @@ html {
 .green {
   background: #65d1330e;
   border: 1px solid var(--green);
-  color: var(--green)
+  color: var(--green);
 }
 
 .red {
-  background: #D133330e;
+  background: #d133330e;
   border: 1px solid var(--red);
-  color: var(--red)
+  color: var(--red);
 }
 
 .red,
 .green {
   padding: 4px 8px;
   border-radius: 8px;
-  width: fit-content
+  width: fit-content;
 }
 
 .green p,
@@ -495,7 +496,7 @@ html {
 
 @media only screen and (max-width: 690px) {
   .cm-scroller {
-    width: 89vw
+    width: 89vw;
   }
 }
 
