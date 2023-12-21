@@ -196,7 +196,9 @@ const Question = () => {
 			.then((d) => d.json())
 			.then((a) => {
 				setCompileData(a);
-				box?.scrollIntoView({ behavior: "smooth" });
+				setTimeout(() => {
+					box?.scrollIntoView({ behavior: "smooth" });
+				}, 1000);
 			});
 		return true;
 	}
