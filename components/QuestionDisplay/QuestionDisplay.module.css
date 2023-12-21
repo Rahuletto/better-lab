@@ -363,4 +363,7 @@
   .run {
     right: 18px !important;
   }
+  .dialog {
+    width: max-content;
+  }
 }

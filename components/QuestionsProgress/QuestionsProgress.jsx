@@ -29,8 +29,8 @@ const QuestionsProgress = ({ courseData, setData, user }) => {
 				{courseData && courseData.flare.children[index].name.toLowerCase()}
 			</h1>
 			<div className={styles.grid}>
-				<div className="row d-flex justify-content-around align-items-center">
-					<div className="col-3">
+				<div className="row d-flex justify-content-center align-items-center">
+					<div className="col-3" style={{ width: 64 }}>
 						<p className={styles.levelTitle}> L1</p>
 					</div>
 					<div className="col-9 d-flex" style={{ gap: 4 }}>
@@ -52,8 +52,8 @@ const QuestionsProgress = ({ courseData, setData, user }) => {
 							})}
 					</div>
 				</div>
-				<div className="row d-flex justify-content-around align-items-center">
-					<div className="col-3">
+				<div className="row d-flex justify-content-center align-items-center">
+					<div className="col-3" style={{ width: 64 }}>
 						<p className={styles.levelTitle}> L2</p>
 					</div>
 					<div className="col-9 d-flex" style={{ gap: 4 }}>
@@ -75,8 +75,8 @@ const QuestionsProgress = ({ courseData, setData, user }) => {
 							})}
 					</div>
 				</div>
-				<div className="row d-flex justify-content-around align-items-center">
-					<div className="col-3">
+				<div className="row d-flex justify-content-center align-items-center">
+					<div className="col-3" style={{ width: 64 }}>
 						<p className={styles.levelTitle}> L3</p>
 					</div>
 					<div className="col-9 d-flex" style={{ gap: 4 }}>

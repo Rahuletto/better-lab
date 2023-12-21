@@ -17,11 +17,17 @@ const QuestionsProgress = dynamic(
 	{ ssr: false },
 );
 
-import { FaAngleLeft, FaAngleRight, FaSquareCheck } from "react-icons/fa6";
+import {
+	FaAngleLeft,
+	FaAngleRight,
+	FaGear,
+	FaSquareCheck,
+} from "react-icons/fa6";
 
 import { Languages } from "@/types/Languages";
 import { loadLanguage } from "@uiw/codemirror-extensions-langs";
 import { useRouter } from "next/router";
+import { TbProgressBolt } from "react-icons/tb";
 
 const Question = () => {
 	const router = useRouter();
@@ -180,18 +186,33 @@ const Question = () => {
 					style={{ gap: 8, bottom: "10px !important" }}
 				>
 					<button
-						style={{ textAlign: "center" }}
 						className={styles.closebutton}
-						onClick={handleNextQuestionOnClick}
+						type="button"
+						style={{
+							display: "flex",
+							alignItems: "center",
+							borderWidth: 1.8,
+							padding: "8px 12px",
+							fontSize: 18,
+						}}
+						onClick={() => setOpn(true)}
+						title="Settings"
 					>
-						Next Question
+						<FaGear />
 					</button>
 					<button
 						className={styles.closebutton}
-						type="button"
-						onClick={() => setOpn(true)}
+						style={{
+							display: "flex",
+							alignItems: "center",
+							borderWidth: 1.8,
+							padding: "6px 10px",
+							fontSize: 22,
+						}}
+						onClick={handleNextQuestionOnClick}
+						title="Progress (Select Question)"
 					>
-						Settings
+						<TbProgressBolt />
 					</button>
 				</div>
 			</div>
