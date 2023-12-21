@@ -63,6 +63,7 @@
   border-radius: 10px;
   color: var(--color);
   padding: 4px 8px !important;
+  width: auto;
 }
 .sideContainer p {
   margin: 0px;
@@ -206,6 +207,30 @@
   padding: 6px 12px;
   font-size: 16px;
   font-weight: 700;
+}
+
+.logout {
+  background-color: #D133330e !important;
+  color: var(--red) !important;
+  border: 2px solid var(--red);
+  border-radius: 12px;
+  padding: 4px 12px;
+  font-size: 16px;
+  font-weight: 700;
+  width: fit-content;
+  transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+.logout:hover {
+  background: var(--red) !important;
+  color: var(--background) !important;
+}
+
+.logout:active {
+  background: var(--red) !important;
+  color: var(--background) !important;
+  transform: scale(0.9) rotate(2deg);
+  opacity: 0.9;
 }
 
 .run {
