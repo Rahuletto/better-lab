@@ -1,5 +1,29 @@
-.square {
+.greenSquare {
   height: 25px;
   width: 25px;
   background-color: var(--green) !important;
+  border-radius: 6px;
+}
+.yellowSquare {
+  height: 25px;
+  width: 25px;
+  background-color: var(--yellow) !important;
+  border-radius: 6px;
+}
+.redSquare {
+  height: 25px;
+  width: 25px;
+  background-color: var(--red) !important;
+  border-radius: 6px;
+}
+.levelTitle {
+  color: var(--level-text);
+  font-size: 16px;
+  font-weight: 600;
+}
+.pagination {
+  border-radius: 12px;
+  border: solid 2px var(--tip-color);
+  text-align: center;
+  padding: 6px;
 }
