@@ -356,6 +356,27 @@
   margin-top: 20px;
 }
 
+.completed {
+  position: fixed;
+  top: 20px;
+  z-index: 3;
+  right: 20px;
+  padding: 16px 18px;
+  display: flex;
+  background: #65d1334d;
+  backdrop-filter: blur(4px);
+  border: 2px solid var(--green);
+  border-radius: 12px;
+  color: var(--green);
+  border-right-width: 4px;
+  align-items: center;
+  gap: 8px;
+}
+
+.completed p {
+  margin: 0;
+}
+
 .result h2 {
   margin: 0px;
 }

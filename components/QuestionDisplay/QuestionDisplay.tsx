@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import styles from "./QuestionDisplay.module.css";
+import { RiEmotionHappyFill } from "react-icons/ri";
 
 import { CompileMsg } from "@/types/CompileMsg";
 import { DataStream } from "@/types/DataStream";
@@ -335,9 +336,14 @@ const Question = () => {
 					</button>
 				</div>
 			</div>
+			{data?.studentData.STATUS == 2 && (
+				<div className={styles.completed}>
+					<RiEmotionHappyFill style={{fontSize: 18}} /><p> You have completed this exercise! YAY</p>
+				</div>
+			)}
 			<div className={styles.grid}>
 				<div className={styles.caseChild}>
-					<div className={styles.sideContainer}>
+					<div className={styles.sideContainer} style={data?.studentData.STATUS == 2 ? {borderColor: "var(--green)"} : {}}>
 						<div>
 							<h3>Mandatory Case</h3>
 							{data && (
@@ -369,7 +375,7 @@ const Question = () => {
 								</div>
 							) : null)}
 					</div>
-					<div className={styles.sideContainer}>
+					<div className={styles.sideContainer} style={data?.studentData.STATUS == 2 ? {borderColor: "var(--green)"} : {}}>
 						<div>
 							<h3>Test Case</h3>
 							{data && (
@@ -422,7 +428,7 @@ const Question = () => {
 					</div>
 				</div>
 
-				<div className={styles.codeWrapper}>
+				<div className={styles.codeWrapper} style={data?.studentData.STATUS == 2 ? {borderColor: "var(--green)"} : {}}>
 					<p>Code Editor</p>
 					<button onClick={run} disabled={code == ""} className={styles.run}>
 						<FaSquareCheck /> Submit

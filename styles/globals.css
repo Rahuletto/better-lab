@@ -528,6 +528,7 @@ html {
 
 dialog::backdrop {
   background: rgba(4, 5, 7, 0.8);
+  backdrop-filter: blur(4px);
   z-index: 5;
 }
 
