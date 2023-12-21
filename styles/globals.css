@@ -2,8 +2,8 @@
   --font-mono: var(--jb-font), monospace;
   font-family: var(--main-font);
 
-  --background: #12161c;
-  --background-light: #14181f;
+  --background: #12161C;
+  --background-light: #14181F;
   --background-dark: #161b22;
 
   --code-editor: #0d1117;
@@ -16,6 +16,8 @@
   --red: #d13333;
   --green: #65d133;
   --yellow: #ffca63;
+
+  --bs-font-monospace: var(--jb-font) !important;
 }
 
 ::-webkit-scrollbar {
@@ -98,24 +100,27 @@ h4,
 p,
 button,
 input {
-  font-family: var(--main-font);
+  font-family: var(--main-font) !important;
 }
 
+button {
+  font-weight: 500 !important;
+}
 * {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
-
-div {
-  background-color: var(--background) !important;
-}
 html {
   text-rendering: optimizeLegibility !important;
   background-color: var(--background);
   color: var(--color);
   padding: 18px;
   scroll-behavior: smooth;
+}
+
+body {
+  background-color: transparent !important;
 }
 
 code {
@@ -128,6 +133,7 @@ code {
   display: block;
   margin: 4px 0px;
   white-space: pre-line;
+  color: var(--color) !important;
 }
 
 pre {
