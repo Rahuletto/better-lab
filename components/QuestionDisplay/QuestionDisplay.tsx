@@ -9,6 +9,13 @@ const CodeEditor = dynamic(
 	() => import("../CodeEditor/Editor").then((mod) => mod.default),
 	{ ssr: false },
 );
+const QuestionsProgress = dynamic(
+	() =>
+		import("@/components/QuestionsProgress/QuestionsProgress").then(
+			(mod) => mod.default,
+		),
+	{ ssr: false },
+);
 
 import { FaAngleLeft, FaAngleRight, FaSquareCheck } from "react-icons/fa6";
 
@@ -20,10 +27,10 @@ const Question = () => {
 	const router = useRouter();
 
 	const [num, setNum] = useState<number>(75);
-	const [user, setUser] = useState<string>();
+	const [user, setUser] = useState<string>("401123438381");
 	const [data, setData] = useState<DataStream | null>(null);
 	const [res, setRes] = useState<CompileMsg | null>(null);
-  const [nextQuestion, setNextQuestion] = useState(false);
+	const [nextQuestion, setNextQuestion] = useState(false);
 	const [opn, setOpn] = useState(false);
 
 	const [code, setCode] = useState("");
@@ -31,11 +38,12 @@ const Question = () => {
 
 	const [page, setPage] = useState(0);
 	const [testpage, setTest] = useState(0);
-	const [courseData, setCourseData] = useState<DataStream | null>(null);
+	const [courseData, setCourseData] = useState<any>(null);
+
 	const onChange = useCallback((value: string) => {
-		const us = localStorage.getItem("userno");
-		if (!us) return router.push("/login");
-		else setUser(us);
+		// const us = localStorage.getItem("userno");
+		// if (!us) return router.push("/login");
+		// else setUser(us);
 
 		if (num) localStorage.setItem("code-" + num, String(value));
 		setCode(value);
@@ -45,7 +53,6 @@ const Question = () => {
 	async function run() {
 		if (!data) return;
 		const box = document.getElementById("result");
-		getCourseInfo();
 		fetch("/api/run?user=" + user, {
 			method: "POST",
 			body: JSON.stringify({
@@ -60,7 +67,6 @@ const Question = () => {
 		})
 			.then((d) => d.json())
 			.then((a) => {
-				console.log(a);
 				setRes(a);
 				box?.scrollIntoView({ behavior: "smooth" });
 			});
@@ -76,28 +82,31 @@ const Question = () => {
 			});
 		return true;
 	}
-  function handleNextQuestionOnClick() {
-    getCourseInfo();
-    setNextQuestion(true);
-  }
+	function handleNextQuestionOnClick() {
+		getCourseInfo();
+		setNextQuestion(true);
+	}
 	async function getCourseInfo() {
 		fetch("/api/circle?user=" + user, {
 			method: "POST",
 			body: JSON.stringify({
 				course: {
-					name: data?.questionData.COURSE_NAME,
-					id: data?.studentData.COURSE_ID,
+					name: "PYTHON",
+					id: 14,
 				},
 			}),
 		})
 			.then((d) => d.json())
 			.then((a) => {
 				setCourseData(a);
+        console.log(a)
 			});
 	}
+
 	useEffect(() => {
 		console.log(courseData);
 	}, [courseData]);
+
 	return (
 		<>
 			<dialog className={styles.dialog} open={opn}>
@@ -144,9 +153,9 @@ const Question = () => {
 					</div>
 				</div>
 			</dialog>
-      <dialog className={styles.dialog} open={nextQuestion}>
-        {courseData && <QuestionsProgress courseData={courseData} />}
-      </dialog>
+			<dialog className={styles.dialog} open={nextQuestion}>
+				{courseData && <QuestionsProgress courseData={courseData} />}
+			</dialog>
 			<div className={styles.qna}>
 				{data && <h2>{String(data?.questionData?.SESSION_NAME)}</h2>}
 				{data && (
@@ -165,9 +174,9 @@ const Question = () => {
 					<button
 						style={{ textAlign: "center" }}
 						className={styles.closebutton}
-						onClick={getCourseInfo}
+						onClick={handleNextQuestionOnClick}
 					>
-						Show More
+						Next Question
 					</button>
 					<button
 						className={styles.closebutton}
@@ -175,16 +184,7 @@ const Question = () => {
 						onClick={() => setOpn(true)}
 					>
 						Settings
-        </button>
-        </div>
-        <div className="col-6 d-flex justify-content-end">
-          <button
-            style={{ width: '6vw', textAlign: 'center' }}
-            className={styles.closebutton}
-            onClick={handleNextQuestionOnClick}
-          >
-            Next Question
-  					</button>
+					</button>
 				</div>
 			</div>
 			<div className={styles.grid}>
