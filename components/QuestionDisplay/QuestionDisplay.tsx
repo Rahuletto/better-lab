@@ -430,7 +430,7 @@ const Question = () => {
 
 				<div className={styles.codeWrapper} style={data?.studentData.STATUS == 2 ? {borderColor: "var(--green)"} : {}}>
 					<p>Code Editor</p>
-					<button onClick={run} disabled={code == ""} className={styles.run}>
+					<button onClick={run} disabled={code == "" || data?.studentData.STATUS == 2} className={styles.run}>
 						<FaSquareCheck /> Submit
 					</button>
 					<CodeEditor code={code} language={language} onChange={onChange} />
@@ -457,7 +457,11 @@ const Question = () => {
 			</div>
 			<div id="result">
 				{res && (
-					<div className={styles.result}>
+					<div className={styles.result} style={
+						res.result.evalPercentage == "100.0"
+							? { borderColor: "var(--green)" }
+							: ( res.result.errorMsg ? { borderColor: "var(--red)" } : {})
+					}>
 						<h2
 							style={
 								res.result.statusCode != "200"
