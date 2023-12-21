@@ -313,7 +313,7 @@ const Question = () => {
 			</div>
 			<div
 				className="row d-flex justify-content-between mb-2"
-				style={{ position: "sticky", bottom: "10px", zIndex: 3 }}
+				style={{ position: "sticky", bottom: "14px", zIndex: 3 }}
 			>
 				<div
 					className="d-flex g-6 justify-content-end"
