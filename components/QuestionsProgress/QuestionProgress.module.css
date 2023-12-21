@@ -19,11 +19,57 @@
 .levelTitle {
   color: var(--level-text);
   font-size: 16px;
-  font-weight: 600;
+  margin: 0px;
+  font-weight: 500;
+  font-family: var(--main-font);
 }
 .pagination {
-  border-radius: 12px;
-  border: solid 2px var(--tip-color);
-  text-align: center;
+  background: var(--background-dark);
+  border: 2px solid var(--border);
+  color: var(--accent);
+  border-radius: 8px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-size: 18px;
   padding: 6px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+.pagination:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.pagination:disabled:hover {
+  border: 2px var(--red) solid;
+  color: var(--red)
+}
+
+.pagination:nth-of-type(1):hover {
+  transform: translateX(-3px);
+}
+
+.pagination:nth-of-type(1):active {
+  transform: translateX(2px) scale(0.95);
+}
+
+.pagination:nth-of-type(2):hover {
+  transform: translateX(3px);
+}
+
+.pagination:nth-of-type(2):active {
+  transform: translateX(-2px) scale(0.95);
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
 }

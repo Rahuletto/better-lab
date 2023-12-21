@@ -69,15 +69,6 @@ const Question = () => {
 		return true;
 	}
 
-	async function getQuestion() {
-		fetch("/api/question?id=" + num + "&user=" + user)
-			.then((d) => d.json())
-			.then((a) => {
-				setData(a);
-				setOpn(false);
-			});
-		return true;
-	}
 	function handleNextQuestionOnClick() {
 		getCourseInfo();
 		setNextQuestion(true);
@@ -95,16 +86,13 @@ const Question = () => {
 			.then((d) => d.json())
 			.then((a) => {
 				setCourseData(a);
-				console.log(a);
 			});
 	}
 
 	useEffect(() => {
-    const us = localStorage.getItem("userid");
+		const us = localStorage.getItem("userid");
 		if (!us) router.push("/login");
 		else setUser(us);
-
-
 	}, []);
 
 	return (
@@ -120,21 +108,29 @@ const Question = () => {
 							method="dialog"
 							className="container d-flex flex-column"
 						>
-              
-              <div style={{display: 'flex', gap: 8}}>
-							<input
-                style={{opacity: 0.9, color: "#b1b1b1", cursor: "not-allowed"}}
-                disabled={true}
-								className="col-12 p-2"
-								pattern="[0-9]{12}"
-								value={user}
-								onChange={(e) => setUser(e.target?.value)}
-							/>
-							<button
-								className={styles.logout}
-								onClick={() => localStorage.setItem('userid', "")}
-							>Logout</button>
-              </div>
+							<div style={{ display: "flex", gap: 8 }}>
+								<input
+									style={{
+										opacity: 0.9,
+										color: "#b1b1b1",
+										cursor: "not-allowed",
+									}}
+									disabled={true}
+									className="col-12 p-2"
+									pattern="[0-9]{12}"
+									value={user}
+									onChange={(e) => setUser(e.target?.value)}
+								/>
+								<button
+									className={styles.logout}
+									onClick={() => {
+										localStorage.setItem("userid", "");
+										router.push("/login");
+									}}
+								>
+									Logout
+								</button>
+							</div>
 						</form>
 					</div>
 					<div className="row d-flex justify-content-end mt-3">
@@ -148,7 +144,7 @@ const Question = () => {
 							<button
 								className=" btn btn-secondary"
 								type="button"
-								onClick={() => getQuestion()}
+								onClick={() => setOpn(false)}
 							>
 								Close
 							</button>
@@ -157,7 +153,13 @@ const Question = () => {
 				</div>
 			</dialog>
 			<dialog className={styles.dialog} open={nextQuestion}>
-				{courseData && <QuestionsProgress courseData={courseData} />}
+				{courseData && (
+					<QuestionsProgress
+						user={user}
+						setData={setData}
+						courseData={courseData}
+					/>
+				)}
 			</dialog>
 			<div className={styles.qna}>
 				{data && <h2>{String(data?.questionData?.SESSION_NAME)}</h2>}
@@ -173,7 +175,10 @@ const Question = () => {
 				className="row d-flex justify-content-between mb-2 sticky-bottom"
 				style={{ bottom: "10px !important", zIndex: 3 }}
 			>
-				<div className="d-flex g-6 justify-content-end" style={{ gap: 8 }}>
+				<div
+					className="d-flex g-6 justify-content-end"
+					style={{ gap: 8, bottom: "10px !important" }}
+				>
 					<button
 						style={{ textAlign: "center" }}
 						className={styles.closebutton}
