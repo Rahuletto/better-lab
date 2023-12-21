@@ -99,7 +99,9 @@ const QuestionsProgress = ({ courseData, setNum, num }) => {
 													: el.children[0].children[0].status == 1
 													  ? styles.yellowSquare
 													  : styles.redSquare,
-												num == Number(el.children[0].children[0].name) ? styles.active : "",
+												num == Number(el.children[0].children[0].name)
+													? styles.active
+													: "",
 											].join(" ")}
 										></div>
 									</>

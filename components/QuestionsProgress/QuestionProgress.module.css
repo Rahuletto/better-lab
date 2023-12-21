@@ -2,24 +2,25 @@
   height: 23px;
   min-width: 23px;
   max-width: 23px;
-  border: 2px solid transparent;
   border-radius: 4px;
   transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
   cursor: pointer;
 }
 .greenSquare {
+  border: 2px solid var(--green);
   background-color: var(--green) !important;
 }
 .yellowSquare {
+  border: 2px solid var(--yellow);
   background-color: var(--yellow) !important;
 }
 .redSquare {
+  border: 2px solid var(--red);
   background-color: var(--red) !important;
 }
 
 .active {
   background-color: #4b33d170 !important;
-  border: 2px solid #4b33d1bb !important;
 }
 
 .greenSquare:hover, .yellowSquare:hover, .redSquare:hover {

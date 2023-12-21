@@ -91,6 +91,9 @@ const Question = () => {
 	}
 
 	useEffect(() => {
+		setPage(0)
+		setTest(0)
+		
 		setTimeout(() => {
 			setCode("");
 			if (num) {
@@ -342,14 +345,14 @@ const Question = () => {
 					</button>
 				</div>
 			</div>
-			{data?.studentData.STATUS == 2 && (
+			{(data?.studentData.STATUS == 2 || res?.result.evalPercentage == "100.0") && (
 				<div className={styles.completed}>
 					<RiEmotionHappyFill style={{fontSize: 18}} /><p> You have completed this exercise! YAY</p>
 				</div>
 			)}
 			<div className={styles.grid}>
 				<div className={styles.caseChild}>
-					<div className={styles.sideContainer} style={data?.studentData.STATUS == 2 ? {borderColor: "var(--green)"} : {}}>
+					<div className={styles.sideContainer} style={(data?.studentData.STATUS == 2 || res?.result.evalPercentage == "100.0") ? {borderColor: "var(--green)"} : {}}>
 						<div>
 							<h3>Mandatory Case</h3>
 							{data && (
@@ -381,7 +384,7 @@ const Question = () => {
 								</div>
 							) : null)}
 					</div>
-					<div className={styles.sideContainer} style={data?.studentData.STATUS == 2 ? {borderColor: "var(--green)"} : {}}>
+					<div className={styles.sideContainer} style={(data?.studentData.STATUS == 2 || res?.result.evalPercentage == "100.0") ? {borderColor: "var(--green)"} : {}}>
 						<div>
 							<h3>Test Case</h3>
 							{data && (
@@ -434,7 +437,7 @@ const Question = () => {
 					</div>
 				</div>
 
-				<div className={styles.codeWrapper} style={data?.studentData.STATUS == 2 ? {borderColor: "var(--green)"} : {}}>
+				<div className={styles.codeWrapper} style={(data?.studentData.STATUS == 2 || res?.result.evalPercentage == "100.0") ? {borderColor: "var(--green)"} : {}}>
 					<p>Code Editor</p>
 					<button onClick={run} disabled={code == "" || data?.studentData.STATUS == 2} className={styles.run}>
 						<FaSquareCheck /> Submit
