@@ -71,7 +71,6 @@ const Question = () => {
   }
 
   async function getCourseInfo() {
-    console.log('hello');
     fetch('/api/circle?user=' + user)
       .then((d) => d.json())
       .then((a) => {
@@ -88,26 +87,26 @@ const Question = () => {
           <div className="row">
             <h1>Settings</h1>
           </div>
-          <div className="row">
-            <form method="dialog" className="container d-flex  flex-column">
+          <div className="row d-flex">
+            <form style={{padding: 0, gap: 8 }} method="dialog" className="container d-flex flex-column">
               <input
-                className="col-12 m-2 p-2"
+                className="col-12 p-2"
                 pattern="[0-9]{12}"
                 value={user}
                 onChange={(e) => setUser(e.target?.value)}
               />
               <input
                 value={num}
-                className="col-12 m-2 p-2"
+                className="col-12 p-2"
                 type="number"
                 onChange={(e) => setNum(Number(e.target?.value))}
               />
             </form>
           </div>
-          <div className="row d-flex justify-content-end mt-5">
-            <div className="col-3">
+          <div className="row d-flex justify-content-end mt-3">
+            <div style={{ display: 'flex', justifyContent: "flex-end", padding: 0 }}>
               <button
-                className="m-2 btn btn-secondary"
+                className=" btn btn-secondary"
                 type="button"
                 onClick={() => getQuestion()}
               >
@@ -128,17 +127,23 @@ const Question = () => {
           />
         )}
       </div>
-      <div className="row d-flex justify-content-between mb-2">
-        <div className="col-6">
+      <div className="row d-flex justify-content-between mb-2 sticky-bottom" style={{ bottom: "10px !important", zIndex: 3 }}>
+        <div className="d-flex g-6 justify-content-end" style={{gap: 8}}>
           <button
-            style={{ width: '6vw', textAlign: 'center' }}
+            style={{ textAlign: 'center' }}
             className={styles.closebutton}
             onClick={getCourseInfo}
           >
             Show More
           </button>
+          <button
+          className={styles.closebutton}
+          type="button"
+          onClick={() => setOpn(true)}
+        >
+          Settings
+        </button>
         </div>
-        <div className="col-6">hello</div>
       </div>
       <div className={styles.grid}>
         <div className={styles.caseChild}>
@@ -281,15 +286,6 @@ const Question = () => {
             )}
           </div>
         )}
-      </div>
-      <div className="p-2">
-        <button
-          className={styles.closebutton}
-          type="button"
-          onClick={() => setOpn(true)}
-        >
-          Settings
-        </button>
       </div>
     </>
   );

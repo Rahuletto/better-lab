@@ -36,17 +36,20 @@
 .dialog {
   background: var(--background);
   z-index: 10;
-  width: 50vh;
-  height: 30vh;
-  position: absolute;
+  width: 68vh;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   border: 1px solid var(--border);
-  border-radius: 15px;
+  border-radius: 18px;
+  padding: 14px 24px !important;
 }
 .dialog h1 {
   color: var(--color);
+  font-weight: 500;
+  font-size: 32px;
+  padding: 0px !important;
 }
 .dialog button {
   background-color: var(--background-dark);
@@ -55,11 +58,11 @@
   font-weight: 700;
 }
 .dialog input {
-  background-color: var(--tip-color);
+  background-color: rgba(48, 54, 61, 0.5);
   border: none;
-  border-radius: 15px;
+  border-radius: 10px;
   color: var(--color);
-  height: 4vh;
+  padding: 4px 8px !important;
 }
 .sideContainer p {
   margin: 0px;
@@ -88,12 +91,12 @@
 .grid {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 0.3fr 16px 1fr;
+  -ms-grid-columns: 0.3fr 20px 1fr;
   grid-template-columns: 0.3fr 1fr;
   -ms-grid-rows: 1fr;
   grid-template-rows: 1fr;
 
-  gap: 16px;
+  gap: 20px;
 }
 
 .grid > *:nth-child(1) {
@@ -111,9 +114,9 @@
   display: grid;
   -ms-grid-columns: 1fr;
   grid-template-columns: 1fr;
-  -ms-grid-rows: 0.5fr 16px 1fr;
+  -ms-grid-rows: 0.5fr 20px 1fr;
   grid-template-rows: 0.5fr 1fr;
-  gap: 16px;
+  gap: 20px;
 }
 
 .caseChild > *:nth-child(1) {
@@ -128,6 +131,7 @@
 
 .moveButtons {
   display: flex;
+  align-items: center;
   justify-content: space-between;
 }
 
@@ -164,9 +168,9 @@
   gap: 6px;
 }
 
-.testCase p {
+.testCase div p {
   color: var(--accent);
-  font-family: var(--space);
+  font-family: var(--space) !important;
   font-size: 14px;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -198,9 +202,8 @@
   background-color: var(--background-dark);
   color: var(--accent);
   border: 2px solid var(--border);
-  border-radius: 15px;
-  padding: 5px;
-  width: 4vw;
+  border-radius: 12px;
+  padding: 6px 12px;
   font-size: 16px;
   font-weight: 700;
 }
@@ -263,7 +266,7 @@
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   gap: 12px;
-  margin-top: 16px;
+  margin-top: 20px;
 }
 
 .result h2 {
