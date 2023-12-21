@@ -78,6 +78,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
       <Head>
         <title>Better-Lab</title>
+        <link rel="icon" type="image/x-icon" href="/favicon.svg"></link>
       </Head>
 
       <Analytics />

@@ -44,50 +44,74 @@ export default function Login() {
 		if (no) router.push("/");
 	}, []);
 	return (
-		<main>
+		<main className={styles.main}>
 			<div className={styles.container}>
 				<h1>Better-Lab</h1>
 				<div className={styles.login}>
-					<input
-						value={uid}
-						maxLength={12}
-						pattern="[0-9]{12}"
-						minLength={12}
-						style={
-							error == 1
-								? { border: "1px solid var(--red)", background: "#D133330e" }
-								: error == 2
-								  ? {
-											border: "1px solid var(--green)",
-											background: "#65d1330e",
+					<div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+						<input
+							value={uid}
+							maxLength={12}
+							pattern="[0-9]{12}"
+							minLength={12}
+							style={
+								error == 1
+									? {
+											border: "1px solid var(--red)",
+											background: "#D133330e",
+											borderBottomLeftRadius: 2,
+											borderBottomRightRadius: 2,
 									  }
-								  : { border: "1px solid transparent" }
-						}
-						onChange={(e) => {
-							setError(0);
-							setUid(e.target.value);
-						}}
-						placeholder="User ID"
-					/>
-					<input
-						type="password"
-						value={pass}
-						style={
-							error == 1
-								? { border: "1px solid var(--red)", background: "#D133330e" }
-								: error == 2
-								  ? {
-											border: "1px solid var(--green)",
-											background: "#65d1330e",
+									: error == 2
+									  ? {
+												border: "1px solid var(--green)",
+												background: "#65d1330e",
+												borderBottomLeftRadius: 2,
+												borderBottomRightRadius: 2,
+										  }
+									  : {
+												border: "1px solid transparent",
+												borderBottomLeftRadius: 2,
+												borderBottomRightRadius: 2,
+										  }
+							}
+							onChange={(e) => {
+								setError(0);
+								setUid(e.target.value);
+							}}
+							placeholder="User ID"
+						/>
+						<input
+							type="password"
+							value={pass}
+							style={
+								error == 1
+									? {
+											border: "1px solid var(--red)",
+											background: "#D133330e",
+											borderTopLeftRadius: 2,
+											borderTopRightRadius: 2,
 									  }
-								  : { border: "1px solid transparent" }
-						}
-						onChange={(e) => {
-							setError(0);
-							setPass(e.target.value);
-						}}
-						placeholder="Passw*rd"
-					/>
+									: error == 2
+									  ? {
+												border: "1px solid var(--green)",
+												background: "#65d1330e",
+												borderTopLeftRadius: 2,
+												borderTopRightRadius: 2,
+										  }
+									  : {
+												border: "1px solid transparent",
+												borderTopLeftRadius: 2,
+												borderTopRightRadius: 2,
+										  }
+							}
+							onChange={(e) => {
+								setError(0);
+								setPass(e.target.value);
+							}}
+							placeholder="Passw*rd"
+						/>
+					</div>
 					{error == -1 ? (
 						<button
 							style={{
@@ -105,6 +129,7 @@ export default function Login() {
 					)}
 				</div>
 			</div>
+			
 		</main>
 	);
 }

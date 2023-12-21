@@ -87,6 +87,7 @@ const UnmemoEditor: React.FC<EditorProps> = ({ language, code, onChange }) => {
 					pointerEvents: "auto",
 					fontFamily: "var(--jb-font)",
 					fontSize: "14px",
+					height: "-webkit-fill-available"
 				}}
 				value={code}
 				extensions={language ? [...ext, language] : ext}

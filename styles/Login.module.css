@@ -1,3 +1,12 @@
+.main {
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background: url('/backdrop.png');
+    background-size: cover;
+}
+
 .login {
     background-color: var(--background-light);
     border: 2px solid var(--border);
@@ -6,7 +15,7 @@
     min-width: 320px;
     flex-direction: column;
     padding: 24px 32px;
-    border-radius: 20px;
+    border-radius: 32px;
     gap: 8px;
     align-items: center;
 }
@@ -25,7 +34,7 @@
     font-weight: 700;
 
     width: fit-content;
-  }
+}
 
 .login input {
     background-color: rgba(48, 54, 61, 0.5);
