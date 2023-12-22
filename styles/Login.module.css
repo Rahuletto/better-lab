@@ -1,65 +1,65 @@
 .main {
-    display: flex;
-    height: 100vh;
-    align-items: center;
-    justify-content: center;
-    background: url('/backdrop.png');
-    background-size: cover;
-    background-position: center;
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background: url('/backdrop.png');
+  background-size: cover;
+  background-position: center;
 }
 
 .login {
-    background-color: var(--background-light);
-    border: 2px solid var(--border);
-    display: flex;
-    width: 32vw;
-    min-width: 320px;
-    flex-direction: column;
-    padding: 24px 32px;
-    border-radius: 32px;
-    gap: 8px;
-    align-items: center;
+  background-color: var(--background-light);
+  border: 2px solid var(--border);
+  display: flex;
+  width: 32vw;
+  min-width: 320px;
+  flex-direction: column;
+  padding: 24px 32px;
+  border-radius: 32px;
+  gap: 8px;
+  align-items: center;
 }
 
 .login h2 {
-    color: var(--color);
+  color: var(--color);
 }
 
 .login button {
-    background-color: var(--background-dark);
-    color: var(--accent);
-    border: 2px solid var(--border);
-    border-radius: 12px;
-    padding: 6px 12px;
-    font-size: 16px;
-    font-weight: 700;
+  background-color: var(--background-dark);
+  color: var(--accent);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  padding: 6px 12px;
+  font-size: 16px;
+  font-weight: 700;
 
-    width: fit-content;
+  width: fit-content;
 }
 
 .login button:disabled {
-    border: 2px solid var(--yellow) !important;
-    background: #ffca630e !important;
-    color: var(--yellow) !important
+  border: 2px solid var(--yellow) !important;
+  background: #ffca630e !important;
+  color: var(--yellow) !important;
 }
 .login input {
-    background-color: rgba(48, 54, 61, 0.5);
-    border: none;
-    border-radius: 10px;
-    color: var(--color);
-    padding: 4px 8px !important;
-    outline: none;
-    transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  background-color: rgba(48, 54, 61, 0.5);
+  border: none;
+  border-radius: 10px;
+  color: var(--color);
+  padding: 4px 8px !important;
+  outline: none;
+  transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
 }
 
 .container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 92vh;
-    flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 92vh;
+  flex-direction: column;
 }
 
 .container h1 {
-    color: var(--accent);
+  color: var(--accent);
 }

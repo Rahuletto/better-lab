@@ -1,4 +1,6 @@
-.greenSquare, .yellowSquare, .redSquare {
+.greenSquare,
+.yellowSquare,
+.redSquare {
   height: 23px;
   min-width: 23px;
   max-width: 23px;
@@ -23,14 +25,18 @@
   background-color: var(--background-dark) !important;
 }
 
-.greenSquare:hover, .yellowSquare:hover, .redSquare:hover {
+.greenSquare:hover,
+.yellowSquare:hover,
+.redSquare:hover {
   transform: scale(0.95);
-  opacity: 0.9
+  opacity: 0.9;
 }
 
-.greenSquare:active, .yellowSquare:active, .redSquare:active {
+.greenSquare:active,
+.yellowSquare:active,
+.redSquare:active {
   transform: scale(0.9);
-  opacity: 0.8
+  opacity: 0.8;
 }
 
 .levelTitle {
@@ -66,7 +72,7 @@
 
 .pagination:disabled:hover {
   border: 2px var(--red) solid;
-  color: var(--red)
+  color: var(--red);
 }
 
 .pagination:nth-of-type(1):hover {

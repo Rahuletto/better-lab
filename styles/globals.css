@@ -71,7 +71,8 @@ li::selection,
 ul::selection,
 sup::selection,
 sub::selection,
-strong::selection,i::selection {
+strong::selection,
+i::selection {
   background-color: var(--accent);
   color: var(--background);
 }
@@ -86,7 +87,8 @@ li::-moz-selection,
 ul::-moz-selection,
 sup::-moz-selection,
 sub::-moz-selection,
-strong::-moz-selection, i::-moz-selection {
+strong::-moz-selection,
+i::-moz-selection {
   background-color: var(--accent);
   color: var(--background);
 }
@@ -172,7 +174,7 @@ pre {
   border-radius: 8px;
   padding: 4px;
   background: var(--background-light) !important;
-  
+
   font-family: var(--jb-font) !important;
 }
 
@@ -285,7 +287,7 @@ pre {
   font-family: var(--jb-font) !important;
 }
 
-.cm-tooltip.cm-tooltip-autocomplete>ul::-webkit-scrollbar {
+.cm-tooltip.cm-tooltip-autocomplete > ul::-webkit-scrollbar {
   width: 2px;
 }
 
@@ -379,7 +381,7 @@ pre {
   font-weight: 600;
 }
 
-.cm-tooltip-autocomplete>ul>li {
+.cm-tooltip-autocomplete > ul > li {
   display: flex;
   gap: 6px;
   -webkit-box-align: center;
@@ -534,7 +536,6 @@ html {
   }
 }
 @media only screen and (max-width: 690px) {
-
   .cm-scroller {
     max-width: initial;
     width: 87vw;
@@ -586,7 +587,6 @@ header h1 {
   font-size: 32px;
   user-select: none;
 }
-
 
 header {
   border-bottom: 2px solid var(--border);

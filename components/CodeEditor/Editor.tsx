@@ -1,33 +1,36 @@
-import dynamic from "next/dynamic";
-import React, { Suspense, memo } from "react";
-import Loader from "./Loader";
+import dynamic from 'next/dynamic';
+import React, { Suspense, memo } from 'react';
+import Loader from './Loader';
 
-const CodeMirror = dynamic(() => import("@uiw/react-codemirror"), {
+const CodeMirror = dynamic(() => import('@uiw/react-codemirror'), {
 	loading: () => <Loader />,
 	ssr: false,
 });
 
-const CodeMenu = dynamic(() => import("./menus/CodeMenu"), {
+const CodeMenu = dynamic(() => import('./menus/CodeMenu'), {
 	ssr: false,
 });
 
-import { githubDarkInit } from "@uiw/codemirror-theme-github";
+import { githubDarkInit } from '@uiw/codemirror-theme-github';
 
-const vscodeKeymap = await (await import("@replit/codemirror-vscode-keymap"))
-	.vscodeKeymap;
+const vscodeKeymap = await (
+	await import('@replit/codemirror-vscode-keymap')
+).vscodeKeymap;
 const indentationMarkers = await (
-	await import("@replit/codemirror-indentation-markers")
+	await import('@replit/codemirror-indentation-markers')
 ).indentationMarkers;
-const keymap = await (await import("@codemirror/view")).keymap;
-const openSearchPanel = await (await import("@codemirror/search"))
-	.openSearchPanel;
-const colorPicker = await (await import("@replit/codemirror-css-color-picker"))
-	.colorPicker;
+const keymap = await (await import('@codemirror/view')).keymap;
+const openSearchPanel = await (
+	await import('@codemirror/search')
+).openSearchPanel;
+const colorPicker = await (
+	await import('@replit/codemirror-css-color-picker')
+).colorPicker;
 
-import { TriggerEvent, useContextMenu } from "react-contexify";
+import { TriggerEvent, useContextMenu } from 'react-contexify';
 
 const ext = [
-	keymap.of([{ key: "Ctrl-Shift-f", run: openSearchPanel }, ...vscodeKeymap]),
+	keymap.of([{ key: 'Ctrl-Shift-f', run: openSearchPanel }, ...vscodeKeymap]),
 	indentationMarkers(),
 	colorPicker,
 ];
@@ -35,7 +38,7 @@ const ext = [
 type EditorProps = {
 	language?: any;
 	code?: string;
-	theme?: "light" | "dark" | string;
+	theme?: 'light' | 'dark' | string;
 	onChange?: Function | any;
 };
 
@@ -62,7 +65,7 @@ const UnmemoEditor: React.FC<EditorProps> = ({ language, code, onChange }) => {
 	};
 
 	const { show } = useContextMenu({
-		id: "elab",
+		id: 'elab',
 	});
 
 	function displayMenu(e: TriggerEvent) {
@@ -79,15 +82,15 @@ const UnmemoEditor: React.FC<EditorProps> = ({ language, code, onChange }) => {
 				placeholder={"Let's test your problem-solving skills"}
 				theme={githubDarkInit({
 					settings: {
-						fontFamily: "var(--jb-font)",
-						gutterForeground: "#4C4F73",
+						fontFamily: 'var(--jb-font)',
+						gutterForeground: '#4C4F73',
 					},
 				})}
 				style={{
-					pointerEvents: "auto",
-					fontFamily: "var(--jb-font)",
-					fontSize: "14px",
-					height: "-webkit-fill-available"
+					pointerEvents: 'auto',
+					fontFamily: 'var(--jb-font)',
+					fontSize: '14px',
+					height: '-webkit-fill-available',
 				}}
 				value={code}
 				extensions={language ? [...ext, language] : ext}
