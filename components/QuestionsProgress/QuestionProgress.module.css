@@ -5,6 +5,8 @@
   min-width: 23px;
   max-width: 23px;
   border-radius: 4px;
+  -webkit-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  -o-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
   transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
   cursor: pointer;
 }
@@ -28,6 +30,8 @@
 .greenSquare:hover,
 .yellowSquare:hover,
 .redSquare:hover {
+  -webkit-transform: scale(0.95);
+  -ms-transform: scale(0.95);
   transform: scale(0.95);
   opacity: 0.9;
 }
@@ -35,6 +39,8 @@
 .greenSquare:active,
 .yellowSquare:active,
 .redSquare:active {
+  -webkit-transform: scale(0.9);
+  -ms-transform: scale(0.9);
   transform: scale(0.9);
   opacity: 0.8;
 }
@@ -45,6 +51,9 @@
   margin: 0px;
   font-weight: 500;
   font-family: var(--main-font);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
 }
 .pagination {
@@ -62,6 +71,8 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  -o-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
   transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
 }
 
@@ -76,23 +87,36 @@
 }
 
 .pagination:nth-of-type(1):hover {
+  -webkit-transform: translateX(-3px);
+  -ms-transform: translateX(-3px);
   transform: translateX(-3px);
 }
 
 .pagination:nth-of-type(1):active {
+  -webkit-transform: translateX(2px) scale(0.95);
+  -ms-transform: translateX(2px) scale(0.95);
   transform: translateX(2px) scale(0.95);
 }
 
 .pagination:nth-of-type(2):hover {
+  -webkit-transform: translateX(3px);
+  -ms-transform: translateX(3px);
   transform: translateX(3px);
 }
 
 .pagination:nth-of-type(2):active {
+  -webkit-transform: translateX(-2px) scale(0.95);
+  -ms-transform: translateX(-2px) scale(0.95);
   transform: translateX(-2px) scale(0.95);
 }
 
 .grid {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
   gap: 6px;
   margin-bottom: 14px;

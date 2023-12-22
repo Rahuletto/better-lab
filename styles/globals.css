@@ -61,6 +61,22 @@ code::-moz-selection {
   color: var(--background);
 }
 
+p::-moz-selection,
+br::-moz-selection,
+h1::-moz-selection,
+h2::-moz-selection,
+h3::-moz-selection,
+code::-moz-selection,
+li::-moz-selection,
+ul::-moz-selection,
+sup::-moz-selection,
+sub::-moz-selection,
+strong::-moz-selection,
+i::-moz-selection {
+  background-color: var(--accent);
+  color: var(--background);
+}
+
 p::selection,
 br::selection,
 h1::selection,
@@ -91,6 +107,11 @@ strong::-moz-selection,
 i::-moz-selection {
   background-color: var(--accent);
   color: var(--background);
+}
+
+pre::-moz-selection {
+  background-color: var(--red) !important;
+  color: var(--background) !important;
 }
 
 pre::selection {
@@ -382,6 +403,8 @@ pre {
 }
 
 .cm-tooltip-autocomplete > ul > li {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   gap: 6px;
   -webkit-box-align: center;
@@ -486,8 +509,14 @@ html {
 }
 
 .loader-div {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
   height: 81vh;
 }
@@ -517,6 +546,8 @@ html {
 .green {
   padding: 4px 8px;
   border-radius: 8px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
 }
 
@@ -561,8 +592,16 @@ html {
   }
 }
 
+dialog::-webkit-backdrop {
+  background: rgba(4, 5, 7, 0.8);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  z-index: 5;
+}
+
 dialog::backdrop {
   background: rgba(4, 5, 7, 0.8);
+  -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
   z-index: 5;
 }
@@ -573,10 +612,14 @@ button:disabled {
 }
 
 button:active {
+  -webkit-transform: scale(0.95);
+  -ms-transform: scale(0.95);
   transform: scale(0.95);
 }
 
 button {
+  -webkit-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  -o-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
   transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
 }
 
@@ -585,6 +628,9 @@ header h1 {
   font-family: var(--jb-font);
   padding: 8px 16px;
   font-size: 32px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
 }
 

@@ -1,7 +1,9 @@
 .grid {
+  display: -ms-grid;
   display: grid;
   gap: 2em;
   grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  -ms-grid-rows: auto;
   grid-template-rows: auto;
   padding: 12px 24px;
 }
@@ -14,16 +16,23 @@
   color: var(--color);
   font-family: var(--main-font);
   cursor: pointer;
+  -webkit-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  -o-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
   transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
 }
 
 .card:hover {
+  -webkit-transform: scale(0.98);
+  -ms-transform: scale(0.98);
   transform: scale(0.98);
+  -webkit-box-shadow: 0px 0px 20px 4px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 20px 4px rgba(0, 0, 0, 0.2);
 }
 
 .card:active {
   opacity: 0.8;
+  -webkit-transform: scale(0.96);
+  -ms-transform: scale(0.96);
   transform: scale(0.96);
 }
 
@@ -50,8 +59,14 @@
   margin-right: 24px;
   margin-bottom: 12px;
   margin-top: 32px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
   justify-content: space-between;
 }
 
@@ -100,6 +115,8 @@
   -webkit-appearance: none;
   appearance: none;
   width: auto;
+  -webkit-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  -o-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
   transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
   text-transform: capitalize;
 }
@@ -117,6 +134,7 @@
   padding: 6px 12px;
   font-size: 16px;
   font-weight: 700;
+  -webkit-box-shadow: 0px 0px 12px 4px var(--background);
   box-shadow: 0px 0px 12px 4px var(--background);
   z-index: 3;
 }
@@ -127,7 +145,11 @@
 }
 
 .text {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   gap: 12px;
 }
@@ -141,9 +163,15 @@
 }
 
 .levelIndicator {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   gap: 20px;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
   justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
 }
 
@@ -156,6 +184,8 @@
   height: 8px;
   background: #ffca630e;
   border: 1px solid var(--border);
+  -webkit-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  -o-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
   transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
 }
 
@@ -164,6 +194,8 @@
   width: 0%;
   padding: 0.1px;
   background: var(--green);
+  -webkit-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  -o-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
   transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
   height: 100%;
 }
@@ -176,7 +208,11 @@
   padding: 4px 12px;
   font-size: 16px;
   font-weight: 700;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
+  -webkit-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  -o-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
   transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
 }
 
@@ -188,20 +224,32 @@
 .logout:active {
   background: var(--red) !important;
   color: var(--background) !important;
+  -webkit-transform: scale(0.9) rotate(2deg);
+  -ms-transform: scale(0.9) rotate(2deg);
   transform: scale(0.9) rotate(2deg);
   opacity: 0.9;
 }
 
 .settingFlex {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   gap: 8px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
   margin-top: 12px;
 }
 
 @media only screen and (max-width: 620px) {
   .grid {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
   }
 
@@ -212,6 +260,9 @@
 
 @media only screen and (max-width: 460px) {
   .dialog {
+    width: -webkit-max-content;
+    width: -moz-max-content;
     width: max-content;
   }
 }
+s
