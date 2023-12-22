@@ -79,7 +79,7 @@ export default function Course() {
 							>
 								<div className={styles.settingFlex}>
 
-									<div style={{ display: "flex", gap: 8 }}>
+									<div style={{ display: "flex", gap: 8, marginBottom: 10 }}>
 										{user && <input
 											style={{
 												opacity: 0.9,
@@ -100,31 +100,6 @@ export default function Course() {
 										>
 											Logout
 										</button>
-									</div>
-									<div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-										<p style={{ margin: 0, color: "var(--level-text)" }}>Course: </p>
-										<select value={courseId} onChange={(e) => {
-											localStorage.setItem('course', e.target.value)
-											setCourseId(e.target.value)
-										}}>
-											{regData &&
-												regData.courses.map(
-													(
-														el: { COURSE_ID: number; COURSE_NAME: string },
-														index: number,
-													) => {
-														return (
-															<option
-																style={{ textTransform: "capitalize" }}
-																key={index}
-																value={`${el.COURSE_ID}|${el.COURSE_NAME}`}
-															>
-																{el.COURSE_NAME.toLowerCase()}
-															</option>
-														);
-													},
-												)}
-										</select>
 									</div>
 								</div>
 							</form>
