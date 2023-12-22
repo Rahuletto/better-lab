@@ -230,7 +230,7 @@ export default function Question() {
 			<header>
 				<h1>Better-Lab</h1>
 			</header>
-			<main>
+			{user ? (<main>
 				<dialog className={styles.dialog} id="settings" style={{ paddingBottom: "24px !important" }}>
 					<div className="container d-flex flex-column justify-content-around">
 						<div className="row">
@@ -530,7 +530,11 @@ export default function Question() {
 						</div>
 					)}
 				</div>
-			</main>
+			</main>) : (
+				<div className="loader-div">
+					<h1 className="loader-text">Loading...</h1>
+				</div>
+			)}
 		</>
 	);
 };

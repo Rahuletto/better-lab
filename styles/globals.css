@@ -483,6 +483,18 @@ html {
   font-size: 14px;
 }
 
+.loader-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 81vh;
+}
+
+.loader-text {
+  color: var(--accent);
+  font-family: var(--space) !important;
+}
+
 .cm-gutters {
   background-color: transparent !important;
 }

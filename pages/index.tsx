@@ -3,11 +3,13 @@ import { useRouter } from "next/router";
 
 import styles from "@/styles/Home.module.css";
 
-import { CourseInfo, RegisteredCourse } from "@/types";
+import { RegisteredCourse } from "@/types";
 import { Courses } from "@/types/RegisteredCourse";
+import { dialogHandler } from "@/components/QuestionDisplay/QuestionDisplay";
+
 import { FaCopyright, FaGear, FaGolang, FaJava, FaJs, FaPython, FaRust, FaSwift } from "react-icons/fa6";
 import { SiCplusplus, SiCsharp, SiHaskell, SiJulia, SiLua, SiPerl, SiPhp, SiR, SiRuby, SiTypescript } from "react-icons/si";
-import { dialogHandler } from "@/components/QuestionDisplay/QuestionDisplay";
+
 import Skeleton from "react-loading-skeleton";
 
 const icons = {
@@ -63,7 +65,7 @@ export default function Course() {
 			<header>
 				<h1>Better-Lab</h1>
 			</header>
-			<main>
+			{user ? <main>
 				<dialog className={styles.dialog} id="settings" style={{ paddingBottom: "24px !important" }}>
 					<div className="container d-flex flex-column justify-content-around">
 						<div className="row">
@@ -211,7 +213,11 @@ export default function Course() {
 							</>
 						)}
 				</div>
-			</main>
+			</main> : (
+				<div className="loader-div">
+					<h1 className="loader-text">Loading...</h1>
+				</div>
+			)}
 		</>
 	);
 }
