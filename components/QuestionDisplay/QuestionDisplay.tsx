@@ -22,7 +22,7 @@ const QuestionsProgress = dynamic(
     import('@/components/QuestionsProgress/QuestionsProgress').then(
       (mod) => mod.default
     ),
-  { ssr: false }
+  { ssr: true }
 );
 
 import {
@@ -136,6 +136,7 @@ export default function Question() {
         });
 
       const wheel = document.getElementById('wheel') as HTMLDialogElement;
+      handleNextQuestionOnClick()
       const settings = document.getElementById('settings') as HTMLDialogElement;
 
       wheel?.addEventListener('click', (e: MouseEvent) => {
@@ -288,7 +289,7 @@ export default function Question() {
                     </div>
                     <div
                       style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-                      <p style={{ margin: 0, color: 'var(--level-text)' }}>
+                      <p style={{ margin: 0, color: 'var(--level-color)' }}>
                         Course:{' '}
                       </p>
                       <select
@@ -355,7 +356,7 @@ export default function Question() {
                   padding: '8px 12px',
                   fontSize: 18,
                 }}
-                onClick={() => router.push('/')}
+                onClick={() => router.push('/course')}
                 title="Home">
                 <FaHouse />
               </button>

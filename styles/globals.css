@@ -12,13 +12,15 @@
   --color: #c8c8c8;
   --tip-color: #30363d;
   --accent: #a0aab6;
-  --level-text: #6b6c6d;
+  --level-color: #6b6c6d;
 
   --red: #d13333;
   --green: #65d133;
   --yellow: #ffca63;
 
   --bs-font-monospace: var(--jb-font) !important;
+  --bs-heading-color: var(--color) !important;
+  color: var(--color);
 }
 
 ::-webkit-scrollbar {
@@ -143,6 +145,7 @@ sup,
 sub,
 strong {
   font-family: var(--main-font) !important;
+  
 }
 
 button {
@@ -156,7 +159,11 @@ button {
 
 html {
   text-rendering: optimizeLegibility !important;
-  background-color: var(--background);
+  background: linear-gradient(
+    135deg,
+    var(--background) 0%,
+    var(--background-dark) 100%
+  );
   color: var(--color);
   padding: 18px;
   scroll-behavior: smooth;

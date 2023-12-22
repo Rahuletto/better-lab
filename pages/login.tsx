@@ -29,7 +29,7 @@ export default function Login() {
           if (a.Status == 1) {
             setError(2);
             localStorage.setItem('userid', uid);
-            router.push('/');
+            router.push('/course');
           } else if (a.Status == 0) {
             localStorage.setItem('token', a.token);
             setError(1);
@@ -40,7 +40,7 @@ export default function Login() {
 
   useEffect(() => {
     const no = localStorage.getItem('userid');
-    if (no) router.push('/');
+    if (no) router.push('/course');
   }, []);
   return (
     <main className={styles.main}>

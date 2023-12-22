@@ -46,7 +46,7 @@
 }
 
 .levelTitle {
-  color: var(--level-text);
+  color: var(--level-color);
   font-size: 16px;
   margin: 0px;
   font-weight: 500;
