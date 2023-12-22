@@ -27,7 +27,7 @@ const space = Space_Grotesk({
 });
 const inter = Inter({
   fallback: ["sans-serif"],
-  weight: ["500", "700"],
+  weight: ["500", "600", "700", "800"],
   display: "swap",
   style: ["normal"],
   subsets: ["latin"],

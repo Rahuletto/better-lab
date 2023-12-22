@@ -69,12 +69,17 @@ const Question = () => {
 
 	// Initial Render
 	useEffect(() => {
+
 		const us = localStorage.getItem("userid");
 		if (!us) router.push("/login");
 		else setUser(us);
 
 		const lan = localStorage.getItem("course");
-		if (lan) setCourseId(lan);
+		if (lan) setCourseId(lan)
+
+		getCourseInfo().then((_a) => {
+			(document.getElementById("wheel") as HTMLDialogElement).showModal();
+		});
 	}, []);
 
 	useEffect(() => {
@@ -151,7 +156,7 @@ const Question = () => {
 	}
 
 	function handleNextQuestionOnClick() {
-		getCourseInfo().then((a) => {
+		getCourseInfo().then((_a) => {
 			(document.getElementById("wheel") as HTMLDialogElement).showModal();
 		});
 	}
@@ -221,293 +226,293 @@ const Question = () => {
 
 	return (
 		<>
-		<header>
-			<h1>Better-Lab</h1>
-		</header>
-		<main>
-			<dialog className={styles.dialog} id="settings" style={{ paddingBottom: "24px !important" }}>
-				<div className="container d-flex flex-column justify-content-around">
-					<div className="row">
-						<h1>Settings</h1>
-					</div>
-					<div className="row d-flex">
-						<form
-							style={{ padding: 0, gap: 8 }}
-							method="dialog"
-							className="container d-flex flex-column"
-						>
-							<div className={styles.settingFlex}>
-							
-								<div style={{ display: "flex", gap: 8 }}>
-									<input
-										style={{
-											opacity: 0.9,
-											color: "#b1b1b1",
-											cursor: "not-allowed",
-										}}
-										disabled={true}
-										className="col-12 p-2"
-										pattern="[0-9]{12}"
-										value={user}
-										onChange={(e) => setUser(e.target?.value)}
-									/>
-									<button
-										className={styles.logout}
-										onClick={() => {
-											localStorage.setItem("userid", "");
-											router.push("/login");
-										}}
-									>
-										Logout
-									</button>
-								</div>
-								<div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-									<p style={{ margin: 0, color: "var(--level-text)" }}>Course: </p>
-									<select value={courseId} onChange={(e) => {
-										localStorage.setItem('course', e.target.value)
-										setCourseId(e.target.value)
+			<header>
+				<h1>Better-Lab</h1>
+			</header>
+			<main>
+				<dialog className={styles.dialog} id="settings" style={{ paddingBottom: "24px !important" }}>
+					<div className="container d-flex flex-column justify-content-around">
+						<div className="row">
+							<h1>Settings</h1>
+						</div>
+						<div className="row d-flex">
+							<form
+								style={{ padding: 0, gap: 8 }}
+								method="dialog"
+								className="container d-flex flex-column"
+							>
+								<div className={styles.settingFlex}>
+
+									<div style={{ display: "flex", gap: 8 }}>
+										{user && <input
+											style={{
+												opacity: 0.9,
+												color: "#b1b1b1",
+												cursor: "not-allowed",
+											}}
+											disabled={true}
+											className="col-12 p-2"
+											pattern="[0-9]{12}"
+											value={user}
+											onChange={(e) => setUser(e.target?.value)}
+										/>}
+										<button
+											className={styles.logout}
+											onClick={() => {
+												localStorage.setItem("userid", "");
+												router.push("/login");
+											}}
+										>
+											Logout
+										</button>
+									</div>
+									<div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+										<p style={{ margin: 0, color: "var(--level-text)" }}>Course: </p>
+										<select value={courseId} onChange={(e) => {
+											localStorage.setItem('course', e.target.value)
+											setCourseId(e.target.value)
 										}}>
-										{regData &&
-											regData.courses.map(
-												(
-													el: { COURSE_ID: number; COURSE_NAME: string },
-													index: number,
-												) => {
-													return (
-														<option
-														style={{ textTransform: "capitalize" }}
-															key={index}
-															value={`${el.COURSE_ID}|${el.COURSE_NAME}`}
-														>
-															{el.COURSE_NAME.toLowerCase()}
-														</option>
-													);
-												},
-											)}
-									</select>
+											{regData &&
+												regData.courses.map(
+													(
+														el: { COURSE_ID: number; COURSE_NAME: string },
+														index: number,
+													) => {
+														return (
+															<option
+																style={{ textTransform: "capitalize" }}
+																key={index}
+																value={`${el.COURSE_ID}|${el.COURSE_NAME}`}
+															>
+																{el.COURSE_NAME.toLowerCase()}
+															</option>
+														);
+													},
+												)}
+										</select>
+									</div>
 								</div>
-							</div>
-						</form>
+							</form>
+						</div>
+
 					</div>
-					
-				</div>
-			</dialog>
-			<dialog className={styles.dialog} id="wheel">
-				<div id="wheel-div">
-					{courseData && (
-						<QuestionsProgress
-							setNum={setNum}
-							num={num}
-							courseData={courseData}
+				</dialog>
+				<dialog className={styles.dialog} id="wheel">
+					<div id="wheel-div">
+						{courseData && (
+							<QuestionsProgress
+								setNum={setNum}
+								num={num}
+								courseData={courseData}
+							/>
+						)}
+					</div>
+				</dialog>
+				<div className={styles.qna}>
+					{qData && <h2>{String(qData?.questionData?.SESSION_NAME)}</h2>}
+					{qData && (
+						<div
+							dangerouslySetInnerHTML={{
+								__html: String(qData.questionData.Q_DESC),
+							}}
 						/>
 					)}
 				</div>
-			</dialog>
-			<div className={styles.qna}>
-				{qData && <h2>{String(qData?.questionData?.SESSION_NAME)}</h2>}
-				{qData && (
-					<div
-						dangerouslySetInnerHTML={{
-							__html: String(qData.questionData.Q_DESC),
-						}}
-					/>
-				)}
-			</div>
-			<div
-				className="row d-flex justify-content-between mb-2"
-				style={{ position: "sticky", bottom: "14px", zIndex: 3 }}
-			>
 				<div
-					className="d-flex g-6 justify-content-end"
-					style={{ gap: 8 }}
+					className="row d-flex justify-content-between mb-2"
+					style={{ position: "sticky", bottom: "14px", zIndex: 3 }}
 				>
-					<button
-						className={styles.closebutton}
-						type="button"
-						style={{
-							display: "flex",
-							alignItems: "center",
-							borderWidth: 1.8,
-							padding: "8px 12px",
-							fontSize: 18,
-						}}
-						onClick={() =>
-							(
-								document.getElementById("settings") as HTMLDialogElement
-							).showModal()
-						}
-						title="Settings"
+					<div
+						className="d-flex g-6 justify-content-end"
+						style={{ gap: 8 }}
 					>
-						<FaGear />
-					</button>
-					<button
-						className={styles.closebutton}
-						style={{
-							display: "flex",
-							alignItems: "center",
-							borderWidth: 1.8,
-							padding: "6px 10px",
-							fontSize: 22,
-						}}
-						onClick={handleNextQuestionOnClick}
-						title="Progress (Select Question)"
-					>
-						<TbProgressBolt />
-					</button>
-				</div>
-			</div>
-			{(qData?.studentData.STATUS == 2 || compileData?.result.evalPercentage == "100.0") && (
-				<div className={styles.completed}>
-					<RiEmotionHappyFill style={{fontSize: 18}} /><p> You have completed this exercise! YAY</p>
-				</div>
-			)}
-			<div className={styles.grid}>
-				<div className={styles.caseChild}>
-					<div className={styles.sideContainer} style={(qData?.studentData.STATUS == 2 || compileData?.result.evalPercentage == "100.0") ? {borderColor: "var(--green)"} : {}}>
-						<div>
-							<h3>Mandatory Case</h3>
-							{qData && (
-								<>
-									<div>
-										<p>{qData.questionData.MANDATORY[mandatoryPage]}</p>
-									</div>
-								</>
-							)}
-						</div>
-						{qData &&
-							(qData.questionData.MANDATORY.length > 1 ? (
-								<div className={styles.moveButtons}>
-									<button
-										disabled={mandatoryPage <= 0}
-										onClick={() => setMandatoryPage((i) => i - 1)}
-									>
-										<FaAngleLeft />
-									</button>
-									<p>
-										{mandatoryPage + 1}/{qData.questionData.MANDATORY.length}
-									</p>
-									<button
-										disabled={mandatoryPage >= qData.questionData.MANDATORY.length - 1}
-										onClick={() => setMandatoryPage((i) => i + 1)}
-									>
-										<FaAngleRight />
-									</button>
-								</div>
-							) : null)}
-					</div>
-					<div className={styles.sideContainer} style={(qData?.studentData.STATUS == 2 || compileData?.result.evalPercentage == "100.0") ? {borderColor: "var(--green)"} : {}}>
-						<div>
-							<h3>Test Case</h3>
-							{qData && (
-								<div className={styles.testCase}>
-									<div>
-										<p>Input</p>
-										<code
-											dangerouslySetInnerHTML={{
-												__html: String(
-													qData.questionData.TESTCASES[tcasePage].INPUT,
-												),
-											}}
-										></code>
-									</div>
-									<div>
-										<p>Output</p>
-										<code
-											dangerouslySetInnerHTML={{
-												__html: String(
-													qData.questionData.TESTCASES[tcasePage].OUTPUT,
-												),
-											}}
-										></code>
-									</div>
-								</div>
-							)}
-						</div>
-						{qData &&
-							(qData.questionData.TESTCASES.length > 1 ? (
-								<div className={styles.moveButtons}>
-									<button
-										disabled={tcasePage <= 0}
-										onClick={() => setTCasePage((i) => i - 1)}
-									>
-										<FaAngleLeft />
-									</button>
-									<p>
-										{tcasePage + 1}/{qData.questionData.TESTCASES.length}
-									</p>
-									<button
-										disabled={
-											tcasePage >= qData.questionData.TESTCASES.length - 1
-										}
-										onClick={() => setTCasePage((i) => i + 1)}
-									>
-										<FaAngleRight />
-									</button>
-								</div>
-							) : null)}
-					</div>
-				</div>
-
-				<div className={styles.codeWrapper} style={(qData?.studentData.STATUS == 2 || compileData?.result.evalPercentage == "100.0") ? {borderColor: "var(--green)"} : {}}>
-					<p>Code Editor</p>
-					<button onClick={run} disabled={code == "" || qData?.studentData.STATUS == 2} className={styles.run}>
-						<FaSquareCheck /> Submit
-					</button>
-					<CodeEditor code={code} language={language} onChange={onChange} />
-					<p
-						style={{
-							textAlign: "right",
-							marginRight: "12px",
-							marginBottom: 0,
-							opacity: 0.7,
-							position: "relative",
-							bottom: "-4px",
-						}}
-					>
-						Powered by{" "}
-						<a
-							href="https://execoder.vercel.app"
-							target="_blank"
-							style={{ color: "#a8aceb" }}
-						>
-							Execoder
-						</a>
-					</p>
-				</div>
-			</div>
-			<div id="result">
-				{compileData && (
-					<div className={styles.result} style={
-						compileData.result.evalPercentage == "100.0"
-							? { borderColor: "var(--green)" }
-							: ( compileData.result.errorMsg ? { borderColor: "var(--red)" } : {})
-					}>
-						<h2
-							style={
-								compileData.result.statusCode != "200"
-									? { color: "var(--red)" }
-									: { color: "var(--green)" }
+						<button
+							className={styles.closebutton}
+							type="button"
+							style={{
+								display: "flex",
+								alignItems: "center",
+								borderWidth: 1.8,
+								padding: "8px 12px",
+								fontSize: 18,
+							}}
+							onClick={() =>
+								(
+									document.getElementById("settings") as HTMLDialogElement
+								).showModal()
 							}
+							title="Settings"
 						>
-							{compileData.result.evalPercentage}%
-						</h2>
-						{compileData.result.errorMsg ? (
-							<pre className={styles.error}>{compileData.result.errorMsg}</pre>
-						) : (
-							<div className={styles.resVar}>
-								{compileData.result.statusArray.map((el, ind) => {
-									return (
-										<div className={el.color} key={ind}>
-											<p>{el.msg}</p>
-										</div>
-									);
-								})}
-							</div>
-						)}
+							<FaGear />
+						</button>
+						<button
+							className={styles.closebutton}
+							style={{
+								display: "flex",
+								alignItems: "center",
+								borderWidth: 1.8,
+								padding: "6px 10px",
+								fontSize: 22,
+							}}
+							onClick={handleNextQuestionOnClick}
+							title="Progress (Select Question)"
+						>
+							<TbProgressBolt />
+						</button>
+					</div>
+				</div>
+				{(qData?.studentData.STATUS == 2 || compileData?.result.evalPercentage == "100.0") && (
+					<div className={styles.completed}>
+						<RiEmotionHappyFill style={{ fontSize: 18 }} /><p> You have completed this exercise! YAY</p>
 					</div>
 				)}
-			</div>
-		</main>
+				<div className={styles.grid}>
+					<div className={styles.caseChild}>
+						<div className={styles.sideContainer} style={(qData?.studentData.STATUS == 2 || compileData?.result.evalPercentage == "100.0") ? { borderColor: "var(--green)" } : {}}>
+							<div>
+								<h3>Mandatory Case</h3>
+								{qData && (
+									<>
+										<div>
+											<p>{qData.questionData.MANDATORY[mandatoryPage]}</p>
+										</div>
+									</>
+								)}
+							</div>
+							{qData &&
+								(qData.questionData.MANDATORY.length > 1 ? (
+									<div className={styles.moveButtons}>
+										<button
+											disabled={mandatoryPage <= 0}
+											onClick={() => setMandatoryPage((i) => i - 1)}
+										>
+											<FaAngleLeft />
+										</button>
+										<p>
+											{mandatoryPage + 1}/{qData.questionData.MANDATORY.length}
+										</p>
+										<button
+											disabled={mandatoryPage >= qData.questionData.MANDATORY.length - 1}
+											onClick={() => setMandatoryPage((i) => i + 1)}
+										>
+											<FaAngleRight />
+										</button>
+									</div>
+								) : null)}
+						</div>
+						<div className={styles.sideContainer} style={(qData?.studentData.STATUS == 2 || compileData?.result.evalPercentage == "100.0") ? { borderColor: "var(--green)" } : {}}>
+							<div>
+								<h3>Test Case</h3>
+								{qData && (
+									<div className={styles.testCase}>
+										<div>
+											<p>Input</p>
+											<code
+												dangerouslySetInnerHTML={{
+													__html: String(
+														qData.questionData.TESTCASES[tcasePage].INPUT,
+													),
+												}}
+											></code>
+										</div>
+										<div>
+											<p>Output</p>
+											<code
+												dangerouslySetInnerHTML={{
+													__html: String(
+														qData.questionData.TESTCASES[tcasePage].OUTPUT,
+													),
+												}}
+											></code>
+										</div>
+									</div>
+								)}
+							</div>
+							{qData &&
+								(qData.questionData.TESTCASES.length > 1 ? (
+									<div className={styles.moveButtons}>
+										<button
+											disabled={tcasePage <= 0}
+											onClick={() => setTCasePage((i) => i - 1)}
+										>
+											<FaAngleLeft />
+										</button>
+										<p>
+											{tcasePage + 1}/{qData.questionData.TESTCASES.length}
+										</p>
+										<button
+											disabled={
+												tcasePage >= qData.questionData.TESTCASES.length - 1
+											}
+											onClick={() => setTCasePage((i) => i + 1)}
+										>
+											<FaAngleRight />
+										</button>
+									</div>
+								) : null)}
+						</div>
+					</div>
+
+					<div className={styles.codeWrapper} style={(qData?.studentData.STATUS == 2 || compileData?.result.evalPercentage == "100.0") ? { borderColor: "var(--green)" } : {}}>
+						<p>Code Editor</p>
+						<button onClick={run} disabled={code == "" || qData?.studentData.STATUS == 2} className={styles.run}>
+							<FaSquareCheck /> Submit
+						</button>
+						<CodeEditor code={code} language={language} onChange={onChange} />
+						<p
+							style={{
+								textAlign: "right",
+								marginRight: "12px",
+								marginBottom: 0,
+								opacity: 0.7,
+								position: "relative",
+								bottom: "-4px",
+							}}
+						>
+							Powered by{" "}
+							<a
+								href="https://execoder.vercel.app"
+								target="_blank"
+								style={{ color: "#a8aceb" }}
+							>
+								Execoder
+							</a>
+						</p>
+					</div>
+				</div>
+				<div id="result">
+					{compileData && (
+						<div className={styles.result} style={
+							compileData.result.evalPercentage == "100.0"
+								? { borderColor: "var(--green)" }
+								: (compileData.result.errorMsg ? { borderColor: "var(--red)" } : {})
+						}>
+							<h2
+								style={
+									compileData.result.statusCode != "200"
+										? { color: "var(--red)" }
+										: { color: "var(--green)" }
+								}
+							>
+								{compileData.result.evalPercentage}%
+							</h2>
+							{compileData.result.errorMsg ? (
+								<pre className={styles.error}>{compileData.result.errorMsg}</pre>
+							) : (
+								<div className={styles.resVar}>
+									{compileData.result.statusArray.map((el, ind) => {
+										return (
+											<div className={el.color} key={ind}>
+												<p>{el.msg}</p>
+											</div>
+										);
+									})}
+								</div>
+							)}
+						</div>
+					)}
+				</div>
+			</main>
 		</>
 	);
 };

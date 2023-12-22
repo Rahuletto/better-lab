@@ -37,7 +37,6 @@ const QuestionsProgress = ({
 						{courseData &&
 							courseData?.flare.children[index].children.map((el, i) => {
 								return (
-									<>
 										<div
 											title={"Question " + el.name}
 											key={i}
@@ -48,12 +47,11 @@ const QuestionsProgress = ({
 												el.status == 2
 													? styles.greenSquare
 													: el.status == 1
-													  ? styles.yellowSquare
-													  : styles.redSquare,
+														? styles.yellowSquare
+														: styles.redSquare,
 												num == Number(el.name) ? styles.active : "",
 											].join(" ")}
 										></div>
-									</>
 								);
 							})}
 					</div>
@@ -66,23 +64,22 @@ const QuestionsProgress = ({
 						{courseData &&
 							courseData?.flare.children[index].children.map((el, i) => {
 								return (
-									<>
-										<div
-											title={"Question " + el.children[0].name}
-											key={i}
-											onClick={() => {
-												setNum(Number(el.children[0].name));
-											}}
-											className={[
-												el.children[0].status == 2
-													? styles.greenSquare
-													: el.children[0].status == 1
-													  ? styles.yellowSquare
-													  : styles.redSquare,
-												num == Number(el.children[0].name) ? styles.active : "",
-											].join(" ")}
-										></div>
-									</>
+									<div
+										title={"Question " + el.children[0].name}
+										key={i}
+										onClick={() => {
+											setNum(Number(el.children[0].name));
+										}}
+										className={[
+											el.children[0].status == 2
+												? styles.greenSquare
+												: el.children[0].status == 1
+													? styles.yellowSquare
+													: styles.redSquare,
+											num == Number(el.children[0].name) ? styles.active : "",
+										].join(" ")}
+									></div>
+
 								);
 							})}
 					</div>
@@ -95,7 +92,6 @@ const QuestionsProgress = ({
 						{courseData &&
 							courseData?.flare.children[index].children.map((el, i) => {
 								return (
-									<>
 										<div
 											title={"Question " + el.children[0].children[0].name}
 											key={i}
@@ -106,14 +102,13 @@ const QuestionsProgress = ({
 												el.children[0].children[0].status == 2
 													? styles.greenSquare
 													: el.children[0].children[0].status == 1
-													  ? styles.yellowSquare
-													  : styles.redSquare,
+														? styles.yellowSquare
+														: styles.redSquare,
 												num == Number(el.children[0].children[0].name)
 													? styles.active
 													: "",
 											].join(" ")}
 										></div>
-									</>
 								);
 							})}
 					</div>

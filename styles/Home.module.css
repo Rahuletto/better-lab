@@ -1,0 +1,91 @@
+.grid {
+    display: grid;
+    gap: 2em;
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    grid-template-rows: auto;
+}
+
+.card {
+    background-color: var(--border);
+    border-radius: 16px;
+    border: 2px solid transparent;
+    padding: 8px 16px;
+    color: var(--color);
+    font-family: var(--main-font);
+    cursor: pointer;
+    transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+.card:hover {
+    transform: scale(0.98);
+    box-shadow: 0px 0px 20px 4px rgba(0,0,0,0.2);
+}
+
+.card:active {
+    opacity: 0.8;
+    transform: scale(0.96);
+}
+
+.card p {
+    color: var(--color);
+    margin: 0;
+}
+
+.card p span {
+    color: var(--color);
+    opacity: 0.6;
+    font-size: 14px;
+}
+
+.title {
+    font-size: 22px;
+    font-weight: 600;
+    opacity: 1 !important;
+}
+
+.card h2 {
+    color: var(--accent);
+    margin: 0px;
+}
+
+.text {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.levels {
+    background: var(--background-dark);
+    margin-bottom: 8px;
+    margin-top: 16px;
+    padding: 4px 8px;
+    border-radius: 8px;
+}
+
+.levelIndicator {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.progress {
+    cursor: pointer;
+    max-width: 180px;
+    min-width: 100px;
+    width: 69%;
+    border-radius: 20px;
+    height: 8px;
+    background: #ffca630e;
+    border: 1px solid var(--border);
+    transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+.progress div {
+    border-radius: 20px;
+    width: 0%;
+    padding: 0.1px;
+    background: var(--green);
+    transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    height: 100%;
+}

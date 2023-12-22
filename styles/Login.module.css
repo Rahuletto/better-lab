@@ -37,6 +37,11 @@
     width: fit-content;
 }
 
+.login button:disabled {
+    border: 2px solid var(--yellow) !important;
+    background: #ffca630e !important;
+    color: var(--yellow) !important
+}
 .login input {
     background-color: rgba(48, 54, 61, 0.5);
     border: none;

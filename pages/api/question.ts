@@ -34,6 +34,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 	fetch(
 		"https://dld.srmist.edu.in/ktretelab2023/elabserver/ict/student/questionview/getinfo",
 		{
+			cache: 'force-cache',
 			method: "POST",
 			body: JSONdata,
 			headers: {

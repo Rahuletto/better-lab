@@ -12,6 +12,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 	fetch("https://dld.srmist.edu.in/ktretelab2023/elabserver/ict/login", {
 		method: "POST",
 		body: JSONdata,
+		cache: 'force-cache',
 		headers: {
 			"Content-Type": "application/json",
 			"Access-Control-Allow-Origin": "https://dld.srmist.edu.in",
