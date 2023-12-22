@@ -29,12 +29,29 @@ import {
 	FaAngleLeft,
 	FaAngleRight,
 	FaGear,
+	FaHouse,
 	FaSquareCheck,
 } from "react-icons/fa6";
 import { TbProgressBolt } from "react-icons/tb";
 import { RiEmotionHappyFill } from "react-icons/ri";
 
-const Question = () => {
+export function dialogHandler(e: MouseEvent | any) {
+	if (e.target?.tagName !== "DIALOG")
+		//This prevents issues with forms
+		return;
+
+	const rect = e.target.getBoundingClientRect();
+
+	const clickedInDialog =
+		rect.top <= e.clientY &&
+		e.clientY <= rect.top + rect.height &&
+		rect.left <= e.clientX &&
+		e.clientX <= rect.left + rect.width;
+
+	if (clickedInDialog === false) e.target.close();
+}
+
+export default function Question() {
 	const router = useRouter();
 
 	const [num, setNum] = useState<number>(); // Question number
@@ -208,22 +225,6 @@ const Question = () => {
 		return true;
 	}
 
-	function dialogHandler(e: MouseEvent | any) {
-		if (e.target?.tagName !== "DIALOG")
-			//This prevents issues with forms
-			return;
-
-		const rect = e.target.getBoundingClientRect();
-
-		const clickedInDialog =
-			rect.top <= e.clientY &&
-			e.clientY <= rect.top + rect.height &&
-			rect.left <= e.clientX &&
-			e.clientX <= rect.left + rect.width;
-
-		if (clickedInDialog === false) e.target.close();
-	}
-
 	return (
 		<>
 			<header>
@@ -254,7 +255,6 @@ const Question = () => {
 											className="col-12 p-2"
 											pattern="[0-9]{12}"
 											value={user}
-											onChange={(e) => setUser(e.target?.value)}
 										/>}
 										<button
 											className={styles.logout}
@@ -326,6 +326,24 @@ const Question = () => {
 						className="d-flex g-6 justify-content-end"
 						style={{ gap: 8 }}
 					>
+						<button
+							className={styles.closebutton}
+							type="button"
+							style={{
+								display: "flex",
+								alignItems: "center",
+								borderWidth: 1.8,
+								padding: "8px 12px",
+								fontSize: 18,
+							}}
+							onClick={() =>
+								router.push('/')
+							}
+							title="Home"
+						>
+							<FaHouse />
+						</button>
+
 						<button
 							className={styles.closebutton}
 							type="button"
@@ -516,5 +534,3 @@ const Question = () => {
 		</>
 	);
 };
-
-export default Question;

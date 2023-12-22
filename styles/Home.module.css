@@ -3,6 +3,7 @@
     gap: 2em;
     grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
     grid-template-rows: auto;
+    padding: 12px 24px;
 }
 
 .card {
@@ -18,7 +19,7 @@
 
 .card:hover {
     transform: scale(0.98);
-    box-shadow: 0px 0px 20px 4px rgba(0,0,0,0.2);
+    box-shadow: 0px 0px 20px 4px rgba(0, 0, 0, 0.2);
 }
 
 .card:active {
@@ -41,6 +42,84 @@
     font-size: 22px;
     font-weight: 600;
     opacity: 1 !important;
+}
+
+.registered {
+    color: var(--color);
+    margin-left: 24px;
+    margin-bottom: 12px;
+    margin-top: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.dialog {
+    background: var(--background);
+    z-index: 10;
+    width: 68vh;
+    position: fixed;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 14px 24px !important;
+}
+
+.dialog h1 {
+    color: var(--color);
+    font-weight: 500;
+    font-size: 28px;
+    padding: 0px !important;
+}
+
+.dialog button {
+    background-color: var(--background-dark);
+    color: var(--accent);
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.dialog input {
+    background-color: rgba(48, 54, 61, 0.5);
+    border: none;
+    border-radius: 10px;
+    color: var(--color);
+    padding: 4px 8px !important;
+    width: auto;
+}
+
+.dialog select {
+    background-color: rgba(48, 54, 61, 0.5);
+    border: none;
+    border-radius: 10px;
+    color: var(--color);
+    padding: 4px 12px !important;
+    border: 2px solid transparent;
+    outline: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    width: auto;
+    transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    text-transform: capitalize;
+}
+
+.dialog select:hover {
+    background: var(--background-light);
+    border: 2px solid rgba(48, 54, 61, 0.5);
+}
+
+
+.closebutton {
+    background-color: var(--background-dark);
+    color: var(--accent);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 6px 12px;
+    font-size: 16px;
+    font-weight: 700;
+    box-shadow: 0px 0px 12px 4px var(--background);
+    z-index: 3;
 }
 
 .card h2 {
@@ -88,4 +167,55 @@
     background: var(--green);
     transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
     height: 100%;
+}
+
+.logout {
+    background-color: #D133330e !important;
+    color: var(--red) !important;
+    border: 2px solid var(--red);
+    border-radius: 12px;
+    padding: 4px 12px;
+    font-size: 16px;
+    font-weight: 700;
+    width: fit-content;
+    transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  }
+  
+  .logout:hover {
+    background: var(--red) !important;
+    color: var(--background) !important;
+  }
+  
+  .logout:active {
+    background: var(--red) !important;
+    color: var(--background) !important;
+    transform: scale(0.9) rotate(2deg);
+    opacity: 0.9;
+  }
+  
+  .settingFlex {
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
+    margin-top: 12px;
+  }
+
+@media only screen and (max-width: 620px) {
+    .grid {
+        display: flex;
+        flex-direction: column;
+    }
+
+
+    .dialog input {
+        width: 150px;
+    }
+
+}
+
+@media only screen and (max-width: 460px) {
+
+    .dialog {
+        width: max-content;
+    }
 }
