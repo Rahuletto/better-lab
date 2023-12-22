@@ -47,6 +47,7 @@
 .registered {
     color: var(--color);
     margin-left: 24px;
+    margin-right: 24px;
     margin-bottom: 12px;
     margin-top: 32px;
     display: flex;

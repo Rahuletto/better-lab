@@ -142,6 +142,13 @@ export default function Question() {
 			settings?.addEventListener("click", (e: any) => {
 				dialogHandler(e);
 			});
+
+			wheel?.addEventListener("touchend", (e: any) => {
+				dialogHandler(e);
+			});
+			settings?.addEventListener("touchend", (e: any) => {
+				dialogHandler(e);
+			});
 		}
 	}, [user]);
 

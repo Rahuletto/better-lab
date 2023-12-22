@@ -58,6 +58,10 @@ export default function Course() {
 		settings?.addEventListener("click", (e: any) => {
 			dialogHandler(e);
 		});
+
+		settings?.addEventListener("touchend", (e: any) => {
+			dialogHandler(e);
+		});
 	}, []);
 
 	return (
