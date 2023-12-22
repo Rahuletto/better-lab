@@ -40,9 +40,9 @@ export function dialogHandler(e: MouseEvent | any) {
 		return;
 
 	const rect = e.target.getBoundingClientRect();
-
-	const touch = (e.changedTouches ? e.changedTouches[0] : e)
-
+	console.log(e)
+	const touch = ((e?.changedTouches && e?.changedTouches?.length != 0) ? e.changedTouches[0] : e)
+	
 	const clickedInDialog =
 		rect.top <= touch.clientY &&
 		touch.clientY <= rect.top + rect.height &&
@@ -137,17 +137,17 @@ export default function Question() {
 			const wheel = document.getElementById("wheel") as HTMLDialogElement;
 			const settings = document.getElementById("settings") as HTMLDialogElement;
 
-			wheel?.addEventListener("click", (e: any) => {
+			wheel?.addEventListener("click", (e: MouseEvent) => {
 				dialogHandler(e);
 			});
-			settings?.addEventListener("click", (e: any) => {
+			settings?.addEventListener("click", (e: MouseEvent) => {
 				dialogHandler(e);
 			});
 
-			wheel?.addEventListener("touchend", (e: any) => {
+			wheel?.addEventListener("touchend", (e: TouchEvent) => {
 				dialogHandler(e);
 			});
-			settings?.addEventListener("touchend", (e: any) => {
+			settings?.addEventListener("touchend", (e: TouchEvent) => {
 				dialogHandler(e);
 			});
 		}
