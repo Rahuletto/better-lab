@@ -8,6 +8,7 @@ import { Courses } from "@/types/RegisteredCourse";
 import { FaCopyright, FaGear, FaGolang, FaJava, FaJs, FaPython, FaRust, FaSwift } from "react-icons/fa6";
 import { SiCplusplus, SiCsharp, SiHaskell, SiJulia, SiLua, SiPerl, SiPhp, SiR, SiRuby, SiTypescript } from "react-icons/si";
 import { dialogHandler } from "@/components/QuestionDisplay/QuestionDisplay";
+import Skeleton from "react-loading-skeleton";
 
 const icons = {
 	C: <FaCopyright />,
@@ -155,7 +156,7 @@ export default function Course() {
 
 				</div>
 				<div className={styles.grid}>
-					{regData &&
+					{regData ?
 						regData.courses.map(
 							(
 								el: Courses,
@@ -201,6 +202,13 @@ export default function Course() {
 									</div>
 								);
 							},
+						) : (
+							<>
+								<Skeleton style={{ borderRadius: 16 }} height={160} width={"100%"} />
+								<Skeleton style={{ borderRadius: 16 }} height={160} width={"100%"} />
+								<Skeleton style={{ borderRadius: 16 }} height={160} width={"100%"} />
+								<Skeleton style={{ borderRadius: 16 }} height={160} width={"100%"} />
+							</>
 						)}
 				</div>
 			</main>
