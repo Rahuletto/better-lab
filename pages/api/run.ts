@@ -1,11 +1,41 @@
-import type { NextApiRequest, NextApiResponse } from "next";
+import { NextRequest } from "next/server";
 
-export default async function handler(
-	req: NextApiRequest,
-	res: NextApiResponse,
-) {
-	// Get url query parameters
-	const { user, id } = req.query;
+export default async function POST(req: NextRequest) {
+	const { searchParams } = new URL(req.url);
+
+	if (req.method != "POST")
+		return new Response(
+			JSON.stringify({
+				message: "Invaid Method ! EXPECTED: POST method.",
+				status: 405,
+			}),
+			{
+				status: 405,
+				headers: {
+					"content-type": "application/json",
+				},
+			},
+		);
+
+	const id = String(searchParams.get("id"));
+	const user = String(searchParams.get("user"));
+
+	if (!id || !user)
+		return new Response(
+			JSON.stringify({
+				error: "Missing query arguments",
+				status: 400,
+				reason:
+					"The server cannot or will not process the request due to something that is perceived to be a client error",
+			}),
+			{
+				status: 400,
+				headers: {
+					"content-type": "application/json",
+				},
+			},
+		);
+
 	const {
 		code,
 		language,
@@ -16,10 +46,23 @@ export default async function handler(
 		language: string;
 		qid: string;
 		course: { name: string; id: number };
-	} = JSON.parse(req.body);
+	} = await req.json();
 
-	if(!user) return res.status(400).json({ error: "Missing query arguments", status: 400, reason: "The server cannot or will not process the request due to something that is perceived to be a client error" })
-    if(!code || !language || !qid || !course) return res.status(400).json({ error: "Missing body arguments", status: 400, reason: "The server cannot or will not process the request due to something that is perceived to be a client error" })
+	if (!code || !language || !qid || !course)
+		return Response.json(
+			{
+				error: "Missing body arguments",
+				status: 400,
+				reason:
+					"The server cannot or will not process the request due to something that is perceived to be a client error",
+			},
+			{
+				status: 400,
+				headers: {
+					"content-type": "application/json",
+				},
+			},
+		);
 
 	const json = {
 		language: language,
@@ -62,9 +105,7 @@ export default async function handler(
 
 	const runJSONData = JSON.stringify(runJSON);
 
-	console.log(json, runJSON)
-
-	fetch(
+	const e = await fetch(
 		"https://dld.srmist.edu.in/ktretelab2023/elabserver/ict/student/questionview/savelogs",
 		{
 			method: "POST",
@@ -79,11 +120,7 @@ export default async function handler(
 				"Sec-Fetch-Site": "same-origin",
 			},
 		},
-	).then((dt) => dt.json())
-	.then(a => console.log(a))
-	.catch((error) => {
-		res.json(error);
-	});
+	);
 
 	const response = await fetch(
 		"https://dld.srmist.edu.in/ktretelab2023/elabserver/ict/student/questionview/evaluate",
@@ -100,15 +137,17 @@ export default async function handler(
 				"Sec-Fetch-Site": "same-origin",
 			},
 		},
-	)
-		.then((dt) => dt.json())
-		.catch((error) => {
-			res.json(error);
-		});
+	);
+	const data = await response.json();
 
-	return new Promise<void>((resolve, reject) => {
-		console.log(response)
-		res.status(200).send(response);
-		resolve();
+	return Response.json(data, {
+		status: 200,
+		headers: {
+			"content-type": "application/json",
+		},
 	});
 }
+
+export const config = {
+	runtime: "edge",
+};
