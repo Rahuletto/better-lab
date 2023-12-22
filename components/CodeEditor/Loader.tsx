@@ -7,6 +7,8 @@ function Loader() {
 				padding: "8px 20px",
 				height: "100%",
 				background: "var(--code-editor)",
+				width: "90vw !important",
+				overflow: "auto"
 			}}
 		>
 			<Skeleton style={{ width: "400px" }} />

@@ -42,7 +42,7 @@ export function dialogHandler(e: MouseEvent | any) {
 	const rect = e.target.getBoundingClientRect();
 	console.log(e)
 	const touch = ((e?.changedTouches && e?.changedTouches?.length != 0) ? e.changedTouches[0] : e)
-	
+
 	const clickedInDialog =
 		rect.top <= touch.clientY &&
 		touch.clientY <= rect.top + rect.height &&
@@ -112,7 +112,7 @@ export default function Question() {
 				);
 				if (cd) setCode(cd);
 			}
-		}, 1000);
+		}, 100);
 
 		if (user && num) {
 			getQuestion(num);
@@ -150,7 +150,17 @@ export default function Question() {
 			settings?.addEventListener("touchend", (e: TouchEvent) => {
 				dialogHandler(e);
 			});
+
+			return () => {
+				wheel.removeEventListener("click", dialogHandler)
+				wheel.removeEventListener("touchend", dialogHandler)
+
+				settings.removeEventListener("click", dialogHandler)
+				settings.removeEventListener("touchend", dialogHandler)
+			}
 		}
+
+
 	}, [user]);
 
 	async function getQuestion(n: number) {
@@ -201,8 +211,8 @@ export default function Question() {
 				})
 					.then((d) => d.json())
 					.then((a) => {
-						setCourseData(a);
 						resolve(true);
+						setCourseData(a);
 					});
 			}
 		});
@@ -228,7 +238,7 @@ export default function Question() {
 				setCompileData(a);
 				setTimeout(() => {
 					box?.scrollIntoView({ behavior: "smooth" });
-				}, 1000);
+				}, 1200);
 			});
 		return true;
 	}

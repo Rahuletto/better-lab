@@ -42,17 +42,6 @@ export default function Course() {
 	const [user, setUser] = useState('')
 
 	useEffect(() => {
-		const settings = document.getElementById("settings") as HTMLDialogElement;
-
-		settings?.addEventListener("click", (e: MouseEvent) => {
-			dialogHandler(e);
-		});
-
-		settings?.addEventListener("touchend", (e: TouchEvent) => {
-			dialogHandler(e);
-		});
-
-
 		const us = localStorage.getItem("userid");
 		if (!us) router.push("/login");
 		else {
@@ -63,9 +52,25 @@ export default function Course() {
 					setRegData(a);
 				});
 		}
-
-
 	}, []);
+
+	useEffect(() => {
+		if (user) {
+			const settings = document.getElementById("settings") as HTMLDialogElement;
+
+			settings?.addEventListener("click", (e: MouseEvent) => {
+				dialogHandler(e);
+			});
+
+			settings?.addEventListener("touchend", (e: TouchEvent) => {
+				dialogHandler(e);
+			});
+			return () => {
+				settings?.removeEventListener('click', dialogHandler)
+				settings?.removeEventListener('touchend', dialogHandler)
+			}
+		}
+	}, [user])
 
 	return (
 		<>
