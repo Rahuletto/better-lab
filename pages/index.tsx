@@ -187,7 +187,7 @@ export default function Course() {
                         `${el.COURSE_ID}|${el.COURSE_NAME}`
                       );
                       setCourseId(`${el.COURSE_ID}|${el.COURSE_NAME}`);
-                      router.push('/course');
+                      router.push('/question');
                     }}>
                     {
                       
