@@ -41,6 +41,12 @@ export default function Login() {
   useEffect(() => {
     const no = localStorage.getItem('userid');
     if (no) router.push('/course');
+
+    fetch('/api/status')
+      .then((d) => d.json())
+      .then((a) => {
+        if (a.Status != 1) router.push('/offline');
+      });
   }, []);
   return (
     <main className={styles.main}>

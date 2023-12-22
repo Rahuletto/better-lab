@@ -71,6 +71,12 @@ export default function Course() {
           setRegData(a);
         });
     }
+
+    fetch('/api/status')
+      .then((d) => d.json())
+      .then((a) => {
+        if (a.Status != 1) router.push('/offline');
+      });
   }, []);
 
   useEffect(() => {
@@ -190,10 +196,11 @@ export default function Course() {
                       router.push('/question');
                     }}>
                     {
-                      
                       <div className={styles.text}>
-                        {' '}{// @ts-ignore
-						}<h2>{icons[el.COURSE_NAME]}</h2>
+                        {' '}
+                        {
+                          // @ts-ignore
+                        }<h2>{icons[el.COURSE_NAME]}</h2>
                         <p className={styles.title}>
                           {el.COURSE_NAME.charAt(0).toUpperCase() +
                             el.COURSE_NAME.slice(1).toLowerCase()}

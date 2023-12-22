@@ -96,6 +96,13 @@ export default function Question() {
     const lan = localStorage.getItem('course');
     if (lan) setCourseId(lan);
 
+    fetch('/api/status')
+      .then((d) => d.json())
+      .then((a) => {
+        if (a.Status != 1) router.push('/offline');
+      });
+      
+
     getCourseInfo().then((_a) => {
       (document.getElementById('wheel') as HTMLDialogElement).showModal();
     });
