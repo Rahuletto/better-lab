@@ -41,7 +41,7 @@ export function dialogHandler(e: MouseEvent | any) {
 
 	const rect = e.target.getBoundingClientRect();
 
-	const touch = (e as TouchEvent ? e.changedTouches[0] : e)
+	const touch = (e.changedTouches ? e.changedTouches[0] : e)
 
 	const clickedInDialog =
 		rect.top <= touch.clientY &&
