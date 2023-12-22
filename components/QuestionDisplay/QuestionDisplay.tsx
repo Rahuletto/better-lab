@@ -101,7 +101,6 @@ export default function Question() {
       .then((a) => {
         if (a.Status != 1) router.push('/offline');
       });
-      
 
     getCourseInfo().then((_a) => {
       (document.getElementById('wheel') as HTMLDialogElement).showModal();
@@ -136,14 +135,16 @@ export default function Question() {
 
   useEffect(() => {
     if (user) {
-      fetch('/api/getreg?user=' + user)
+      const sr = localStorage.getItem('server');
+
+      fetch('/api/getreg?user=' + user + '&server=' + sr)
         .then((d) => d.json())
         .then((a) => {
           setRegData(a);
         });
 
       const wheel = document.getElementById('wheel') as HTMLDialogElement;
-      handleNextQuestionOnClick()
+      handleNextQuestionOnClick();
       const settings = document.getElementById('settings') as HTMLDialogElement;
 
       wheel?.addEventListener('click', (e: MouseEvent) => {
@@ -173,8 +174,9 @@ export default function Question() {
   async function getQuestion(n: number) {
     const cid = courseId.split('|')[0];
     const reg = regData?.courses.find((a: any) => a.COURSE_ID == cid);
+    const sr = localStorage.getItem('server');
 
-    fetch('/api/question?id=' + n + '&user=' + user, {
+    fetch('/api/question?id=' + n + '&user=' + user + "&server=" + sr, {
       method: 'POST',
       body: JSON.stringify({
         course: {
@@ -206,8 +208,9 @@ export default function Question() {
   async function getCourseInfo() {
     return new Promise((resolve) => {
       const [id, l] = courseId.split('|');
+      const sr = localStorage.getItem('server');
       if (user) {
-        fetch('/api/circle?user=' + user, {
+        fetch('/api/circle?user=' + user + '&server=' + sr, {
           method: 'POST',
           body: JSON.stringify({
             course: {
@@ -228,7 +231,9 @@ export default function Question() {
   async function run() {
     if (!qData) return;
     const box = document.getElementById('result');
-    fetch('/api/run?user=' + user + '&id=' + num, {
+    const sr = localStorage.getItem('server');
+
+    fetch('/api/run?user=' + user + '&id=' + num + "&server=" + sr, {
       method: 'POST',
       body: JSON.stringify({
         qid: qData?.studentData.Q_ID,

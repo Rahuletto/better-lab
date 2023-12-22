@@ -20,6 +20,8 @@ export default async function POST(req: NextRequest) {
   const id = String(searchParams.get('id'));
   const user = String(searchParams.get('user'));
 
+  const server = String(searchParams.get('server')) || "ktretelab2023";
+
   if (!id || !user)
     return new Response(
       JSON.stringify({
@@ -64,6 +66,8 @@ export default async function POST(req: NextRequest) {
       }
     );
 
+  const url = server.startsWith('rmp') ? 'srmrmp' : 'srmist';
+
   const json = {
     language: language,
     input: '0',
@@ -96,26 +100,26 @@ export default async function POST(req: NextRequest) {
         mode: 0,
       },
     ],
-    compilez: 'https://dld.srmist.edu.in/ktretelab2023/compiler',
+    compilez: `https://dld.${url}.edu.in/${server}/compiler`,
     language: language,
     student_id: 'Class' + user,
     KEY: 'john',
-    ictserver: 'https://dld.srmist.edu.in/ktretelab2023/elabserver',
+    ictserver: `https://dld.${url}.edu.in/${server}/elabserver`,
   };
 
   const runJSONData = JSON.stringify(runJSON);
 
   const e = await fetch(
-    'https://dld.srmist.edu.in/ktretelab2023/elabserver/ict/student/questionview/savelogs',
+    `https://dld.${url}.edu.in/${server}/elabserver/ict/student/questionview/savelogs`,
     {
       method: 'POST',
       body: JSONdata,
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'https://dld.srmist.edu.in',
-        Referer: 'https://dld.srmist.edu.in/ktretelab2023/',
-        Origin: 'https://dld.srmist.edu.in',
-        Host: 'dld.srmist.edu.in',
+        'Access-Control-Allow-Origin': `https://dld.${url}.edu.in`,
+        Referer: `https://dld.${url}.edu.in/${server}/`,
+        Origin: `https://dld.${url}.edu.in`,
+        Host: `dld.${url}.edu.in`,
         'Sec-Fetch-Mode': 'cors',
         'Sec-Fetch-Site': 'same-origin',
       },
@@ -123,16 +127,16 @@ export default async function POST(req: NextRequest) {
   );
 
   const response = await fetch(
-    'https://dld.srmist.edu.in/ktretelab2023/elabserver/ict/student/questionview/evaluate',
+    `https://dld.${url}.edu.in/${server}/elabserver/ict/student/questionview/evaluate`,
     {
       method: 'POST',
       body: runJSONData,
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'https://dld.srmist.edu.in',
-        Referer: 'https://dld.srmist.edu.in/ktretelab2023/',
-        Origin: 'https://dld.srmist.edu.in',
-        Host: 'dld.srmist.edu.in',
+        'Access-Control-Allow-Origin': `https://dld.${url}.edu.in`,
+        Referer: `https://dld.${url}.edu.in/${server}/`,
+        Origin: `https://dld.${url}.edu.in`,
+        Host: `dld.${url}.edu.in`,
         'Sec-Fetch-Mode': 'cors',
         'Sec-Fetch-Site': 'same-origin',
       },

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from '../styles/Login.module.css';
 import { useRouter } from 'next/router';
+import { setServers } from 'dns';
 
 export default function Login() {
   const router = useRouter();
@@ -9,10 +10,12 @@ export default function Login() {
 
   const [error, setError] = useState(0);
 
+  const [server, setServers] = useState<any>('');
+
   function save() {
     setError(-1);
     if (uid.length != 12) return setError(1);
-    fetch('/api/login', {
+    fetch('/api/login?server=' + server, {
       method: 'POST',
       body: JSON.stringify({
         user: uid,
@@ -28,10 +31,10 @@ export default function Login() {
         ) => {
           if (a.Status == 1) {
             setError(2);
+            localStorage.setItem('server', server);
             localStorage.setItem('userid', uid);
             router.push('/course');
           } else if (a.Status == 0) {
-            localStorage.setItem('token', a.token);
             setError(1);
           }
         }
@@ -41,6 +44,9 @@ export default function Login() {
   useEffect(() => {
     const no = localStorage.getItem('userid');
     if (no) router.push('/course');
+
+    const sr = localStorage.getItem('server');
+    setServers(sr);
 
     fetch('/api/status')
       .then((d) => d.json())
@@ -117,6 +123,57 @@ export default function Login() {
               placeholder="Passw*rd"
             />
           </div>
+
+          {server ? (
+            <select
+              required
+              value={server}
+              onChange={(e) => setServers(e.target.value)}>
+              <option disabled>Select batch</option>
+              <optgroup label="Kattankulathur">
+                <option value="ktretelab2023">KTR 2023</option>
+                <option value="ktretelab2022">KTR 2022</option>
+                <option value="ktretelab2021">KTR 2021</option>
+                <option value="ktretelab2020">KTR 2020</option>
+              </optgroup>
+              <optgroup label="Ramapuram">
+                <option value="rmpetelab2023">RMP 2023</option>
+                <option value="rmpetelab2022">RMP 2022</option>
+                <option value="rmpetelab2021">RMP 2021</option>
+                <option value="rmpetelab2020">RMP 2020</option>
+              </optgroup>
+              <optgroup label="Vadapalani">
+                <option value="vdpetelab2023">VDP 2023</option>
+                <option value="vdpetelab2022">VDP 2022</option>
+                <option value="vdpetelab2021">VDP 2021</option>
+                <option value="vdpetelab2020">VDP 2020</option>
+              </optgroup>
+            </select>
+          ) : (
+            <select required onChange={(e) => setServers(e.target.value)}>
+              <option selected disabled>
+                Select batch
+              </option>
+              <optgroup label="Kattankulathur">
+                <option value="ktretelab2023">KTR 2023</option>
+                <option value="ktretelab2022">KTR 2022</option>
+                <option value="ktretelab2021">KTR 2021</option>
+                <option value="ktretelab2020">KTR 2020</option>
+              </optgroup>
+              <optgroup label="Ramapuram">
+                <option value="rmpetelab2023">RMP 2023</option>
+                <option value="rmpetelab2022">RMP 2022</option>
+                <option value="rmpetelab2021">RMP 2021</option>
+                <option value="rmpetelab2020">RMP 2020</option>
+              </optgroup>
+              <optgroup label="Vadapalani">
+                <option value="vdpetelab2023">VDP 2023</option>
+                <option value="vdpetelab2022">VDP 2022</option>
+                <option value="vdpetelab2021">VDP 2021</option>
+                <option value="vdpetelab2020">VDP 2020</option>
+              </optgroup>
+            </select>
+          )}
           {error == -1 ? (
             <button
               style={{

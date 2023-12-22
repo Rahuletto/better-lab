@@ -10,7 +10,7 @@ export default function error() {
     fetch('/api/status')
       .then((d) => d.json())
       .then((a) => {
-        // if(a.Status == 1) router.push('/');
+        if(a.Status == 1) router.push('/');
         
       });
   }, []);

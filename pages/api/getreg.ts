@@ -18,6 +18,8 @@ export default async function GET(req: NextRequest) {
     );
 
   const user = String(searchParams.get('user'));
+  const server = String(searchParams.get('server')) || "ktretelab2023";
+
   if (!user)
     return new Response(
       JSON.stringify({
@@ -44,18 +46,20 @@ export default async function GET(req: NextRequest) {
 
   const JSONdata = JSON.stringify(json);
 
+  const url = server.startsWith("rmp") ? "srmrmp" : "srmist"
+
   const r = await fetch(
-    'https://dld.srmist.edu.in/ktretelab2023/elabserver/ict/student/home/registeredcourses',
+    `https://dld.${url}.edu.in/${server}/elabserver/ict/student/home/registeredcourses`,
     {
       cache: 'force-cache',
       method: 'POST',
       body: JSONdata,
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'https://dld.srmist.edu.in',
-        Referer: 'https://dld.srmist.edu.in/ktretelab2023/',
-        Origin: 'https://dld.srmist.edu.in',
-        Host: 'dld.srmist.edu.in',
+        'Access-Control-Allow-Origin': `https://dld.${url}.edu.in`,
+        Referer: `https://dld.${url}.edu.in/${server}/`,
+        Origin: `https://dld.${url}.edu.in`,
+        Host: `dld.${url}.edu.in`,
         'Sec-Fetch-Mode': 'cors',
         'Sec-Fetch-Site': 'same-origin',
       },

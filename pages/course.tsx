@@ -65,7 +65,9 @@ export default function Course() {
     if (!us) router.push('/login');
     else {
       setUser(us);
-      fetch('/api/getreg?user=' + us)
+      const sr = localStorage.getItem('server');
+
+      fetch('/api/getreg?user=' + us + "&server=" + sr)
         .then((d) => d.json())
         .then((a) => {
           setRegData(a);
