@@ -36,8 +36,10 @@
 }
 
 .main li::marker,
+.blockquotewarn p,
 .main li span {
   color: var(--yellow);
+  margin: 0;
 }
 .container svg {
   font-size: 74px;
@@ -53,8 +55,23 @@
   border-left-width: 6px;
 }
 
-.blockquote a {
-  color: var(--accent);
+.blockquotewarn {
+  color: var(--yellow);
+  background: #222324;
+  padding: 12px 20px;
+  border-radius: 14px;
+  border: 2px solid var(--yellow);
+  border-left-width: 6px;
+  padding-left: 8px;
+  width: -webkit-fill-available;
+  margin: 0px;
+  display: inline-flex;
+  gap: 8px;
+}
+
+.blockquotewarn svg {
+  font-size: 22px;
+  min-width: 32px;
 }
 
 .buttons {
@@ -72,9 +89,6 @@
   font-family: var(--main-font);
   text-decoration: none;
   font-weight: 600;
-
-  -webkit-transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
-  -o-transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
   transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
 }
 
@@ -92,18 +106,17 @@
   width: fit-content;
   text-decoration: none;
   font-weight: 600;
-  
-  -webkit-transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
-  -o-transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
   transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
 }
 
-.login:hover, .course:hover {
+.login:hover,
+.course:hover {
   opacity: 0.9;
   transform: scale(0.98);
 }
 
-.login:active, .course:active {
+.login:active,
+.course:active {
   opacity: 0.8;
   transform: scale(0.95) rotate(-2deg);
 }
