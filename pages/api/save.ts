@@ -17,11 +17,13 @@ export default async function POST(req: NextRequest) {
       }
     );
 
-  const id = String(searchParams.get('id'));
+  const id = Number(searchParams.get('id'));
   const user = String(searchParams.get('user'));
+  const cid = Number(searchParams.get('cid'));
+
   const server = String(searchParams.get('server')) || 'ktretelab2023';
 
-  if (!id || !user)
+  if (!id || !user || !cid)
     return new Response(
       JSON.stringify({
         error: 'Missing query arguments',
@@ -37,8 +39,13 @@ export default async function POST(req: NextRequest) {
       }
     );
 
-  const { course }: { course: { id: number; name: string } } = await req.json();
-  if (!course)
+  const {
+    code,
+  }: {
+    code: string;
+  } = await req.json();
+
+  if (!code)
     return Response.json(
       {
         error: 'Missing body arguments',
@@ -54,27 +61,24 @@ export default async function POST(req: NextRequest) {
       }
     );
 
+  const url = server.startsWith('rmp') ? 'srmrmp' : 'srmist';
+
   const json = {
-    ROLE: 'S',
     info: {
       USER_ID: user,
       ROLE: 'S',
+      Status: 1,
     },
-    course: {
-      USER_ID: user,
-      COURSE_ID: Number(course.id),
-      COURSE_NAME: course.name,
-    },
+    COURSE_ID: cid,
     SEQUENCE_ID: Number(id),
+    CODE: [{ value: code.toString(), mode: 0 }],
     KEY: 'john',
   };
 
   const JSONdata = JSON.stringify(json);
 
-  const url = server.startsWith('rmp') ? 'srmrmp' : 'srmist';
-
-  const r = await fetch(
-    `https://dld.${url}.edu.in/${server}/elabserver/ict/student/questionview/getinfo`,
+  const response = await fetch(
+    `https://dld.${url}.edu.in/${server}/elabserver/ict/student/questionview/saveinfo`,
     {
       method: 'POST',
       body: JSONdata,
@@ -89,7 +93,8 @@ export default async function POST(req: NextRequest) {
       },
     }
   );
-  const data = await r.json();
+  const data = await response.json();
+
   return Response.json(data, {
     status: 200,
     headers: {

@@ -78,11 +78,6 @@ export default function Question() {
 
   // Changes happen in Codeblock happens here
   const onChange = useCallback((value: string) => {
-    if (num && value)
-      localStorage.setItem(
-        'code-' + courseId.split('|')[1] + '-' + num,
-        String(value)
-      );
     setCode(value);
     return;
   }, []);
@@ -109,20 +104,11 @@ export default function Question() {
     setMandatoryPage(0);
     setTCasePage(0);
 
-    setTimeout(() => {
-      setCode('');
-      if (num) {
-        const cd = localStorage.getItem(
-          'code-' + courseId.split('|')[1] + '-' + num
-        );
-        if (cd) setCode(cd);
-      }
-    }, 100);
-
     if (user && num) {
       getQuestion(num);
       (document.getElementById('wheel') as HTMLDialogElement).close();
     }
+    setCode('');
     setCompileData(null);
   }, [num, courseId]);
 
@@ -169,6 +155,36 @@ export default function Question() {
     }
   }, [user]);
 
+  function changeQuestion(n: number) {
+    saveCode();
+    setNum(n);
+  }
+
+  function saveCode() {
+    const sr = localStorage.getItem('server');
+
+    if (!code) return;
+    else {
+      fetch(
+        '/api/save?id=' +
+          num +
+          '&user=' +
+          user +
+          '&server=' +
+          sr +
+          '&cid=' +
+          qData?.studentData.COURSE_ID,
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            code: code,
+          }),
+        }
+      );
+      return true;
+    }
+  }
+
   async function getQuestion(n: number) {
     const cid = courseId.split('|')[0];
     const reg = regData?.courses.find((a: any) => a.COURSE_ID == cid);
@@ -188,10 +204,6 @@ export default function Question() {
         setQData(a);
         if (a.studentData.CODE[0]?.value) {
           setCode(a.studentData.CODE[0].value);
-          localStorage.setItem(
-            'code-' + courseId.split('|')[1] + '-' + n,
-            String(a.studentData.CODE[0].value)
-          );
         }
       });
     return true;
@@ -230,6 +242,7 @@ export default function Question() {
     if (!qData) return;
     const box = document.getElementById('result');
     const sr = localStorage.getItem('server');
+    saveCode();
 
     fetch('/api/run?user=' + user + '&id=' + num + '&server=' + sr, {
       method: 'POST',
@@ -335,7 +348,7 @@ export default function Question() {
             <div id="wheel-div">
               {courseData && (
                 <QuestionsProgress
-                  setNum={setNum}
+                  setNum={changeQuestion}
                   num={num}
                   courseData={courseData}
                 />

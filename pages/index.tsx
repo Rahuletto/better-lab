@@ -37,7 +37,7 @@ export default function Login() {
                 Efficient <span>{'(~90% performance improvements)'}</span>
               </li>
               <li>Better User-Experience</li>
-              <li>Auto Sync with srm-elab and Better-Lab</li>
+              <li>Auto Sync with SRM Elab</li>
               <li>Support for all browsers possible</li>
             </ul>
           </div>
