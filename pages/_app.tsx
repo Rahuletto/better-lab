@@ -7,7 +7,8 @@ import Head from 'next/head';
 
 import { Analytics } from '@vercel/analytics/react';
 import { Inter, JetBrains_Mono, Space_Grotesk } from 'next/font/google';
-import { useEffect } from 'react';
+import { Component, useEffect } from 'react';
+import ErrorStack from './error';
 
 const jb = JetBrains_Mono({
   fallback: ['monospace'],
@@ -79,7 +80,33 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
 
       <Analytics />
-      <Component {...pageProps} />
+      <ErrorBoundary>
+        <Component {...pageProps} />
+      </ErrorBoundary>
     </>
   );
+}
+
+type ErrorBound = {
+  hasError: boolean,
+  error: Error
+}
+class ErrorBoundary extends Component {
+  constructor(props: ErrorBound | Readonly<ErrorBound>) {
+    super(props);
+    this.state = { hasError: false };
+  }
+  static getDerivedStateFromError(error: Error) {
+    return { hasError: true, error: error };
+  }
+  componentDidCatch(error: Error, errorInfo: { componentStack: string }) {
+    console.warn({ error, errorInfo });
+  }
+  render() {
+    if ((this.state as ErrorBound).hasError) {
+      return <ErrorStack error={(this.state as ErrorBound).error} />;
+    }
+    // @ts-ignore
+    return this.props.children;
+  }
 }

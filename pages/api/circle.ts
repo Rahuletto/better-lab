@@ -17,8 +17,8 @@ export default async function POST(req: NextRequest) {
       }
     );
 
-  const user = String(searchParams.get('user'));
-  const server = String(searchParams.get('server')) || "ktretelab2023";
+  const user = searchParams.get('user');
+  const server = String(searchParams.get('server')) || 'ktretelab2023';
 
   if (!user)
     return new Response(
@@ -69,7 +69,7 @@ export default async function POST(req: NextRequest) {
   };
   const JSONdata = JSON.stringify(json);
 
-  const url = server.startsWith("rmp") ? "srmrmp" : "srmist"
+  const url = server.startsWith('rmp') ? 'srmrmp' : 'srmist';
 
   const r = await fetch(
     `https://dld.${url}.edu.in/${server}/elabserver/ict/student/courseview/getcourseinfo`,

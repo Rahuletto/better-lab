@@ -39,7 +39,7 @@ export function dialogHandler(e: MouseEvent | any) {
   if (e.target?.tagName !== 'DIALOG') return;
 
   const rect = e.target.getBoundingClientRect();
-  console.log(e);
+
   const touch =
     e?.changedTouches && e?.changedTouches?.length != 0
       ? e.changedTouches[0]
@@ -102,9 +102,7 @@ export default function Question() {
         if (a.Status != 1) router.push('/offline');
       });
 
-    getCourseInfo().then((_a) => {
-      (document.getElementById('wheel') as HTMLDialogElement).showModal();
-    });
+    handleProgress();
   }, []);
 
   useEffect(() => {
@@ -144,7 +142,7 @@ export default function Question() {
         });
 
       const wheel = document.getElementById('wheel') as HTMLDialogElement;
-      handleNextQuestionOnClick();
+      handleProgress();
       const settings = document.getElementById('settings') as HTMLDialogElement;
 
       wheel?.addEventListener('click', (e: MouseEvent) => {
@@ -176,7 +174,7 @@ export default function Question() {
     const reg = regData?.courses.find((a: any) => a.COURSE_ID == cid);
     const sr = localStorage.getItem('server');
 
-    fetch('/api/question?id=' + n + '&user=' + user + "&server=" + sr, {
+    fetch('/api/question?id=' + n + '&user=' + user + '&server=' + sr, {
       method: 'POST',
       body: JSON.stringify({
         course: {
@@ -199,13 +197,13 @@ export default function Question() {
     return true;
   }
 
-  function handleNextQuestionOnClick() {
+  function handleProgress() {
     getCourseInfo().then((_a) => {
       (document.getElementById('wheel') as HTMLDialogElement).showModal();
     });
   }
 
-  async function getCourseInfo() {
+  function getCourseInfo() {
     return new Promise((resolve) => {
       const [id, l] = courseId.split('|');
       const sr = localStorage.getItem('server');
@@ -221,7 +219,7 @@ export default function Question() {
         })
           .then((d) => d.json())
           .then((a) => {
-            resolve(true);
+            resolve(a);
             setCourseData(a);
           });
       }
@@ -233,7 +231,7 @@ export default function Question() {
     const box = document.getElementById('result');
     const sr = localStorage.getItem('server');
 
-    fetch('/api/run?user=' + user + '&id=' + num + "&server=" + sr, {
+    fetch('/api/run?user=' + user + '&id=' + num + '&server=' + sr, {
       method: 'POST',
       body: JSON.stringify({
         qid: qData?.studentData.Q_ID,
@@ -400,7 +398,7 @@ export default function Question() {
                   padding: '6px 10px',
                   fontSize: 22,
                 }}
-                onClick={handleNextQuestionOnClick}
+                onClick={handleProgress}
                 title="Progress (Select Question)">
                 <TbProgressBolt />
               </button>
