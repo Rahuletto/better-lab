@@ -3,7 +3,7 @@ import styles from '@/styles/Error.module.css';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
-export default function error() {
+export default function Offline() {
   const router = useRouter();
 
   useEffect(() => {
