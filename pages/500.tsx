@@ -2,7 +2,7 @@ import { FaQuestion } from 'react-icons/fa';
 import styles from '@/styles/Error.module.css';
 import { useRouter } from 'next/router';
 
-export default function error() {
+export default function Error500() {
   const router = useRouter();
 
   return (
