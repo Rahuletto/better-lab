@@ -3,7 +3,7 @@ import styles from '@/styles/Error.module.css';
 import { useRouter } from 'next/router';
 
 
-export default function error() {
+export default function Error404() {
   const router = useRouter()
 
   return (
