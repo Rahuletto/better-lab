@@ -23,30 +23,29 @@ export async function middleware(req: NextRequest) {
 
   const { success, limit, remaining, reset } = await ratelimit.blockUntilReady(
     uid || ip || '0.0.0.0',
-    10_000
+    5000
   );
 
   res.headers.set('RateLimit-Limit', limit.toString());
   res.headers.set('RateLimit-Remaining', remaining.toString());
 
-  return success
-    ? res
-    : new NextResponse(
-        JSON.stringify({
-          message: 'Ratelimited !',
-          warning:
-            'Repeating this periodically may result of blacklisting of your ip',
-          status: 429,
-        }),
-        {
-          status: 429,
-          headers: {
-            'content-type': 'application/json',
-            'RateLimit-Limit': limit.toString(),
-            'Retry-After': reset.toString(),
-          },
-        }
-      );
+  if(!success) return Response.json({
+      message: 'Ratelimited !',
+      warning:
+        'Repeating this periodically may result of blacklisting of your ip',
+      status: 429,
+    },
+    {
+      status: 429,
+      headers: {
+        'content-type': 'application/json',
+        'RateLimit-Limit': limit.toString(),
+        'Retry-After': reset.toString(),
+      },
+    }
+  );
+
+  return res;
 }
 
 export const config = {
