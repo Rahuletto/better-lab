@@ -121,7 +121,11 @@ export default function Question() {
     if (user) {
       const sr = localStorage.getItem('server');
 
-      fetch('/api/getreg?user=' + user + '&server=' + sr)
+      fetch('/api/getreg?user=' + user + '&server=' + sr, {
+        headers: {
+          Authorization: `Basic ${btoa(user)}`,
+        },
+      })
         .then((d) => d.json())
         .then((a) => {
           setRegData(a);
@@ -163,7 +167,7 @@ export default function Question() {
   function saveCode() {
     const sr = localStorage.getItem('server');
 
-    if (!code) return;
+    if (!code || !user) return;
     else {
       fetch(
         '/api/save?id=' +
@@ -176,6 +180,9 @@ export default function Question() {
           qData?.studentData.COURSE_ID,
         {
           method: 'POST',
+          headers: {
+            Authorization: `Basic ${btoa(user)}`,
+          },
           body: JSON.stringify({
             code: code,
           }),
@@ -189,9 +196,13 @@ export default function Question() {
     const cid = courseId.split('|')[0];
     const reg = regData?.courses.find((a: any) => a.COURSE_ID == cid);
     const sr = localStorage.getItem('server');
+    if (!user) return;
 
     fetch('/api/question?id=' + n + '&user=' + user + '&server=' + sr, {
       method: 'POST',
+      headers: {
+        Authorization: `Basic ${btoa(user)}`,
+      },
       body: JSON.stringify({
         course: {
           id: reg?.COURSE_ID,
@@ -222,6 +233,9 @@ export default function Question() {
       if (user) {
         fetch('/api/circle?user=' + user + '&server=' + sr, {
           method: 'POST',
+          headers: {
+            Authorization: `Basic ${btoa(user)}`,
+          },
           body: JSON.stringify({
             course: {
               name: l,
@@ -240,12 +254,15 @@ export default function Question() {
 
   async function run() {
     if (!qData) return;
+    if (!user) return;
     const box = document.getElementById('result');
     const sr = localStorage.getItem('server');
     saveCode();
-
     fetch('/api/run?user=' + user + '&id=' + num + '&server=' + sr, {
       method: 'POST',
+      headers: {
+        Authorization: `Basic ${btoa(user)}`,
+      },
       body: JSON.stringify({
         qid: qData?.studentData.Q_ID,
         code: code,

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import styles from '../styles/Login.module.css';
 import { useRouter } from 'next/router';
-import { setServers } from 'dns';
 
 export default function Login() {
   const router = useRouter();
@@ -17,6 +16,9 @@ export default function Login() {
     if (uid.length != 12) return setError(1);
     fetch('/api/login?server=' + server, {
       method: 'POST',
+      headers: {
+        Authorization: `Basic ${btoa(uid)}`,
+      },
       body: JSON.stringify({
         user: uid,
         pass: pass,

@@ -67,7 +67,11 @@ export default function Course() {
       setUser(us);
       const sr = localStorage.getItem('server');
 
-      fetch('/api/getreg?user=' + us + "&server=" + sr)
+      fetch('/api/getreg?user=' + us + '&server=' + sr, {
+        headers: {
+          Authorization: `Basic ${btoa(us)}`,
+        },
+      })
         .then((d) => d.json())
         .then((a) => {
           setRegData(a);
@@ -202,7 +206,8 @@ export default function Course() {
                         {' '}
                         {
                           // @ts-ignore
-                        }<h2>{icons[el.COURSE_NAME]}</h2>
+                          <h2>{icons[el.COURSE_NAME]}</h2>
+                        }
                         <p className={styles.title}>
                           {el.COURSE_NAME.charAt(0).toUpperCase() +
                             el.COURSE_NAME.slice(1).toLowerCase()}
