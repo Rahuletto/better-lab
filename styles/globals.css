@@ -439,6 +439,7 @@ select {
   cursor: pointer;
 }
 
+
 .react-loading-skeleton {
   --base-color: #454a55 !important;
   --highlight-color: #666b7a !important;
@@ -514,6 +515,7 @@ html {
 }
 
 .loader-text {
+  cursor: wait;
   color: var(--accent);
   font-family: var(--space) !important;
 }

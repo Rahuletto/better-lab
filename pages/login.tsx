@@ -1,6 +1,26 @@
 import { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
+
 import styles from '../styles/Login.module.css';
+
 import { useRouter } from 'next/router';
+
+const ServerSelect = dynamic(
+  () => import('@/components/Auth/ServerSelect').then((mod) => mod.default),
+  { ssr: false }
+);
+
+const LoginButton = dynamic(
+  () => import('@/components/Auth/LoginButton').then((mod) => mod.default),
+  { ssr: false }
+);
+
+const LoginInput = dynamic(
+  () => import('@/components/Auth/LoginInput').then((mod) => mod.default),
+  { ssr: false }
+);
+
+import { ServerList } from '@/types';
 
 export default function Login() {
   const router = useRouter();
@@ -9,7 +29,7 @@ export default function Login() {
 
   const [error, setError] = useState(0);
 
-  const [server, setServers] = useState<any>('');
+  const [server, setServers] = useState<ServerList>('');
 
   function save() {
     setError(-1);
@@ -49,7 +69,7 @@ export default function Login() {
     if (no) router.push('/course');
 
     const sr = localStorage.getItem('server');
-    setServers(sr);
+    setServers(sr as ServerList);
 
     fetch('/api/status')
       .then((d) => d.json())
@@ -57,144 +77,44 @@ export default function Login() {
         if (a.Status != 1) router.push('/offline');
       });
   }, []);
+
   return (
     <main className={styles.main}>
       <div className={styles.container}>
         <h1>Better-Lab</h1>
-        <div className={styles.login}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-            <input
-              value={uid}
-              maxLength={12}
-              pattern="[0-9]{12}"
-              minLength={12}
-              style={
-                error == 1
-                  ? {
-                      border: '1px solid var(--red)',
-                      background: '#D133330e',
-                      borderBottomLeftRadius: 2,
-                      borderBottomRightRadius: 2,
-                    }
-                  : error == 2
-                  ? {
-                      border: '1px solid var(--green)',
-                      background: '#65d1330e',
-                      borderBottomLeftRadius: 2,
-                      borderBottomRightRadius: 2,
-                    }
-                  : {
-                      border: '1px solid transparent',
-                      borderBottomLeftRadius: 2,
-                      borderBottomRightRadius: 2,
-                    }
-              }
-              onChange={(e) => {
-                setError(0);
-                setUid(e.target.value);
-              }}
-              placeholder="User ID"
-            />
-            <input
-              type="password"
-              value={pass}
-              style={
-                error == 1
-                  ? {
-                      border: '1px solid var(--red)',
-                      background: '#D133330e',
-                      borderTopLeftRadius: 2,
-                      borderTopRightRadius: 2,
-                    }
-                  : error == 2
-                  ? {
-                      border: '1px solid var(--green)',
-                      background: '#65d1330e',
-                      borderTopLeftRadius: 2,
-                      borderTopRightRadius: 2,
-                    }
-                  : {
-                      border: '1px solid transparent',
-                      borderTopLeftRadius: 2,
-                      borderTopRightRadius: 2,
-                    }
-              }
-              onChange={(e) => {
-                setError(0);
-                setPass(e.target.value);
-              }}
-              placeholder="Passw*rd"
-            />
-          </div>
+        {ServerSelect && LoginInput && LoginButton ? (
+          <div className={styles.login}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+              <LoginInput
+                onChange={(e) => {
+                  setError(0);
+                  setUid(e.target.value);
+                }}
+                error={error}
+                uid={uid}
+                type="UID"
+              />
+              <LoginInput
+                onChange={(e) => {
+                  setError(0);
+                  setPass(e.target.value);
+                }}
+                error={error}
+                uid={pass}
+                type="Password"
+              />
+            </div>
 
-          {server ? (
-            <select
-              required
-              value={server}
-              onChange={(e) => setServers(e.target.value)}>
-              <option disabled>Select batch</option>
-              <optgroup label="Kattankulathur">
-                <option value="ktretelab2023">KTR 2023</option>
-                <option value="ktretelab2022">KTR 2022</option>
-                <option value="ktretelab2021">KTR 2021</option>
-                <option value="ktretelab2020">KTR 2020</option>
-              </optgroup>
-              <optgroup label="Ramapuram">
-                <option value="rmpetelab2023">RMP 2023</option>
-                <option value="rmpetelab2022">RMP 2022</option>
-                <option value="rmpetelab2021">RMP 2021</option>
-                <option value="rmpetelab2020">RMP 2020</option>
-              </optgroup>
-              <optgroup label="Vadapalani">
-                <option value="vdpetelab2023">VDP 2023</option>
-                <option value="vdpetelab2022">VDP 2022</option>
-                <option value="vdpetelab2021">VDP 2021</option>
-                <option value="vdpetelab2020">VDP 2020</option>
-              </optgroup>
-            </select>
-          ) : (
-            <select
-              required
-              defaultValue="slt"
-              onChange={(e) => setServers(e.target.value)}>
-              <option value="slt" disabled>
-                Select batch
-              </option>
-              <optgroup label="Kattankulathur">
-                <option value="ktretelab2023">KTR 2023</option>
-                <option value="ktretelab2022">KTR 2022</option>
-                <option value="ktretelab2021">KTR 2021</option>
-                <option value="ktretelab2020">KTR 2020</option>
-              </optgroup>
-              <optgroup label="Ramapuram">
-                <option value="rmpetelab2023">RMP 2023</option>
-                <option value="rmpetelab2022">RMP 2022</option>
-                <option value="rmpetelab2021">RMP 2021</option>
-                <option value="rmpetelab2020">RMP 2020</option>
-              </optgroup>
-              <optgroup label="Vadapalani">
-                <option value="vdpetelab2023">VDP 2023</option>
-                <option value="vdpetelab2022">VDP 2022</option>
-                <option value="vdpetelab2021">VDP 2021</option>
-                <option value="vdpetelab2020">VDP 2020</option>
-              </optgroup>
-            </select>
-          )}
-          {error == -1 ? (
-            <button
-              style={{
-                border: '2px solid var(--yellow)',
-                backgroundColor: '#ffca630e !important',
-                color: 'var(--yellow) !important',
-              }}
-              disabled
-              onClick={() => {}}>
-              Logging in
-            </button>
-          ) : (
-            <button onClick={save}>Login</button>
-          )}
-        </div>
+            <ServerSelect server={server} setServers={setServers} />
+            <LoginButton error={error} onClick={save} />
+          </div>
+        ) : (
+          <div className={styles.login}>
+            <h3 style={{ margin: 0 }} className="loader-text">
+              Loading..
+            </h3>
+          </div>
+        )}
       </div>
     </main>
   );

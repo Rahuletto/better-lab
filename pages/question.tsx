@@ -1,4 +1,4 @@
-import Question from '../components/QuestionDisplay/QuestionDisplay';
+import Question from '../components/Question/QuestionDisplay/QuestionDisplay';
 const Home = () => {
   return <Question />;
 };

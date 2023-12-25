@@ -20,9 +20,10 @@ const CodeEditor = dynamic(
   () => import('../CodeEditor/Editor').then((mod) => mod.default),
   { ssr: false }
 );
+
 const QuestionsProgress = dynamic(
   () =>
-    import('@/components/QuestionsProgress/QuestionsProgress').then(
+    import('@/components/Question/QuestionsProgress/QuestionsProgress').then(
       (mod) => mod.default
     ),
   { ssr: true }
