@@ -16,6 +16,7 @@ export default function Login() {
     if (uid.length != 12) return setError(1);
     fetch('/api/login?server=' + server, {
       method: 'POST',
+      cache: 'force-cache',
       headers: {
         Authorization: `Basic ${btoa(uid)}`,
       },

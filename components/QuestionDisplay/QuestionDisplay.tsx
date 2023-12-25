@@ -199,6 +199,7 @@ export default function Question() {
     if (!user) return;
 
     fetch('/api/question?id=' + n + '&user=' + user + '&server=' + sr, {
+      cache: 'force-cache',
       method: 'POST',
       headers: {
         Authorization: `Basic ${btoa(user)}`,
@@ -259,6 +260,7 @@ export default function Question() {
     const sr = localStorage.getItem('server');
     saveCode();
     fetch('/api/run?user=' + user + '&id=' + num + '&server=' + sr, {
+      cache: 'force-cache',
       method: 'POST',
       headers: {
         Authorization: `Basic ${btoa(user)}`,
