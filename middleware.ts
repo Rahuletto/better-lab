@@ -4,9 +4,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import { Ratelimit } from '@upstash/ratelimit';
 import redis from './utils/redis';
 
-// IP
-const requestIp = require('request-ip');
-
 const cache = new Map();
 
 const ratelimit = new Ratelimit({
