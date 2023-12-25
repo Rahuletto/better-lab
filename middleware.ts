@@ -21,53 +21,57 @@ export async function middleware(req: NextRequest, event: NextFetchEvent) {
   const ip = getIp(req);
   const uid = head && atob(head?.replace('Basic ', ''));
 
-  const { success, limit, remaining, reset, pending } = await ratelimit.blockUntilReady(
-    uid || ip || '0.0.0.0',
-    5000
-  );
+  const { success, limit, remaining, reset, pending } =
+    await ratelimit.blockUntilReady(uid || ip || '0.0.0.0', 5000);
 
-  event.waitUntil(pending);
-
-  res.headers.set('RateLimit-Limit', limit.toString());
-  res.headers.set('RateLimit-Remaining', remaining.toString());
-
-  if(!success) return Response.json({
-      message: 'Ratelimited !',
-      warning:
-        'Repeating this periodically may result of blacklisting of your ip',
-      status: 429,
-    },
-    {
-      status: 429,
-      headers: {
-        'content-type': 'application/json',
-        'RateLimit-Limit': limit.toString(),
-        'Retry-After': reset.toString(),
+  if (remaining <= 0) {
+    return Response.json(
+      {
+        message: 'Ratelimited !',
+        warning:
+          'Repeating this periodically may result of blacklisting of your ip',
+        status: 429,
       },
-    }
-  );
+      {
+        status: 429,
+        headers: {
+          'content-type': 'application/json',
+          'RateLimit-Limit': limit.toString(),
+          'Retry-After': reset.toString(),
+        },
+      }
+    );
+  } else {
+    event.waitUntil(pending);
 
-  return res;
+    res.headers.set('RateLimit-Limit', limit.toString());
+    res.headers.set('RateLimit-Remaining', remaining.toString());
+
+    if (!success)
+      return Response.json(
+        {
+          message: 'Ratelimited !',
+          warning:
+            'Repeating this periodically may result of blacklisting of your ip',
+          status: 429,
+        },
+        {
+          status: 429,
+          headers: {
+            'content-type': 'application/json',
+            'RateLimit-Limit': limit.toString(),
+            'Retry-After': reset.toString(),
+          },
+        }
+      );
+
+    return res;
+  }
 }
 
 export const config = {
   matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],
 };
-
-function generateUUID() {
-  var d = new Date().getTime();
-
-  var uuid = 'codeboard_api.xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(
-    /[xy]/g,
-    function (c) {
-      var r = (d + Math.random() * 16) % 16 | 0;
-      d = Math.floor(d / 16);
-      return (c == 'x' ? r : (r & 0x3) | 0x8).toString(16);
-    }
-  );
-
-  return uuid;
-}
 
 function getIp(request: NextRequest) {
   let ip = request.ip ?? request.headers.get('x-real-ip');
@@ -76,5 +80,5 @@ function getIp(request: NextRequest) {
     ip = forwardedFor.split(',').at(0) ?? 'Unknown';
   }
 
-  return ip
+  return ip;
 }
