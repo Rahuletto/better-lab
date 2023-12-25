@@ -1,0 +1,95 @@
+@media only screen and (max-width: 460px) {
+  .dialog {
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+  }
+}
+
+
+
+.logout {
+  background-color: #d133330e !important;
+  color: var(--red) !important;
+  border: 2px solid var(--red);
+  border-radius: 12px;
+  padding: 4px 12px;
+  font-size: 16px;
+  font-weight: 700;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+.logout:hover {
+  background: var(--red) !important;
+  color: var(--background) !important;
+}
+
+.logout:active {
+  background: var(--red) !important;
+  color: var(--background) !important;
+  transform: scale(0.9) rotate(2deg);
+  opacity: 0.9;
+}
+
+.dialog {
+  background: var(--background);
+  z-index: 10;
+  width: 68vh;
+  position: fixed;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 14px 24px !important;
+}
+
+.dialog h1 {
+  color: var(--color);
+  font-weight: 500;
+  font-size: 28px;
+  padding: 0px !important;
+}
+
+.dialog button {
+  background-color: var(--background-dark);
+  color: var(--accent);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.dialog input {
+  background-color: rgba(48, 54, 61, 0.5);
+  border: none;
+  border-radius: 10px;
+  color: var(--color);
+  padding: 4px 8px !important;
+  width: auto;
+}
+
+.dialog select {
+  background-color: rgba(48, 54, 61, 0.5);
+  border: none;
+  border-radius: 10px;
+  color: var(--color);
+  padding: 4px 12px !important;
+  border: 2px solid transparent;
+  outline: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  width: auto;
+  transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  text-transform: capitalize;
+}
+
+.dialog select:hover {
+  background: var(--background-light);
+  border: 2px solid rgba(48, 54, 61, 0.5);
+}
+
+@media only screen and (max-width: 620px) {
+  .dialog input {
+    width: 150px;
+  }
+}

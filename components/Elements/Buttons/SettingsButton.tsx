@@ -1,16 +1,16 @@
 import { CSSProperties } from 'react';
 import { FaGear } from 'react-icons/fa6';
 
+import styles from './Buttons.module.css'
+
 export default function SettingsButton({
   style,
-  className,
 }: {
   style: CSSProperties;
-  className: string;
 }) {
   return (
     <button
-      className={className}
+      className={styles.closebutton}
       type="button"
       style={style}
       onClick={() =>

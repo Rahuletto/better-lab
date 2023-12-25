@@ -6,17 +6,17 @@ import styles from '../styles/Login.module.css';
 import { useRouter } from 'next/router';
 
 const ServerSelect = dynamic(
-  () => import('@/components/Auth/ServerSelect').then((mod) => mod.default),
+  () => import('@/components/PageComponents/Auth/ServerSelect').then((mod) => mod.default),
   { ssr: false }
 );
 
 const LoginButton = dynamic(
-  () => import('@/components/Auth/LoginButton').then((mod) => mod.default),
+  () => import('@/components/PageComponents/Auth/LoginButton').then((mod) => mod.default),
   { ssr: false }
 );
 
 const LoginInput = dynamic(
-  () => import('@/components/Auth/LoginInput').then((mod) => mod.default),
+  () => import('@/components/PageComponents/Auth/LoginInput').then((mod) => mod.default),
   { ssr: false }
 );
 

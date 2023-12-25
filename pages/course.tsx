@@ -6,22 +6,22 @@ import styles from '@/styles/Course.module.css';
 
 import { RegisteredCourse, Courses } from '@/types';
 
-import Loader from '@/components/Courses/Loader';
+import Loader from '@/components/PageComponents/Courses/Loader';
 
 const SettingsButton = dynamic(
   () =>
-    import('@/components/Buttons/SettingsButton').then((mod) => mod.default),
+    import('@/components/Elements/Buttons/SettingsButton').then((mod) => mod.default),
   { ssr: false }
 );
 
 const CourseElement = dynamic(
-  () => import('@/components/Courses/CourseElement').then((mod) => mod.default),
+  () => import('@/components/PageComponents/Courses/CourseElement').then((mod) => mod.default),
   { ssr: false }
 );
 
 const SettingsDialog = dynamic(
   () =>
-    import('@/components/Courses/SettingsDialog').then((mod) => mod.default),
+    import('@/components/Elements/Dialog/SettingsDialog').then((mod) => mod.default),
   { ssr: false }
 );
 
@@ -83,7 +83,6 @@ export default function Course() {
                 padding: '8px 12px',
                 fontSize: 18,
               }}
-              className={styles.closebutton}
             />
           </div>
           <div className={styles.grid}>
