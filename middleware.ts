@@ -8,7 +8,7 @@ const cache = new Map();
 
 const ratelimit = new Ratelimit({
   redis: redis,
-  limiter: Ratelimit.slidingWindow(30, '30 s'),
+  limiter: Ratelimit.slidingWindow(1, '30 s'),
   prefix: '@ratelimit/betterlab',
   ephemeralCache: cache,
 });
@@ -25,22 +25,24 @@ export async function middleware(req: NextRequest, event: NextFetchEvent) {
     await ratelimit.blockUntilReady(uid || ip || '0.0.0.0', 5000);
 
   if (remaining <= 0) {
-    return Response.json(
-      {
-        message: 'Ratelimited !',
-        warning:
-          'Repeating this periodically may result of blacklisting of your ip',
-        status: 429,
-      },
-      {
-        status: 429,
-        headers: {
-          'content-type': 'application/json',
-          'RateLimit-Limit': limit.toString(),
-          'Retry-After': reset.toString(),
+    if (req.headers.get('content-type') == 'application/json')
+      return Response.json(
+        {
+          message: 'Ratelimited !',
+          warning:
+            'Repeating this periodically may result of blacklisting of your ip',
+          status: 429,
         },
-      }
-    );
+        {
+          status: 429,
+          headers: {
+            'content-type': 'application/json',
+            'RateLimit-Limit': limit.toString(),
+            'Retry-After': reset.toString(),
+          },
+        }
+      );
+    else NextResponse.redirect(new URL('/ratelimit', req.url));
   } else {
     event.waitUntil(pending);
 
