@@ -19,10 +19,10 @@ export async function middleware(req: NextRequest) {
   const head = req.headers.get('authorization');
 
   const ip = getIp(req);
-  const uid = head ? atob(head?.replace('Basic ', '')) : 'common';
+  const uid = head && atob(head?.replace('Basic ', ''));
 
   const { success, limit, remaining, reset } = await ratelimit.blockUntilReady(
-    ip || uid,
+    uid || ip || '0.0.0.0',
     10_000
   );
 
