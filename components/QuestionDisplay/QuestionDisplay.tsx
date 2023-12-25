@@ -13,6 +13,9 @@ import {
 
 import { loadLanguage } from '@uiw/codemirror-extensions-langs';
 
+// Sanitize
+import { sanitize } from 'dompurify';
+
 const CodeEditor = dynamic(
   () => import('../CodeEditor/Editor').then((mod) => mod.default),
   { ssr: false }
@@ -379,7 +382,7 @@ export default function Question() {
             {qData && (
               <div
                 dangerouslySetInnerHTML={{
-                  __html: String(qData.questionData.Q_DESC),
+                  __html: sanitize(qData.questionData.Q_DESC),
                 }}
               />
             )}
@@ -502,7 +505,7 @@ export default function Question() {
                         <p>Input</p>
                         <code
                           dangerouslySetInnerHTML={{
-                            __html: String(
+                            __html: sanitize(
                               qData.questionData.TESTCASES[tcasePage].INPUT
                             ),
                           }}></code>
@@ -511,7 +514,7 @@ export default function Question() {
                         <p>Output</p>
                         <code
                           dangerouslySetInnerHTML={{
-                            __html: String(
+                            __html: sanitize(
                               qData.questionData.TESTCASES[tcasePage].OUTPUT
                             ),
                           }}></code>
