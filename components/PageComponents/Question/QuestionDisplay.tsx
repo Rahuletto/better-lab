@@ -86,8 +86,6 @@ export default function Question() {
 
   const [courseData, setCourseData] = useState<CourseInfo | null>(null); // All course data (the wheel)
 
-  const [tcasePage, setTCasePage] = useState(0); // Test case pagination
-
   // Changes happen in Codeblock happens here
   const onChange = useCallback((value: string) => {
     setCode(value);
@@ -113,8 +111,6 @@ export default function Question() {
   }, []);
 
   useEffect(() => {
-    setTCasePage(0);
-
     if (user && num) {
       getQuestion(num);
       (document.getElementById('wheel') as HTMLDialogElement).close();
@@ -209,6 +205,7 @@ export default function Question() {
   }
 
   function handleProgress() {
+    setCourseData(null)
     getCourseInfo().then((_a) => {
       (document.getElementById('wheel') as HTMLDialogElement).showModal();
     });
@@ -219,6 +216,9 @@ export default function Question() {
       const [id, l] = courseId.split('|');
       const sr = localStorage.getItem('server');
       if (user) {
+        setTimeout(() => {
+          resolve(true);
+        }, 100);
         fetch('/api/circle?user=' + user + '&server=' + sr, {
           method: 'POST',
           headers: {
@@ -233,7 +233,6 @@ export default function Question() {
         })
           .then((d) => d.json())
           .then((a) => {
-            resolve(a);
             setCourseData(a);
           });
       }

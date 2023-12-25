@@ -7,6 +7,7 @@ import { CourseInfo } from '@/types';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa6';
 
 import dialogHandler from '@/utils/DialogHandler';
+import Skeleton from 'react-loading-skeleton';
 
 const QuestionsProgress = ({
   courseData,
@@ -51,7 +52,7 @@ const QuestionsProgress = ({
   return (
     <dialog className={dialogStyles.dialog} id="wheel">
       <div id="wheel-div">
-        {courseData && (
+        {courseData ? (
           <>
             <h1
               style={{
@@ -166,6 +167,14 @@ const QuestionsProgress = ({
                 <FaAngleRight />
               </button>
             </div>
+          </>
+        ) : (
+          <>
+            <Skeleton width={100} />
+            <Skeleton
+              height={115}
+              style={{ borderRadius: 10, width: '100%' }}
+            />
           </>
         )}
       </div>
