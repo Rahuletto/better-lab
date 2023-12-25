@@ -59,15 +59,6 @@ p::-moz-selection,
 br::-moz-selection,
 h1::-moz-selection,
 h2::-moz-selection,
-code::-moz-selection {
-  background-color: var(--accent);
-  color: var(--background);
-}
-
-p::-moz-selection,
-br::-moz-selection,
-h1::-moz-selection,
-h2::-moz-selection,
 h3::-moz-selection,
 code::-moz-selection,
 li::-moz-selection,
@@ -75,7 +66,8 @@ ul::-moz-selection,
 sup::-moz-selection,
 sub::-moz-selection,
 strong::-moz-selection,
-i::-moz-selection {
+i::-moz-selection,
+math::-moz-selection {
   background-color: var(--accent);
   color: var(--background);
 }
@@ -91,25 +83,18 @@ ul::selection,
 sup::selection,
 sub::selection,
 strong::selection,
-i::selection {
+i::selection,
+math *::selection {
   background-color: var(--accent);
   color: var(--background);
 }
 
-p::-moz-selection,
-br::-moz-selection,
-h1::-moz-selection,
-h2::-moz-selection,
-h3::-moz-selection,
-code::-moz-selection,
-li::-moz-selection,
-ul::-moz-selection,
-sup::-moz-selection,
-sub::-moz-selection,
-strong::-moz-selection,
-i::-moz-selection {
-  background-color: var(--accent);
-  color: var(--background);
+math {
+  font-size: 22px;
+  background: var(--background-darker);
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
 }
 
 pre::-moz-selection {
@@ -146,7 +131,6 @@ sup,
 sub,
 strong {
   font-family: var(--main-font) !important;
-  
 }
 
 button {
