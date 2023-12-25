@@ -8,7 +8,7 @@ const cache = new Map();
 
 const ratelimit = new Ratelimit({
   redis: redis,
-  limiter: Ratelimit.slidingWindow(1, '30 s'),
+  limiter: Ratelimit.slidingWindow(30, '30 s'),
   prefix: '@ratelimit/betterlab',
   ephemeralCache: cache,
 });
