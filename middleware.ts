@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextFetchEvent, NextRequest, NextResponse } from 'next/server';
 
 // Ratelimits
 import { Ratelimit } from '@upstash/ratelimit';
@@ -13,7 +13,7 @@ const ratelimit = new Ratelimit({
   ephemeralCache: cache,
 });
 
-export async function middleware(req: NextRequest) {
+export async function middleware(req: NextRequest, event: NextFetchEvent) {
   const res = NextResponse.next();
 
   const head = req.headers.get('authorization');
@@ -21,10 +21,12 @@ export async function middleware(req: NextRequest) {
   const ip = getIp(req);
   const uid = head && atob(head?.replace('Basic ', ''));
 
-  const { success, limit, remaining, reset } = await ratelimit.blockUntilReady(
+  const { success, limit, remaining, reset, pending } = await ratelimit.blockUntilReady(
     uid || ip || '0.0.0.0',
     5000
   );
+
+  event.waitUntil(pending);
 
   res.headers.set('RateLimit-Limit', limit.toString());
   res.headers.set('RateLimit-Remaining', remaining.toString());
