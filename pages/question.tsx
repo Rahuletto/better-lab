@@ -229,7 +229,6 @@ export default function Question() {
   }
 
   function handleProgress() {
-    setCourseData(null);
     getCourseInfo().then((_a) => {
       (document.getElementById('wheel') as HTMLDialogElement).showModal();
     });
@@ -240,9 +239,6 @@ export default function Question() {
       const [id, l] = courseId.split('|');
       const sr = localStorage.getItem('server');
       if (user) {
-        setTimeout(() => {
-          resolve(true);
-        }, 100);
         fetch('/api/circle?user=' + user + '&server=' + sr, {
           method: 'POST',
           headers: {
@@ -257,6 +253,7 @@ export default function Question() {
         })
           .then((d) => d.json())
           .then((a) => {
+            resolve(a);
             setCourseData(a);
           });
       }
