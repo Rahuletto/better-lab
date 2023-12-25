@@ -153,8 +153,11 @@ export default function Login() {
               </optgroup>
             </select>
           ) : (
-            <select required onChange={(e) => setServers(e.target.value)}>
-              <option selected disabled>
+            <select
+              required
+              defaultValue="slt"
+              onChange={(e) => setServers(e.target.value)}>
+              <option value="slt" disabled>
                 Select batch
               </option>
               <optgroup label="Kattankulathur">
