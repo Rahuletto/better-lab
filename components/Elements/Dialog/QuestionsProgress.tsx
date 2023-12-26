@@ -86,7 +86,7 @@ const QuestionsProgress = ({
                               ? styles.yellowSquare
                               : styles.redSquare,
                             num == Number(el.name) ? styles.active : '',
-                          ].join(' ')}></div>
+                          ].join(' ')} />
                       );
                     })}
                 </div>
@@ -114,7 +114,7 @@ const QuestionsProgress = ({
                             num == Number(el.children[0].name)
                               ? styles.active
                               : '',
-                          ].join(' ')}></div>
+                          ].join(' ')} />
                       );
                     })}
                 </div>
@@ -142,7 +142,7 @@ const QuestionsProgress = ({
                             num == Number(el.children[0].children[0].name)
                               ? styles.active
                               : '',
-                          ].join(' ')}></div>
+                          ].join(' ')} />
                       );
                     })}
                 </div>

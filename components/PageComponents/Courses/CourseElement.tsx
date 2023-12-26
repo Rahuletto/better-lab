@@ -51,7 +51,7 @@ export default function CourseElement({
             <span>/100</span>
           </p>
           <div className={styles.progress}>
-            <div style={{ width: `${course.LEVEL1}%` }}></div>
+            <div style={{ width: `${course.LEVEL1}%` }} />
           </div>
         </div>
         <div className={styles.levelIndicator}>
@@ -60,7 +60,7 @@ export default function CourseElement({
             <span>/100</span>
           </p>
           <div className={styles.progress}>
-            <div style={{ width: `${course.LEVEL2}%` }}></div>
+            <div style={{ width: `${course.LEVEL2}%` }} />
           </div>
         </div>
         <div className={styles.levelIndicator}>
@@ -69,7 +69,7 @@ export default function CourseElement({
             <span>/100</span>
           </p>
           <div className={styles.progress}>
-            <div style={{ width: `${course.LEVEL3}%` }}></div>
+            <div style={{ width: `${course.LEVEL3}%` }} />
           </div>
         </div>
       </div>

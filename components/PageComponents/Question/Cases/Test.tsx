@@ -40,7 +40,7 @@ export default function TestCase({
                   __html: sanitize(
                     qData.questionData.TESTCASES[testPage].INPUT
                   ),
-                }}></code>
+                }} />
             </div>
             <div>
               <p>Output</p>
@@ -49,7 +49,7 @@ export default function TestCase({
                   __html: sanitize(
                     qData.questionData.TESTCASES[testPage].OUTPUT
                   ),
-                }}></code>
+                }} />
             </div>
           </div>
         )}

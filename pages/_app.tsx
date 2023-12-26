@@ -79,7 +79,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <link
           rel="shortcut icon"
           type="image/x-icon"
-          href="/favicon.svg"></link>
+          href="/favicon.svg" />
         <link rel="manifest" href="/manifest.json" />
         {/* PWA */}
         <meta name="application-name" content="Better-Lab" />
