@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import React, { MouseEventHandler, Suspense, memo } from 'react';
+import React, { Suspense, memo } from 'react';
 import Loader from './Loader';
 
 const CodeMirror = dynamic(() => import('@uiw/react-codemirror'), {

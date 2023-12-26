@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import dialogStyles from './Dialog.module.css';
 import styles from './QuestionProgress.module.css';
 
