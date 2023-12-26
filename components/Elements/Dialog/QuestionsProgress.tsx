@@ -76,6 +76,7 @@ const QuestionsProgress = ({
                         <div
                           title={'Question ' + el.name}
                           key={i}
+                          role="button"
                           onClick={() => {
                             setNum(Number(el.name));
                           }}
@@ -102,6 +103,7 @@ const QuestionsProgress = ({
                         <div
                           title={'Question ' + el.children[0].name}
                           key={i}
+                          role="button"
                           onClick={() => {
                             setNum(Number(el.children[0].name));
                           }}
@@ -130,6 +132,7 @@ const QuestionsProgress = ({
                         <div
                           title={'Question ' + el.children[0].children[0].name}
                           key={i}
+                          role="button"
                           onClick={() => {
                             setNum(Number(el.children[0].children[0].name));
                           }}

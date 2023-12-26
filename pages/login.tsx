@@ -82,8 +82,7 @@ export default function Login() {
   }, []);
 
   useEffect(() => {
-
-    fetch('/api/status?server=' + server || 'ktretelab2023')
+    fetch('/api/status?server=' + (server || 'ktretelab2023'))
       .then((d) => d.json())
       .then((a) => {
         if (!a || a.Status != 1) router.push('/offline');

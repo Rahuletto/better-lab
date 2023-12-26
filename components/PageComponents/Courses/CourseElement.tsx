@@ -32,6 +32,7 @@ export default function CourseElement({
         course.COURSE_NAME.charAt(0).toUpperCase() +
         course.COURSE_NAME.slice(1).toLowerCase()
       }
+      role="button"
       key={index}
       onClick={onClick}>
       {
