@@ -125,7 +125,8 @@ export default function Question() {
     const lan = localStorage.getItem('course');
     if (lan) setCourseId(lan);
 
-    fetch('/api/status')
+    const sr = localStorage.getItem('server');
+    fetch('/api/status?server=' + sr)
       .then((d) => d.json())
       .then((a) => {
         if (a.Status != 1) router.push('/offline');

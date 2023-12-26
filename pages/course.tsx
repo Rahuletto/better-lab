@@ -10,18 +10,25 @@ import Loader from '@/components/PageComponents/Courses/Loader';
 
 const SettingsButton = dynamic(
   () =>
-    import('@/components/Elements/Buttons/SettingsButton').then((mod) => mod.default),
+    import('@/components/Elements/Buttons/SettingsButton').then(
+      (mod) => mod.default
+    ),
   { ssr: false }
 );
 
 const CourseElement = dynamic(
-  () => import('@/components/PageComponents/Courses/CourseElement').then((mod) => mod.default),
+  () =>
+    import('@/components/PageComponents/Courses/CourseElement').then(
+      (mod) => mod.default
+    ),
   { ssr: false }
 );
 
 const SettingsDialog = dynamic(
   () =>
-    import('@/components/Elements/Dialog/SettingsDialog').then((mod) => mod.default),
+    import('@/components/Elements/Dialog/SettingsDialog').then(
+      (mod) => mod.default
+    ),
   { ssr: false }
 );
 
@@ -35,10 +42,18 @@ export default function Course() {
 
   useEffect(() => {
     const us = localStorage.getItem('userid');
+
+    const sr = localStorage.getItem('server');
+
+    fetch('/api/status?server=' + sr)
+      .then((d) => d.json())
+      .then((a) => {
+        if (a.Status != 1) router.push('/offline');
+      });
+
     if (!us) router.push('/login');
     else {
       setUser(us);
-      const sr = localStorage.getItem('server');
 
       fetch('/api/getreg?user=' + us + '&server=' + sr, {
         headers: {
@@ -50,12 +65,6 @@ export default function Course() {
           setRegData(a);
         });
     }
-
-    fetch('/api/status')
-      .then((d) => d.json())
-      .then((a) => {
-        if (a.Status != 1) router.push('/offline');
-      });
   }, []);
 
   return (
