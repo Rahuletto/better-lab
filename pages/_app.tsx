@@ -83,6 +83,9 @@ export default function App({ Component, pageProps }: AppProps) {
           content="A better alternative to SRM-Elab made by the SRM DLD (Directorate of Learning and Development) division."
         />
 
+        <meta property="theme-color" content="#12161c" />
+        <meta property="og:color" content="#a0aab6" />
+
         <meta property="og:url" content="https://better-lab.vercel.app" />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Better-Lab" />
