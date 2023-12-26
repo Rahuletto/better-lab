@@ -59,8 +59,7 @@ export default async function POST(req: NextRequest) {
       },
     }
   );
-  const data = await r.text();
-  console.log(data)
+  const data = await r.json();
   return Response.json(data, {
     status: 200,
     headers: {
