@@ -43,11 +43,11 @@ export default function App({ Component, pageProps }: AppProps) {
           event.ctrlKey
             ? 'ctrl'
             : event.altKey
-            ? 'alt'
-            : event.shiftKey
-            ? 'shift'
-            : event.key
-        )
+              ? 'alt'
+              : event.shiftKey
+                ? 'shift'
+                : event.key,
+        ),
       ).forEach((a) => {
         (a as HTMLElement).style.transform = 'scale(0.9)';
         (a as HTMLElement).style.opacity = '0.7';
@@ -151,7 +151,7 @@ class ErrorBoundary extends Component {
     if ((this.state as ErrorBound).hasError) {
       return <ErrorStack error={(this.state as ErrorBound).error} />;
     }
-    // @ts-ignore
+    // @ts-expect-error
     return this.props.children;
   }
 }

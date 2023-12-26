@@ -21,7 +21,7 @@ import {
 } from 'react-icons/si';
 
 export default function IconMaker({ lang }: { lang: string }) {
-  // @ts-ignore
+  // @ts-expect-error
   return <h2>{iconMap[lang]}</h2>;
 }
 
