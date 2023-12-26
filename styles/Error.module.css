@@ -1,7 +1,13 @@
 .main {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   height: 94vh;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
 }
 
@@ -13,6 +19,7 @@
   padding: 6px 12px;
   font-size: 16px;
   font-weight: 700;
+  -webkit-box-shadow: 0px 0px 12px 4px var(--background);
   box-shadow: 0px 0px 12px 4px var(--background);
   z-index: 3;
   cursor: pointer;
@@ -21,11 +28,20 @@
 .container {
   width: 80vw;
   height: 80vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   background: #0f1217;
   border-radius: 32px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
   gap: 8px;
 }
@@ -64,8 +80,6 @@
     width: 95vw;
     height: 95vh;
   }
-
-  
 }
 
 @media only screen and (max-width: 460px) {

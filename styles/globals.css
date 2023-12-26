@@ -2,9 +2,9 @@
   --font-mono: var(--jb-font), monospace;
   font-family: var(--main-font);
 
-  --background: #12161c;
   --background-light: #14181f;
-  --background-dark: #161b22;
+  --background: #12161c;
+  --background-dark: #101419;
   --background-darker: #0f1217;
 
   --code-editor: #0d1117;
@@ -68,6 +68,40 @@ sub::-moz-selection,
 strong::-moz-selection,
 i::-moz-selection,
 math::-moz-selection {
+  background-color: var(--accent);
+  color: var(--background);
+}
+
+p::-moz-selection,
+br::-moz-selection,
+h1::-moz-selection,
+h2::-moz-selection,
+h3::-moz-selection,
+code::-moz-selection,
+li::-moz-selection,
+ul::-moz-selection,
+sup::-moz-selection,
+sub::-moz-selection,
+strong::-moz-selection,
+i::-moz-selection,
+math *::-moz-selection {
+  background-color: var(--accent);
+  color: var(--background);
+}
+
+p::-moz-selection,
+br::-moz-selection,
+h1::-moz-selection,
+h2::-moz-selection,
+h3::-moz-selection,
+code::-moz-selection,
+li::-moz-selection,
+ul::-moz-selection,
+sup::-moz-selection,
+sub::-moz-selection,
+strong::-moz-selection,
+i::-moz-selection,
+math *::-moz-selection {
   background-color: var(--accent);
   color: var(--background);
 }
@@ -144,6 +178,11 @@ button {
 
 html {
   text-rendering: optimizeLegibility !important;
+  background: -o-linear-gradient(
+    315deg,
+    var(--background) 0%,
+    var(--background-dark) 100%
+  );
   background: linear-gradient(
     135deg,
     var(--background) 0%,
@@ -438,7 +477,6 @@ input {
 select {
   cursor: pointer;
 }
-
 
 .react-loading-skeleton {
   --base-color: #454a55 !important;

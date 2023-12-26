@@ -1,13 +1,3 @@
-@media only screen and (max-width: 460px) {
-  .dialog {
-    width: -webkit-max-content;
-    width: -moz-max-content;
-    width: max-content;
-  }
-}
-
-
-
 .logout {
   background-color: #d133330e !important;
   color: var(--red) !important;
@@ -19,6 +9,8 @@
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
+  -webkit-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  -o-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
   transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
 }
 
@@ -30,6 +22,8 @@
 .logout:active {
   background: var(--red) !important;
   color: var(--background) !important;
+  -webkit-transform: scale(0.9) rotate(2deg);
+  -ms-transform: scale(0.9) rotate(2deg);
   transform: scale(0.9) rotate(2deg);
   opacity: 0.9;
 }
@@ -79,6 +73,8 @@
   -webkit-appearance: none;
   appearance: none;
   width: auto;
+  -webkit-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  -o-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
   transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
   text-transform: capitalize;
 }
@@ -91,5 +87,13 @@
 @media only screen and (max-width: 620px) {
   .dialog input {
     width: 150px;
+  }
+}
+
+@media only screen and (max-width: 460px) {
+  .dialog {
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
   }
 }
