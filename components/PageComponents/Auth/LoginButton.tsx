@@ -14,8 +14,7 @@ export default function LoginButton({
         backgroundColor: '#ffca630e !important',
         color: 'var(--yellow) !important',
       }}
-      disabled
-      onClick={() => {}}>
+      disabled >
       Logging in
     </button>
   ) : (

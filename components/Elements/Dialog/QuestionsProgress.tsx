@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import dialogStyles from './Dialog.module.css';
 import styles from './QuestionProgress.module.css';
 
@@ -16,7 +16,7 @@ const QuestionsProgress = ({
   user,
 }: {
   courseData: CourseInfo | null;
-  setNum: Function;
+  setNum: (n: number) => void;
   num: number | undefined;
   user: string;
 }) => {

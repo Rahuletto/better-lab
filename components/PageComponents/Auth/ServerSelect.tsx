@@ -1,11 +1,12 @@
 import { ServerList } from "@/types";
+import { Dispatch, SetStateAction } from "react";
 
 export default function ServerSelect({
   server,
   setServers,
 }: {
   server: ServerList;
-  setServers: Function;
+  setServers: Dispatch<SetStateAction<string>>;
 }) {
   return server ? (
     <select

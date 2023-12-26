@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import React, { Suspense, memo } from 'react';
+import React, { MouseEventHandler, Suspense, memo } from 'react';
 import Loader from './Loader';
 
 const CodeMirror = dynamic(() => import('@uiw/react-codemirror'), {
@@ -28,6 +28,7 @@ const colorPicker = await (
 ).colorPicker;
 
 import { TriggerEvent, useContextMenu } from 'react-contexify';
+import { ViewUpdate } from '@codemirror/view';
 
 const ext = [
 	keymap.of([{ key: 'Ctrl-Shift-f', run: openSearchPanel }, ...vscodeKeymap]),
@@ -39,7 +40,7 @@ type EditorProps = {
 	language?: any;
 	code?: string;
 	theme?: 'light' | 'dark' | string;
-	onChange?: Function | any;
+	onChange?: (value: string, viewUpdate: ViewUpdate) => void;
 };
 
 const UnmemoEditor: React.FC<EditorProps> = ({ language, code, onChange }) => {

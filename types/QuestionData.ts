@@ -35,6 +35,6 @@ export type QuestionData = {
     }[];
     key: number;
   };
-  queryData: {};
+  queryData: object;
   status: [];
 };
