@@ -122,6 +122,8 @@ export default function App({ Component, pageProps }: AppProps) {
         />
         <meta name="twitter:image" content="/og.png" />
         <meta name="twitter:creator" content="@SRMStudents" />
+
+        <meta name="google-site-verification" content="0Cmv3J0IwkFN7JLhsv8jWAnIlX3SaPHFrlIlWy4kzK4" />
       </Head>
 
       <Analytics />
