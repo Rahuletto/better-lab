@@ -1,5 +1,5 @@
 import styles from '@/styles/Error.module.css';
-import { PiWifiXBold } from "react-icons/pi";
+import { PiWifiXBold } from 'react-icons/pi';
 
 export default function Offline() {
   return (

@@ -6,20 +6,20 @@ import { IconType } from 'react-icons';
 
 const BiSearch = dynamic<React.ComponentProps<IconType>>(
   () => import('react-icons/bi').then((mod) => mod.BiSearch),
-  { ssr: false }
+  { ssr: false },
 );
 const BiSolidCopy = dynamic<React.ComponentProps<IconType>>(
   () => import('react-icons/bi').then((mod) => mod.BiSolidCopy),
-  { ssr: false }
+  { ssr: false },
 );
 const TbCut = dynamic<React.ComponentProps<IconType>>(
   () => import('react-icons/tb').then((mod) => mod.TbCut),
-  { ssr: false }
+  { ssr: false },
 );
 
 const LuClipboardPaste = dynamic<React.ComponentProps<IconType>>(
   () => import('react-icons/lu').then((mod) => mod.LuClipboardPaste),
-  { ssr: false }
+  { ssr: false },
 );
 
 const CodeMenu = () => {
@@ -32,7 +32,7 @@ const CodeMenu = () => {
               ctrlKey: true,
               shiftKey: true,
               key: 'f',
-            })
+            }),
           )
         }>
         <BiSearch style={{ marginRight: '8px' }} /> Find
@@ -59,7 +59,7 @@ const CodeMenu = () => {
           document.execCommand(
             'insertText',
             true /*no UI*/,
-            await navigator.clipboard.readText()
+            await navigator.clipboard.readText(),
           );
         }}>
         <LuClipboardPaste style={{ marginRight: '8px' }} /> Paste

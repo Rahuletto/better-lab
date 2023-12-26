@@ -80,7 +80,7 @@ export default function SettingsDialog({
                   {regData.courses.map(
                     (
                       el: { COURSE_ID: number; COURSE_NAME: string },
-                      index: number
+                      index: number,
                     ) => {
                       return (
                         <option
@@ -90,7 +90,7 @@ export default function SettingsDialog({
                           {el.COURSE_NAME.toLowerCase()}
                         </option>
                       );
-                    }
+                    },
                   )}
                 </select>
               </div>

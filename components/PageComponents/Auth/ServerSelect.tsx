@@ -1,4 +1,4 @@
-import { ServerList } from "@/types";
+import { ServerList } from '@/types';
 
 export default function ServerSelect({
   server,

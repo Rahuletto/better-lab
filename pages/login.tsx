@@ -8,25 +8,25 @@ import { useRouter } from 'next/router';
 const ServerSelect = dynamic(
   () =>
     import('@/components/PageComponents/Auth/ServerSelect').then(
-      (mod) => mod.default
+      (mod) => mod.default,
     ),
-  { ssr: false }
+  { ssr: false },
 );
 
 const LoginButton = dynamic(
   () =>
     import('@/components/PageComponents/Auth/LoginButton').then(
-      (mod) => mod.default
+      (mod) => mod.default,
     ),
-  { ssr: false }
+  { ssr: false },
 );
 
 const LoginInput = dynamic(
   () =>
     import('@/components/PageComponents/Auth/LoginInput').then(
-      (mod) => mod.default
+      (mod) => mod.default,
     ),
-  { ssr: false }
+  { ssr: false },
 );
 
 import { ServerList } from '@/types';
@@ -59,7 +59,7 @@ export default function Login() {
         (
           a:
             | { Status: 1; msg: string }
-            | { Status: 0; success: boolean; token: string }
+            | { Status: 0; success: boolean; token: string },
         ) => {
           if (a.Status == 1) {
             setError(2);
@@ -69,7 +69,7 @@ export default function Login() {
           } else if (a.Status == 0) {
             setError(1);
           }
-        }
+        },
       );
   }
 
@@ -82,7 +82,6 @@ export default function Login() {
   }, []);
 
   useEffect(() => {
-
     fetch('/api/status?server=' + server || 'ktretelab2023')
       .then((d) => d.json())
       .then((a) => {

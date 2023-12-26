@@ -10,8 +10,9 @@ export default function Ratelimit() {
         </h1>
         <h3>bruh.</h3>
         <p>Stop with the spams. You got ratelimited</p>
-        <p style={{color: "var(--yellow)"}}>Repeating this periodically may result of blacklisting of your ip</p>
-
+        <p style={{ color: 'var(--yellow)' }}>
+          Repeating this periodically may result of blacklisting of your ip
+        </p>
       </div>
     </main>
   );

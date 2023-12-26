@@ -3,11 +3,7 @@ import { FaGear } from 'react-icons/fa6';
 
 import styles from './Buttons.module.css';
 
-export default function SettingsButton({
-  style,
-}: {
-  style: CSSProperties;
-}) {
+export default function SettingsButton({ style }: { style: CSSProperties }) {
   return (
     <button
       className={styles.closebutton}

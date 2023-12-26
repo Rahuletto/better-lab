@@ -40,7 +40,7 @@ export async function middleware(req: NextRequest, event: NextFetchEvent) {
             'RateLimit-Limit': limit.toString(),
             'Retry-After': reset.toString(),
           },
-        }
+        },
       );
     else NextResponse.redirect(new URL('/ratelimit', req.url));
   } else {
@@ -64,7 +64,7 @@ export async function middleware(req: NextRequest, event: NextFetchEvent) {
             'RateLimit-Limit': limit.toString(),
             'Retry-After': reset.toString(),
           },
-        }
+        },
       );
 
     return res;

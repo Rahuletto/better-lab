@@ -14,11 +14,11 @@ export default async function GET(req: NextRequest) {
         headers: {
           'content-type': 'application/json',
         },
-      }
+      },
     );
 
   const user = String(searchParams.get('user'));
-  const server = String(searchParams.get('server')) || "ktretelab2023";
+  const server = String(searchParams.get('server')) || 'ktretelab2023';
 
   if (!user)
     return new Response(
@@ -33,7 +33,7 @@ export default async function GET(req: NextRequest) {
         headers: {
           'content-type': 'application/json',
         },
-      }
+      },
     );
 
   const json = {
@@ -46,7 +46,7 @@ export default async function GET(req: NextRequest) {
 
   const JSONdata = JSON.stringify(json);
 
-  const url = server.startsWith("rmp") ? "srmrmp" : "srmist"
+  const url = server.startsWith('rmp') ? 'srmrmp' : 'srmist';
 
   const r = await fetch(
     `https://dld.${url}.edu.in/${server}/elabserver/ict/student/home/registeredcourses`,
@@ -63,7 +63,7 @@ export default async function GET(req: NextRequest) {
         'Sec-Fetch-Mode': 'cors',
         'Sec-Fetch-Site': 'same-origin',
       },
-    }
+    },
   );
   const data = await r.json();
   return Response.json(data, {

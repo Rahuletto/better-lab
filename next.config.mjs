@@ -1,9 +1,9 @@
 import million from 'million/compiler';
 /** @type {import('next').NextConfig} */
 
-import pwa from 'next-pwa'
+import pwa from 'next-pwa';
 const withPWA = pwa({
-  dest: 'public'
+  dest: 'public',
 });
 
 const config = withPWA({

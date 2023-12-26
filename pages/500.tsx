@@ -8,11 +8,15 @@ export default function Error500() {
   return (
     <main className={styles.main}>
       <div className={styles.container}>
-        <h1 style={{ fontSize: '98px', color: "var(--red)" }}>
+        <h1 style={{ fontSize: '98px', color: 'var(--red)' }}>
           <FaQuestion />
         </h1>
         <h3>wait wha-</h3>
-        <p>Sounds like a broken socket. Don{"'"}t get zapped.<br />Error 500</p>
+        <p>
+          Sounds like a broken socket. Don{"'"}t get zapped.
+          <br />
+          Error 500
+        </p>
         <button
           className={styles.closebutton}
           type="button"
