@@ -46,6 +46,7 @@ export default function CodeBlock({
         <a
           href="https://execoder.vercel.app"
           target="_blank"
+          rel="noopener noreferrer"
           style={{ color: '#a8aceb' }}>
           Execoder
         </a>
