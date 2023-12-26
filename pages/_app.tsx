@@ -56,6 +56,7 @@ export default function App({ Component, pageProps }: AppProps) {
         document.documentElement.style.setProperty('--background', '#F7F7F9');
         document.documentElement.style.setProperty('--background-light', '#F4F4F4');
         document.documentElement.style.setProperty('--background-dark', '#CDD1D8');
+        document.documentElement.style.setProperty('--background-darker', '#a3aab5');
         document.documentElement.style.setProperty('--code-editor', '#FCFDFF');
         document.documentElement.style.setProperty('--color', '#0C0F13');
         document.documentElement.style.setProperty('--accent', '#12161C');
