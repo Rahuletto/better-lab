@@ -94,23 +94,17 @@ import Skeleton from 'react-loading-skeleton';
 
 export default function Question() {
   const router = useRouter();
-
   const [num, setNum] = useState<number>(); // Question number
   const [user, setUser] = useState<string>(); // UserID
-
   const [qData, setQData] = useState<QuestionData | null>(null); // Question Data
   const [regData, setRegData] = useState<RegisteredCourse | null>(null); // Registered Course
   const [compileData, setCompileData] = useState<CompilerResponse | null>(null); // Compiler Response
-
   const [courseId, setCourseId] = useState('11|C'); // The course they currently working on
-
   const [code, setCode] = useState(''); // The code
   const [language, setLanguage] = useState(
     loadLanguage(('c' as Languages) || 'shell')
   ); // Language of such course in codeblock
-
   const [courseData, setCourseData] = useState<CourseInfo | null>(null); // All course data (the wheel)
-
   // Changes happen in Codeblock happens here
   const onChange = useCallback((value: string) => {
     setCode(value);

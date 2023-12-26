@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import React, { Suspense, memo } from 'react';
+import React, { Suspense, memo, useEffect, useState } from 'react';
 import Loader from './Loader';
 
 const CodeMirror = dynamic(() => import('@uiw/react-codemirror'), {
@@ -11,7 +11,7 @@ const CodeMenu = dynamic(() => import('./menus/CodeMenu'), {
   ssr: false,
 });
 
-import { githubDarkInit } from '@uiw/codemirror-theme-github';
+import { githubDarkInit, githubLightInit } from '@uiw/codemirror-theme-github';
 
 const vscodeKeymap = await (
   await import('@replit/codemirror-vscode-keymap')
@@ -27,8 +27,8 @@ const colorPicker = await (
   await import('@replit/codemirror-css-color-picker')
 ).colorPicker;
 
-import { TriggerEvent, useContextMenu } from 'react-contexify';
 import { ViewUpdate } from '@codemirror/view';
+import { TriggerEvent, useContextMenu } from 'react-contexify';
 
 const ext = [
   keymap.of([{ key: 'Ctrl-Shift-f', run: openSearchPanel }, ...vscodeKeymap]),
@@ -64,7 +64,8 @@ const UnmemoEditor: React.FC<EditorProps> = ({ language, code, onChange }) => {
     historyKeymap: false,
     lineNumbers: true,
   };
-
+  const [lightMode, setLightMode] = useState(false);
+  const [trigger, setTrigger] = useState(false);
   const { show } = useContextMenu({
     id: 'elab',
   });
@@ -74,19 +75,38 @@ const UnmemoEditor: React.FC<EditorProps> = ({ language, code, onChange }) => {
       event: e,
     });
   }
-
+  useEffect(() => {
+    window.addEventListener('keydown', (event) => {
+      if (event.ctrlKey && event.key.toLowerCase() == 'l') {
+        setTrigger(true);
+      }
+    });
+  }, []);
+  useEffect(()=>{
+    if(trigger){
+      setLightMode(true);
+    }
+  },[trigger]);
   return (
     <Suspense fallback={<Loader />}>
       <CodeMirror
         id="code-board"
         onContextMenu={displayMenu}
         placeholder={"Let's test your problem-solving skills"}
-        theme={githubDarkInit({
-          settings: {
-            fontFamily: 'var(--jb-font)',
-            gutterForeground: '#4C4F73',
-          },
-        })}
+        theme={
+          lightMode
+            ? githubLightInit({
+                settings: {
+                  fontFamily: 'var(--jb-font)',
+                },
+              })
+            : githubDarkInit({
+                settings: {
+                  fontFamily: 'var(--jb-font)',
+                  gutterForeground: '#4C4F73',
+                },
+              })
+        }
         style={{
           pointerEvents: 'auto',
           fontFamily: 'var(--jb-font)',
