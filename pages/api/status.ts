@@ -1,7 +1,7 @@
 import { NextRequest } from 'next/server';
 
 export default async function GET(req: NextRequest) {
-  if (req.method != 'GET')
+  if (req.method !== 'GET')
     return new Response(
       JSON.stringify({
         message: 'Invaid Method ! EXPECTED: GET method.',

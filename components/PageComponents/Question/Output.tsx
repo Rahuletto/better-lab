@@ -12,7 +12,7 @@ export default function Output({
         <div
           className={styles.result}
           style={
-            compileData.result.evalPercentage == '100.0'
+            compileData.result.evalPercentage === '100.0'
               ? { borderColor: 'var(--green)' }
               : compileData.result.errorMsg
               ? { borderColor: 'var(--red)' }
@@ -20,7 +20,7 @@ export default function Output({
           }>
           <h2
             style={
-              compileData.result.statusCode != '200'
+              compileData.result.statusCode !== '200'
                 ? { color: 'var(--red)' }
                 : { color: 'var(--green)' }
             }>

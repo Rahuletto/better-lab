@@ -42,7 +42,7 @@ const QuestionsProgress = ({
   function handleOnClick(e: string) {
     if (!courseData) return;
 
-    if (e == 'next' && index < courseData.flare.children.length - 1) {
+    if (e === 'next' && index < courseData.flare.children.length - 1) {
       setIndex(index + 1);
     } else if (index > 0) {
       setIndex(index - 1);
@@ -81,12 +81,12 @@ const QuestionsProgress = ({
                             setNum(Number(el.name));
                           }}
                           className={[
-                            el.status == 2
+                            el.status === 2
                               ? styles.greenSquare
-                              : el.status == 1
+                              : el.status === 1
                               ? styles.yellowSquare
                               : styles.redSquare,
-                            num == Number(el.name) ? styles.active : '',
+                            num === Number(el.name) ? styles.active : '',
                           ].join(' ')}></div>
                       );
                     })}
@@ -108,12 +108,12 @@ const QuestionsProgress = ({
                             setNum(Number(el.children[0].name));
                           }}
                           className={[
-                            el.children[0].status == 2
+                            el.children[0].status === 2
                               ? styles.greenSquare
-                              : el.children[0].status == 1
+                              : el.children[0].status === 1
                               ? styles.yellowSquare
                               : styles.redSquare,
-                            num == Number(el.children[0].name)
+                            num === Number(el.children[0].name)
                               ? styles.active
                               : '',
                           ].join(' ')}></div>
@@ -137,12 +137,12 @@ const QuestionsProgress = ({
                             setNum(Number(el.children[0].children[0].name));
                           }}
                           className={[
-                            el.children[0].children[0].status == 2
+                            el.children[0].children[0].status === 2
                               ? styles.greenSquare
-                              : el.children[0].children[0].status == 1
+                              : el.children[0].children[0].status === 1
                               ? styles.yellowSquare
                               : styles.redSquare,
-                            num == Number(el.children[0].children[0].name)
+                            num === Number(el.children[0].children[0].name)
                               ? styles.active
                               : '',
                           ].join(' ')}></div>

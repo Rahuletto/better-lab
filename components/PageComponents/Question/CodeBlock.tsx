@@ -20,15 +20,15 @@ export default function CodeBlock({
     <div
       className={styles.codeWrapper}
       style={
-        qData?.studentData.STATUS == 2 ||
-        compileData?.result.evalPercentage == '100.0'
+        qData?.studentData.STATUS === 2 ||
+        compileData?.result.evalPercentage === '100.0'
           ? { borderColor: 'var(--green)' }
           : {}
       }>
       <p>Code Editor</p>
       <button
         onClick={run}
-        disabled={code == '' || qData?.studentData.STATUS == 2}
+        disabled={code === '' || qData?.studentData.STATUS === 2}
         className={styles.run}>
         <FaSquareCheck /> Submit
       </button>

@@ -24,8 +24,8 @@ export default function TestCase({
     <div
       className={styles.sideContainer}
       style={
-        qData?.studentData.STATUS == 2 ||
-        compileData?.result.evalPercentage == '100.0'
+        qData?.studentData.STATUS === 2 ||
+        compileData?.result.evalPercentage === '100.0'
           ? { borderColor: 'var(--green)' }
           : {}
       }>

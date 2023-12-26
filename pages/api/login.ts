@@ -3,7 +3,7 @@ import { NextRequest } from 'next/server';
 export default async function POST(req: NextRequest) {
   const { searchParams } = new URL(req.url);
 
-  if (req.method != 'POST')
+  if (req.method !== 'POST')
     return new Response(
       JSON.stringify({
         message: 'Invaid Method ! EXPECTED: POST method.',

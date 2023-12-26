@@ -11,7 +11,7 @@ export default function LoginInput({
   uid: string;
   error: number;
 }) {
-  if (type == 'UID')
+  if (type === 'UID')
     return (
       <input
         value={uid}
@@ -19,14 +19,14 @@ export default function LoginInput({
         pattern="[0-9]{12}"
         minLength={12}
         style={
-          error == 1
+          error === 1
             ? {
                 border: '1px solid var(--red)',
                 background: '#D133330e',
                 borderBottomLeftRadius: 2,
                 borderBottomRightRadius: 2,
               }
-            : error == 2
+            : error === 2
             ? {
                 border: '1px solid var(--green)',
                 background: '#65d1330e',
@@ -49,14 +49,14 @@ export default function LoginInput({
         type="password"
         value={uid}
         style={
-          error == 1
+          error === 1
             ? {
                 border: '1px solid var(--red)',
                 background: '#D133330e',
                 borderTopLeftRadius: 2,
                 borderTopRightRadius: 2,
               }
-            : error == 2
+            : error === 2
             ? {
                 border: '1px solid var(--green)',
                 background: '#65d1330e',

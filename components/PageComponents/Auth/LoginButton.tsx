@@ -7,7 +7,7 @@ export default function LoginButton({
   error: number;
   onClick: MouseEventHandler;
 }) {
-  return error == -1 ? (
+  return error === -1 ? (
     <button
       style={{
         border: '2px solid var(--yellow)',

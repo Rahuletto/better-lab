@@ -6,6 +6,7 @@ import { Suspense, useCallback, useEffect, useState } from 'react';
 import {
   CompilerResponse,
   CourseInfo,
+  Courses,
   Languages,
   QuestionData,
   RegisteredCourse,
@@ -129,7 +130,7 @@ export default function Question() {
     fetch('/api/status?server=' + sr)
       .then((d) => d.json())
       .then((a) => {
-        if (a.Status != 1) router.push('/offline');
+        if (a.Status !== 1) router.push('/offline');
       });
 
     handleProgress();
@@ -202,7 +203,9 @@ export default function Question() {
 
   async function getQuestion(n: number) {
     const cid = courseId.split('|')[0];
-    const reg = regData?.courses.find((a: any) => a.COURSE_ID == cid);
+    const reg = regData?.courses.find(
+      (a: Courses) => a.COURSE_ID === Number(cid)
+    );
     const sr = localStorage.getItem('server');
     if (!user) return;
 
@@ -339,8 +342,8 @@ export default function Question() {
             />
           </Suspense>
 
-          {(qData?.studentData.STATUS == 2 ||
-            compileData?.result.evalPercentage == '100.0') && (
+          {(qData?.studentData.STATUS === 2 ||
+            compileData?.result.evalPercentage === '100.0') && (
             <div className={styles.completed}>
               <RiEmotionHappyFill style={{ fontSize: 18 }} />
               <p> You have completed this exercise! YAY</p>

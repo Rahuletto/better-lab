@@ -42,7 +42,7 @@ export default function Login() {
 
   function save() {
     setError(-1);
-    if (uid.length != 12) return setError(1);
+    if (uid.length !== 12) return setError(1);
     fetch('/api/login?server=' + server, {
       method: 'POST',
       cache: 'force-cache',
@@ -61,12 +61,12 @@ export default function Login() {
             | { Status: 1; msg: string }
             | { Status: 0; success: boolean; token: string }
         ) => {
-          if (a.Status == 1) {
+          if (a.Status === 1) {
             setError(2);
             localStorage.setItem('server', server);
             localStorage.setItem('userid', uid);
             router.push('/course');
-          } else if (a.Status == 0) {
+          } else if (a.Status === 0) {
             setError(1);
           }
         }
@@ -85,7 +85,7 @@ export default function Login() {
     fetch('/api/status?server=' + (server || 'ktretelab2023'))
       .then((d) => d.json())
       .then((a) => {
-        if (!a || a.Status != 1) router.push('/offline');
+        if (!a || a.Status !== 1) router.push('/offline');
       });
   }, [server]);
 
