@@ -14,13 +14,13 @@ export default async function POST(req: NextRequest) {
         headers: {
           'content-type': 'application/json',
         },
-      }
+      },
     );
 
   const id = String(searchParams.get('id'));
   const user = String(searchParams.get('user'));
 
-  const server = String(searchParams.get('server')) || "ktretelab2023";
+  const server = String(searchParams.get('server')) || 'ktretelab2023';
 
   if (!id || !user)
     return new Response(
@@ -35,7 +35,7 @@ export default async function POST(req: NextRequest) {
         headers: {
           'content-type': 'application/json',
         },
-      }
+      },
     );
 
   const {
@@ -63,7 +63,7 @@ export default async function POST(req: NextRequest) {
         headers: {
           'content-type': 'application/json',
         },
-      }
+      },
     );
 
   const url = server.startsWith('rmp') ? 'srmrmp' : 'srmist';
@@ -123,7 +123,7 @@ export default async function POST(req: NextRequest) {
         'Sec-Fetch-Mode': 'cors',
         'Sec-Fetch-Site': 'same-origin',
       },
-    }
+    },
   );
 
   const response = await fetch(
@@ -140,7 +140,7 @@ export default async function POST(req: NextRequest) {
         'Sec-Fetch-Mode': 'cors',
         'Sec-Fetch-Site': 'same-origin',
       },
-    }
+    },
   );
   const data = await response.json();
 

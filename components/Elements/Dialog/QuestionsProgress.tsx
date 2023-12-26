@@ -84,8 +84,8 @@ const QuestionsProgress = ({
                             el.status === 2
                               ? styles.greenSquare
                               : el.status === 1
-                              ? styles.yellowSquare
-                              : styles.redSquare,
+                                ? styles.yellowSquare
+                                : styles.redSquare,
                             num === Number(el.name) ? styles.active : '',
                           ].join(' ')}></div>
                       );
@@ -111,8 +111,8 @@ const QuestionsProgress = ({
                             el.children[0].status === 2
                               ? styles.greenSquare
                               : el.children[0].status === 1
-                              ? styles.yellowSquare
-                              : styles.redSquare,
+                                ? styles.yellowSquare
+                                : styles.redSquare,
                             num === Number(el.children[0].name)
                               ? styles.active
                               : '',
@@ -140,8 +140,8 @@ const QuestionsProgress = ({
                             el.children[0].children[0].status === 2
                               ? styles.greenSquare
                               : el.children[0].children[0].status === 1
-                              ? styles.yellowSquare
-                              : styles.redSquare,
+                                ? styles.yellowSquare
+                                : styles.redSquare,
                             num === Number(el.children[0].children[0].name)
                               ? styles.active
                               : '',

@@ -23,8 +23,8 @@ export default function CourseElement({
         course.LEVEL1 === 100 && course.LEVEL2 === 100 && course.LEVEL3 === 100
           ? { border: '2px solid var(--green)' }
           : course.LEVEL1 === 100
-          ? { border: '2px solid var(--yellow)' }
-          : { border: '2px solid transparent' }
+            ? { border: '2px solid var(--yellow)' }
+            : { border: '2px solid transparent' }
       }
       className={styles.card}
       title={

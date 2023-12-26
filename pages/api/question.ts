@@ -14,7 +14,7 @@ export default async function POST(req: NextRequest) {
         headers: {
           'content-type': 'application/json',
         },
-      }
+      },
     );
 
   const id = String(searchParams.get('id'));
@@ -34,7 +34,7 @@ export default async function POST(req: NextRequest) {
         headers: {
           'content-type': 'application/json',
         },
-      }
+      },
     );
 
   const { course }: { course: { id: number; name: string } } = await req.json();
@@ -51,7 +51,7 @@ export default async function POST(req: NextRequest) {
         headers: {
           'content-type': 'application/json',
         },
-      }
+      },
     );
 
   const json = {
@@ -87,7 +87,7 @@ export default async function POST(req: NextRequest) {
         'Sec-Fetch-Mode': 'cors',
         'Sec-Fetch-Site': 'same-origin',
       },
-    }
+    },
   );
   const data = await r.json();
   return Response.json(data, {

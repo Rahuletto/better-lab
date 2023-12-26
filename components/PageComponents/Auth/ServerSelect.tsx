@@ -1,5 +1,5 @@
-import { ServerList } from "@/types";
-import { Dispatch, SetStateAction } from "react";
+import { ServerList } from '@/types';
+import { Dispatch, SetStateAction } from 'react';
 
 export default function ServerSelect({
   server,

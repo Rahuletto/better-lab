@@ -14,7 +14,7 @@ export default function LoginButton({
         backgroundColor: '#ffca630e !important',
         color: 'var(--yellow) !important',
       }}
-      disabled >
+      disabled>
       Logging in
     </button>
   ) : (

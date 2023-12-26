@@ -4,7 +4,7 @@ import { CompilerResponse } from '@/types';
 export default function Output({
   compileData,
 }: {
-  compileData: CompilerResponse| null;
+  compileData: CompilerResponse | null;
 }) {
   return (
     <div id="result">
@@ -15,8 +15,8 @@ export default function Output({
             compileData.result.evalPercentage === '100.0'
               ? { borderColor: 'var(--green)' }
               : compileData.result.errorMsg
-              ? { borderColor: 'var(--red)' }
-              : {}
+                ? { borderColor: 'var(--red)' }
+                : {}
           }>
           <h2
             style={

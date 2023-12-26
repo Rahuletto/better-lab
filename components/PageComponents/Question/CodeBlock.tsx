@@ -32,7 +32,7 @@ export default function CodeBlock({
         className={styles.run}>
         <FaSquareCheck /> Submit
       </button>
-      { children }
+      {children}
       <p
         style={{
           textAlign: 'right',
