@@ -77,6 +77,30 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <title>Better-Lab</title>
         <link rel="icon" type="image/x-icon" href="/favicon.svg"></link>
+
+        <meta
+          name="description"
+          content="A better alternative to SRM-Elab made by the SRM DLD (Directorate of Learning and Development) division."
+        />
+
+        <meta property="og:url" content="https://better-lab.vercel.app" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Better-Lab" />
+        <meta
+          property="og:description"
+          content="A better alternative to SRM-Elab made by the SRM DLD (Directorate of Learning and Development) division."
+        />
+        <meta property="og:image" content="/og.png" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="twitter:domain" content="better-lab.vercel.app" />
+        <meta property="twitter:url" content="https://better-lab.vercel.app" />
+        <meta name="twitter:title" content="Better-Lab" />
+        <meta
+          name="twitter:description"
+          content="A better alternative to SRM-Elab made by the SRM DLD (Directorate of Learning and Development) division."
+        />
+        <meta name="twitter:image" content="/og.png" />
       </Head>
 
       <Analytics />
@@ -88,9 +112,9 @@ export default function App({ Component, pageProps }: AppProps) {
 }
 
 type ErrorBound = {
-  hasError: boolean,
-  error: Error
-}
+  hasError: boolean;
+  error: Error;
+};
 class ErrorBoundary extends Component {
   constructor(props: ErrorBound | Readonly<ErrorBound>) {
     super(props);
@@ -106,6 +130,7 @@ class ErrorBoundary extends Component {
     if ((this.state as ErrorBound).hasError) {
       return <ErrorStack error={(this.state as ErrorBound).error} />;
     }
+    // @ts-ignore
     return this.props.children;
   }
 }
