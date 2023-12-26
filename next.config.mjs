@@ -1,6 +1,15 @@
 import million from 'million/compiler';
 /** @type {import('next').NextConfig} */
-const config = {
+
+import * as pwa from 'next-pwa';
+
+const withPWA = pwa({
+  dest: 'public',
+  register: true,
+  skipWaiting: true
+});
+
+const config = withPWA({
   poweredByHeader: false,
   swcMinify: true,
   reactStrictMode: true,
@@ -8,6 +17,7 @@ const config = {
   images: {
     domains: ['avatars.githubusercontent.com'],
   },
+  webpack5: true,
   webpack: (config) => {
     config.experiments = {
       topLevelAwait: true,
@@ -15,8 +25,6 @@ const config = {
     };
     return config;
   },
-};
+});
 
-export default million.next(
-  config, { auto: true }
-);
+export default million.next(config, { auto: true });

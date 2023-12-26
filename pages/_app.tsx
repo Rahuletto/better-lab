@@ -76,11 +76,28 @@ export default function App({ Component, pageProps }: AppProps) {
 
       <Head>
         <title>Better-Lab</title>
-        <link rel="icon" type="image/x-icon" href="/favicon.svg"></link>
+        <link
+          rel="shortcut icon"
+          type="image/x-icon"
+          href="/favicon.svg"></link>
+        <link rel="manifest" href="/manifest.json" />
+        {/* PWA */}
+        <meta name="application-name" content="Better-Lab" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="Better-Lab" />
+        <meta
+          name="description"
+          content="A better alternative to SRM-Elab made by the SRM DLD (Directorate of Learning and Development) team."
+        />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="msapplication-TileColor" content="#12161c" />
+        <meta name="msapplication-tap-highlight" content="no" />
 
         <meta
           name="description"
-          content="A better alternative to SRM-Elab made by the SRM DLD (Directorate of Learning and Development) division."
+          content="A better alternative to SRM-Elab made by the SRM DLD (Directorate of Learning and Development) team."
         />
 
         <meta property="theme-color" content="#12161c" />
@@ -91,7 +108,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta property="og:title" content="Better-Lab" />
         <meta
           property="og:description"
-          content="A better alternative to SRM-Elab made by the SRM DLD (Directorate of Learning and Development) division."
+          content="A better alternative to SRM-Elab made by the SRM DLD (Directorate of Learning and Development) team."
         />
         <meta property="og:image" content="/og.png" />
 
@@ -101,9 +118,10 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="twitter:title" content="Better-Lab" />
         <meta
           name="twitter:description"
-          content="A better alternative to SRM-Elab made by the SRM DLD (Directorate of Learning and Development) division."
+          content="A better alternative to SRM-Elab made by the SRM DLD (Directorate of Learning and Development) team."
         />
         <meta name="twitter:image" content="/og.png" />
+        <meta name="twitter:creator" content="@SRMStudents" />
       </Head>
 
       <Analytics />
