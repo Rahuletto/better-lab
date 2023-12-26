@@ -1,60 +1,51 @@
+import Loader from '@/components/PageComponents/Courses/Loader';
+import styles from '@/styles/Course.module.css';
+import { Courses, RegisteredCourse } from '@/types';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-import styles from '@/styles/Course.module.css';
-
-import { Courses, RegisteredCourse } from '@/types';
-
-import Loader from '@/components/PageComponents/Courses/Loader';
-
 const SettingsButton = dynamic(
   () =>
     import('@/components/Elements/Buttons/SettingsButton').then(
-      (mod) => mod.default,
+      (mod) => mod.default
     ),
-  { ssr: false },
+  { ssr: false }
 );
 
 const CourseElement = dynamic(
   () =>
     import('@/components/PageComponents/Courses/CourseElement').then(
-      (mod) => mod.default,
+      (mod) => mod.default
     ),
-  { ssr: false },
+  { ssr: false }
 );
 
 const SettingsDialog = dynamic(
   () =>
     import('@/components/Elements/Dialog/SettingsDialog').then(
-      (mod) => mod.default,
+      (mod) => mod.default
     ),
-  { ssr: false },
+  { ssr: false }
 );
 
 export default function Course() {
   const router = useRouter();
-
   const [regData, setRegData] = useState<RegisteredCourse | null>(null); // Registered Course
-
   const [courseId, setCourseId] = useState('11|C'); // The course they currently working on
   const [user, setUser] = useState('');
 
   useEffect(() => {
     const us = localStorage.getItem('userid');
-
     const sr = localStorage.getItem('server');
-
     fetch('/api/status?server=' + sr)
       .then((d) => d.json())
       .then((a) => {
         if (a.Status !== 1) router.push('/offline');
       });
-
     if (!us) router.push('/login');
     else {
       setUser(us);
-
       fetch('/api/getreg?user=' + us + '&server=' + sr, {
         headers: {
           Authorization: `Basic ${btoa(us)}`,
@@ -66,7 +57,6 @@ export default function Course() {
         });
     }
   }, []);
-
   return (
     <>
       <header>
@@ -81,7 +71,6 @@ export default function Course() {
               router.push('/login');
             }}
           />
-
           <div className={styles.registered}>
             <h2>Registered Courses</h2>
             <SettingsButton
@@ -101,10 +90,11 @@ export default function Course() {
                   <CourseElement
                     course={course}
                     index={index}
+                    key={index}
                     onClick={() => {
                       localStorage.setItem(
                         'course',
-                        `${course.COURSE_ID}|${course.COURSE_NAME}`,
+                        `${course.COURSE_ID}|${course.COURSE_NAME}`
                       );
                       setCourseId(`${course.COURSE_ID}|${course.COURSE_NAME}`);
                       router.push('/question');

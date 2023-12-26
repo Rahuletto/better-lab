@@ -20,4 +20,5 @@ const config = withPWA({
   },
 });
 
-export default million.next(config, { auto: true });
+//export default million.next(config, { auto: true });
+export default config;
