@@ -4,7 +4,7 @@ export default function dialogHandler(e: MouseEvent | any) {
   const rect = e.target.getBoundingClientRect();
 
   const touch =
-    e?.changedTouches && e?.changedTouches?.length != 0
+    e?.changedTouches && e?.changedTouches?.length !== 0
       ? e.changedTouches[0]
       : e;
 

@@ -24,8 +24,8 @@ export default function TestCase({
     <div
       className={styles.sideContainer}
       style={
-        qData?.studentData.STATUS == 2 ||
-        compileData?.result.evalPercentage == '100.0'
+        qData?.studentData.STATUS === 2 ||
+        compileData?.result.evalPercentage === '100.0'
           ? { borderColor: 'var(--green)' }
           : {}
       }>
@@ -38,7 +38,7 @@ export default function TestCase({
               <code
                 dangerouslySetInnerHTML={{
                   __html: sanitize(
-                    qData.questionData.TESTCASES[testPage].INPUT
+                    qData.questionData.TESTCASES[testPage].INPUT,
                   ),
                 }}></code>
             </div>
@@ -47,7 +47,7 @@ export default function TestCase({
               <code
                 dangerouslySetInnerHTML={{
                   __html: sanitize(
-                    qData.questionData.TESTCASES[testPage].OUTPUT
+                    qData.questionData.TESTCASES[testPage].OUTPUT,
                   ),
                 }}></code>
             </div>

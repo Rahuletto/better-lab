@@ -25,7 +25,7 @@ export async function middleware(req: NextRequest, event: NextFetchEvent) {
     await ratelimit.blockUntilReady(uid || ip || '0.0.0.0', 5000);
 
   if (remaining <= 0) {
-    if (req.headers.get('content-type') == 'application/json')
+    if (req.headers.get('content-type') === 'application/json')
       return Response.json(
         {
           message: 'Ratelimited !',
@@ -40,7 +40,7 @@ export async function middleware(req: NextRequest, event: NextFetchEvent) {
             'RateLimit-Limit': limit.toString(),
             'Retry-After': reset.toString(),
           },
-        }
+        },
       );
     else NextResponse.redirect(new URL('/ratelimit', req.url));
   } else {
@@ -64,7 +64,7 @@ export async function middleware(req: NextRequest, event: NextFetchEvent) {
             'RateLimit-Limit': limit.toString(),
             'Retry-After': reset.toString(),
           },
-        }
+        },
       );
 
     return res;

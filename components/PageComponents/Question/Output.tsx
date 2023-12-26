@@ -4,7 +4,7 @@ import { CompilerResponse } from '@/types';
 export default function Output({
   compileData,
 }: {
-  compileData: CompilerResponse| null;
+  compileData: CompilerResponse | null;
 }) {
   return (
     <div id="result">
@@ -12,15 +12,15 @@ export default function Output({
         <div
           className={styles.result}
           style={
-            compileData.result.evalPercentage == '100.0'
+            compileData.result.evalPercentage === '100.0'
               ? { borderColor: 'var(--green)' }
               : compileData.result.errorMsg
-              ? { borderColor: 'var(--red)' }
-              : {}
+                ? { borderColor: 'var(--red)' }
+                : {}
           }>
           <h2
             style={
-              compileData.result.statusCode != '200'
+              compileData.result.statusCode !== '200'
                 ? { color: 'var(--red)' }
                 : { color: 'var(--green)' }
             }>

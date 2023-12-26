@@ -3,7 +3,7 @@ import { NextRequest } from 'next/server';
 export default async function POST(req: NextRequest) {
   const { searchParams } = new URL(req.url);
 
-  if (req.method != 'POST')
+  if (req.method !== 'POST')
     return new Response(
       JSON.stringify({
         message: 'Invaid Method ! EXPECTED: POST method.',
@@ -14,7 +14,7 @@ export default async function POST(req: NextRequest) {
         headers: {
           'content-type': 'application/json',
         },
-      }
+      },
     );
 
   const server = String(searchParams.get('server')) || 'ktretelab2023';
@@ -33,7 +33,7 @@ export default async function POST(req: NextRequest) {
         headers: {
           'content-type': 'application/json',
         },
-      }
+      },
     );
 
   const json = { USER_ID: user, PASSWORD: pass, KEY: 'john' };
@@ -57,7 +57,7 @@ export default async function POST(req: NextRequest) {
         'Sec-Fetch-Mode': 'cors',
         'Sec-Fetch-Site': 'same-origin',
       },
-    }
+    },
   );
   const data = await r.json();
   return Response.json(data, {

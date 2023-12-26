@@ -6,6 +6,7 @@ import { Suspense, useCallback, useEffect, useState } from 'react';
 import {
   CompilerResponse,
   CourseInfo,
+  Courses,
   Languages,
   QuestionData,
   RegisteredCourse,
@@ -21,70 +22,70 @@ import Loader from '@/components/PageComponents/Question/Cases/Loader';
 const CodeEditor = dynamic(
   () =>
     import('@/components/Elements/CodeEditor/Editor').then(
-      (mod) => mod.default
+      (mod) => mod.default,
     ),
-  { ssr: false }
+  { ssr: false },
 );
 
 const SettingsDialog = dynamic(
   () =>
     import('@/components/Elements/Dialog/SettingsDialog').then(
-      (mod) => mod.default
+      (mod) => mod.default,
     ),
-  { ssr: false }
+  { ssr: false },
 );
 
 const MandatoryCase = dynamic(
   () =>
     import('@/components/PageComponents/Question/Cases/Mandatory').then(
-      (mod) => mod.default
+      (mod) => mod.default,
     ),
-  { ssr: false, loading: () => <Loader /> }
+  { ssr: false, loading: () => <Loader /> },
 );
 
 const TestCase = dynamic(
   () =>
     import('@/components/PageComponents/Question/Cases/Test').then(
-      (mod) => mod.default
+      (mod) => mod.default,
     ),
-  { ssr: false, loading: () => <Loader /> }
+  { ssr: false, loading: () => <Loader /> },
 );
 
 const Toolbar = dynamic(
   () =>
     import('@/components/PageComponents/Question/Toolbar').then(
-      (mod) => mod.default
+      (mod) => mod.default,
     ),
   {
     ssr: false,
     loading: () => <ToolbarLoader />,
-  }
+  },
 );
 
 const CodeBlock = dynamic(
   () =>
     import('@/components/PageComponents/Question/CodeBlock').then(
-      (mod) => mod.default
+      (mod) => mod.default,
     ),
-  { ssr: false, loading: () => <Loader /> }
+  { ssr: false, loading: () => <Loader /> },
 );
 
 const Output = dynamic(
   () =>
     import('@/components/PageComponents/Question/Output').then(
-      (mod) => mod.default
+      (mod) => mod.default,
     ),
   {
     ssr: false,
-  }
+  },
 );
 
 const QuestionsProgress = dynamic(
   () =>
     import('@/components/Elements/Dialog/QuestionsProgress').then(
-      (mod) => mod.default
+      (mod) => mod.default,
     ),
-  { ssr: true }
+  { ssr: true },
 );
 
 import { RiEmotionHappyFill } from 'react-icons/ri';
@@ -105,7 +106,7 @@ export default function Question() {
 
   const [code, setCode] = useState(''); // The code
   const [language, setLanguage] = useState(
-    loadLanguage(('c' as Languages) || 'shell')
+    loadLanguage(('c' as Languages) || 'shell'),
   ); // Language of such course in codeblock
 
   const [courseData, setCourseData] = useState<CourseInfo | null>(null); // All course data (the wheel)
@@ -129,7 +130,7 @@ export default function Question() {
     fetch('/api/status?server=' + sr)
       .then((d) => d.json())
       .then((a) => {
-        if (a.Status != 1) router.push('/offline');
+        if (a.Status !== 1) router.push('/offline');
       });
 
     handleProgress();
@@ -194,7 +195,7 @@ export default function Question() {
           body: JSON.stringify({
             code: code,
           }),
-        }
+        },
       );
       return true;
     }
@@ -202,7 +203,9 @@ export default function Question() {
 
   async function getQuestion(n: number) {
     const cid = courseId.split('|')[0];
-    const reg = regData?.courses.find((a: any) => a.COURSE_ID == cid);
+    const reg = regData?.courses.find(
+      (a: Courses) => a.COURSE_ID === Number(cid),
+    );
     const sr = localStorage.getItem('server');
     if (!user) return;
 
@@ -339,8 +342,8 @@ export default function Question() {
             />
           </Suspense>
 
-          {(qData?.studentData.STATUS == 2 ||
-            compileData?.result.evalPercentage == '100.0') && (
+          {(qData?.studentData.STATUS === 2 ||
+            compileData?.result.evalPercentage === '100.0') && (
             <div className={styles.completed}>
               <RiEmotionHappyFill style={{ fontSize: 18 }} />
               <p> You have completed this exercise! YAY</p>

@@ -20,11 +20,11 @@ export default function CourseElement({
   return (
     <div
       style={
-        course.LEVEL1 == 100 && course.LEVEL2 == 100 && course.LEVEL3 == 100
+        course.LEVEL1 === 100 && course.LEVEL2 === 100 && course.LEVEL3 === 100
           ? { border: '2px solid var(--green)' }
-          : course.LEVEL1 == 100
-          ? { border: '2px solid var(--yellow)' }
-          : { border: '2px solid transparent' }
+          : course.LEVEL1 === 100
+            ? { border: '2px solid var(--yellow)' }
+            : { border: '2px solid transparent' }
       }
       className={styles.card}
       title={
@@ -32,6 +32,7 @@ export default function CourseElement({
         course.COURSE_NAME.charAt(0).toUpperCase() +
         course.COURSE_NAME.slice(1).toLowerCase()
       }
+      role="button"
       key={index}
       onClick={onClick}>
       {
@@ -46,7 +47,7 @@ export default function CourseElement({
 
       <div className={styles.levels}>
         <div className={styles.levelIndicator}>
-          <p style={course.LEVEL1 == 100 ? { color: 'var(--green)' } : {}}>
+          <p style={course.LEVEL1 === 100 ? { color: 'var(--green)' } : {}}>
             {course.LEVEL1}
             <span>/100</span>
           </p>
@@ -55,7 +56,7 @@ export default function CourseElement({
           </div>
         </div>
         <div className={styles.levelIndicator}>
-          <p style={course.LEVEL2 == 100 ? { color: 'var(--green)' } : {}}>
+          <p style={course.LEVEL2 === 100 ? { color: 'var(--green)' } : {}}>
             {course.LEVEL2}
             <span>/100</span>
           </p>
@@ -64,7 +65,7 @@ export default function CourseElement({
           </div>
         </div>
         <div className={styles.levelIndicator}>
-          <p style={course.LEVEL3 == 100 ? { color: 'var(--green)' } : {}}>
+          <p style={course.LEVEL3 === 100 ? { color: 'var(--green)' } : {}}>
             {course.LEVEL3}
             <span>/100</span>
           </p>

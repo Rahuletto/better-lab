@@ -16,7 +16,7 @@ const QuestionsProgress = ({
   user,
 }: {
   courseData: CourseInfo | null;
-  setNum: Function;
+  setNum: (n: number) => void;
   num: number | undefined;
   user: string;
 }) => {
@@ -42,7 +42,7 @@ const QuestionsProgress = ({
   function handleOnClick(e: string) {
     if (!courseData) return;
 
-    if (e == 'next' && index < courseData.flare.children.length - 1) {
+    if (e === 'next' && index < courseData.flare.children.length - 1) {
       setIndex(index + 1);
     } else if (index > 0) {
       setIndex(index - 1);
@@ -76,17 +76,19 @@ const QuestionsProgress = ({
                         <div
                           title={'Question ' + el.name}
                           key={i}
+                          role="button"
                           onClick={() => {
                             setNum(Number(el.name));
                           }}
                           className={[
-                            el.status == 2
+                            el.status === 2
                               ? styles.greenSquare
-                              : el.status == 1
-                              ? styles.yellowSquare
-                              : styles.redSquare,
-                            num == Number(el.name) ? styles.active : '',
-                          ].join(' ')}></div>
+                              : el.status === 1
+                                ? styles.yellowSquare
+                                : styles.redSquare,
+                            num === Number(el.name) ? styles.active : '',
+                          ].join(' ')}
+                        />
                       );
                     })}
                 </div>
@@ -102,19 +104,21 @@ const QuestionsProgress = ({
                         <div
                           title={'Question ' + el.children[0].name}
                           key={i}
+                          role="button"
                           onClick={() => {
                             setNum(Number(el.children[0].name));
                           }}
                           className={[
-                            el.children[0].status == 2
+                            el.children[0].status === 2
                               ? styles.greenSquare
-                              : el.children[0].status == 1
-                              ? styles.yellowSquare
-                              : styles.redSquare,
-                            num == Number(el.children[0].name)
+                              : el.children[0].status === 1
+                                ? styles.yellowSquare
+                                : styles.redSquare,
+                            num === Number(el.children[0].name)
                               ? styles.active
                               : '',
-                          ].join(' ')}></div>
+                          ].join(' ')}
+                        />
                       );
                     })}
                 </div>
@@ -130,19 +134,21 @@ const QuestionsProgress = ({
                         <div
                           title={'Question ' + el.children[0].children[0].name}
                           key={i}
+                          role="button"
                           onClick={() => {
                             setNum(Number(el.children[0].children[0].name));
                           }}
                           className={[
-                            el.children[0].children[0].status == 2
+                            el.children[0].children[0].status === 2
                               ? styles.greenSquare
-                              : el.children[0].children[0].status == 1
-                              ? styles.yellowSquare
-                              : styles.redSquare,
-                            num == Number(el.children[0].children[0].name)
+                              : el.children[0].children[0].status === 1
+                                ? styles.yellowSquare
+                                : styles.redSquare,
+                            num === Number(el.children[0].children[0].name)
                               ? styles.active
                               : '',
-                          ].join(' ')}></div>
+                          ].join(' ')}
+                        />
                       );
                     })}
                 </div>

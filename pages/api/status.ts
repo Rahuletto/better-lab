@@ -1,7 +1,7 @@
 import { NextRequest } from 'next/server';
 
 export default async function GET(req: NextRequest) {
-  if (req.method != 'GET')
+  if (req.method !== 'GET')
     return new Response(
       JSON.stringify({
         message: 'Invaid Method ! EXPECTED: GET method.',
@@ -12,7 +12,7 @@ export default async function GET(req: NextRequest) {
         headers: {
           'content-type': 'application/json',
         },
-      }
+      },
     );
   const { searchParams } = new URL(req.url);
   const server = String(searchParams.get('server')) || 'ktretelab2023';
@@ -42,7 +42,7 @@ export default async function GET(req: NextRequest) {
           'Sec-Fetch-Mode': 'cors',
           'Sec-Fetch-Site': 'same-origin',
         },
-      }
+      },
     );
     const data = await r.json();
     if (data) clearTimeout(timeoutId);
@@ -61,7 +61,7 @@ export default async function GET(req: NextRequest) {
         headers: {
           'content-type': 'application/json',
         },
-      }
+      },
     );
   }
 }

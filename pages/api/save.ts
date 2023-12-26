@@ -3,7 +3,7 @@ import { NextRequest } from 'next/server';
 export default async function POST(req: NextRequest) {
   const { searchParams } = new URL(req.url);
 
-  if (req.method != 'POST')
+  if (req.method !== 'POST')
     return new Response(
       JSON.stringify({
         message: 'Invaid Method ! EXPECTED: POST method.',
@@ -14,7 +14,7 @@ export default async function POST(req: NextRequest) {
         headers: {
           'content-type': 'application/json',
         },
-      }
+      },
     );
 
   const id = Number(searchParams.get('id'));
@@ -36,7 +36,7 @@ export default async function POST(req: NextRequest) {
         headers: {
           'content-type': 'application/json',
         },
-      }
+      },
     );
 
   const {
@@ -58,7 +58,7 @@ export default async function POST(req: NextRequest) {
         headers: {
           'content-type': 'application/json',
         },
-      }
+      },
     );
 
   const url = server.startsWith('rmp') ? 'srmrmp' : 'srmist';
@@ -91,7 +91,7 @@ export default async function POST(req: NextRequest) {
         'Sec-Fetch-Mode': 'cors',
         'Sec-Fetch-Site': 'same-origin',
       },
-    }
+    },
   );
   const data = await response.json();
 

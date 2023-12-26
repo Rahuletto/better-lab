@@ -8,25 +8,25 @@ import { useRouter } from 'next/router';
 const ServerSelect = dynamic(
   () =>
     import('@/components/PageComponents/Auth/ServerSelect').then(
-      (mod) => mod.default
+      (mod) => mod.default,
     ),
-  { ssr: false }
+  { ssr: false },
 );
 
 const LoginButton = dynamic(
   () =>
     import('@/components/PageComponents/Auth/LoginButton').then(
-      (mod) => mod.default
+      (mod) => mod.default,
     ),
-  { ssr: false }
+  { ssr: false },
 );
 
 const LoginInput = dynamic(
   () =>
     import('@/components/PageComponents/Auth/LoginInput').then(
-      (mod) => mod.default
+      (mod) => mod.default,
     ),
-  { ssr: false }
+  { ssr: false },
 );
 
 import { ServerList } from '@/types';
@@ -42,7 +42,7 @@ export default function Login() {
 
   function save() {
     setError(-1);
-    if (uid.length != 12) return setError(1);
+    if (uid.length !== 12) return setError(1);
     fetch('/api/login?server=' + server, {
       method: 'POST',
       cache: 'force-cache',
@@ -59,17 +59,17 @@ export default function Login() {
         (
           a:
             | { Status: 1; msg: string }
-            | { Status: 0; success: boolean; token: string }
+            | { Status: 0; success: boolean; token: string },
         ) => {
-          if (a.Status == 1) {
+          if (a.Status === 1) {
             setError(2);
             localStorage.setItem('server', server);
             localStorage.setItem('userid', uid);
             router.push('/course');
-          } else if (a.Status == 0) {
+          } else if (a.Status === 0) {
             setError(1);
           }
-        }
+        },
       );
   }
 
@@ -82,11 +82,10 @@ export default function Login() {
   }, []);
 
   useEffect(() => {
-
-    fetch('/api/status?server=' + server || 'ktretelab2023')
+    fetch('/api/status?server=' + (server || 'ktretelab2023'))
       .then((d) => d.json())
       .then((a) => {
-        if (!a || a.Status != 1) router.push('/offline');
+        if (!a || a.Status !== 1) router.push('/offline');
       });
   }, [server]);
 

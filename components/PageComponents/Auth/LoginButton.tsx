@@ -7,15 +7,14 @@ export default function LoginButton({
   error: number;
   onClick: MouseEventHandler;
 }) {
-  return error == -1 ? (
+  return error === -1 ? (
     <button
       style={{
         border: '2px solid var(--yellow)',
         backgroundColor: '#ffca630e !important',
         color: 'var(--yellow) !important',
       }}
-      disabled
-      onClick={() => {}}>
+      disabled>
       Logging in
     </button>
   ) : (
