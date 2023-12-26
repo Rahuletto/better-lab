@@ -1,12 +1,9 @@
 import million from 'million/compiler';
 /** @type {import('next').NextConfig} */
 
-import * as pwa from 'next-pwa';
-
+import pwa from 'next-pwa'
 const withPWA = pwa({
-  dest: 'public',
-  register: true,
-  skipWaiting: true
+  dest: 'public'
 });
 
 const config = withPWA({
@@ -17,7 +14,6 @@ const config = withPWA({
   images: {
     domains: ['avatars.githubusercontent.com'],
   },
-  webpack5: true,
   webpack: (config) => {
     config.experiments = {
       topLevelAwait: true,
