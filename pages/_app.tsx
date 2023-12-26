@@ -43,11 +43,11 @@ export default function App({ Component, pageProps }: AppProps) {
           event.ctrlKey
             ? 'ctrl'
             : event.altKey
-            ? 'alt'
-            : event.shiftKey
-            ? 'shift'
-            : event.key
-        )
+              ? 'alt'
+              : event.shiftKey
+                ? 'shift'
+                : event.key,
+        ),
       ).forEach((a) => {
         (a as HTMLElement).style.transform = 'scale(0.9)';
         (a as HTMLElement).style.opacity = '0.7';
@@ -76,10 +76,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
       <Head>
         <title>Better-Lab</title>
-        <link
-          rel="shortcut icon"
-          type="image/x-icon"
-          href="/favicon.svg" />
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.svg" />
         <link rel="manifest" href="/manifest.json" />
         {/* PWA */}
         <meta name="application-name" content="Better-Lab" />

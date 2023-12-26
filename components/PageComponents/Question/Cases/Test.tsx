@@ -38,18 +38,20 @@ export default function TestCase({
               <code
                 dangerouslySetInnerHTML={{
                   __html: sanitize(
-                    qData.questionData.TESTCASES[testPage].INPUT
+                    qData.questionData.TESTCASES[testPage].INPUT,
                   ),
-                }} />
+                }}
+              />
             </div>
             <div>
               <p>Output</p>
               <code
                 dangerouslySetInnerHTML={{
                   __html: sanitize(
-                    qData.questionData.TESTCASES[testPage].OUTPUT
+                    qData.questionData.TESTCASES[testPage].OUTPUT,
                   ),
-                }} />
+                }}
+              />
             </div>
           </div>
         )}
