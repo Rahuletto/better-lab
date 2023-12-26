@@ -151,7 +151,7 @@ class ErrorBoundary extends Component {
     if ((this.state as ErrorBound).hasError) {
       return <ErrorStack error={(this.state as ErrorBound).error} />;
     }
-    // @ts-ignore
+    // @ts-expect-error
     return this.props.children;
   }
 }
