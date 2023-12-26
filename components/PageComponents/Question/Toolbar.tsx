@@ -1,7 +1,7 @@
 import styles from '@/components/Elements/Buttons/Buttons.module.css';
 import { MouseEventHandler } from 'react';
 
-import { FaHouse, FaGear } from 'react-icons/fa6';
+import { FaGear, FaHouse } from 'react-icons/fa6';
 import { TbProgressBolt } from 'react-icons/tb';
 
 export default function Toolbar({

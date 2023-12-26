@@ -1,6 +1,6 @@
-import { FaQuestion } from 'react-icons/fa';
 import styles from '@/styles/Error.module.css';
 import { useRouter } from 'next/router';
+import { FaQuestion } from 'react-icons/fa';
 
 export default function Error500() {
   const router = useRouter();

@@ -1,5 +1,5 @@
 import styles from '@/styles/Question.module.css';
-import { QuestionData, CompilerResponse } from '@/types';
+import { CompilerResponse, QuestionData } from '@/types';
 import { MouseEventHandler } from 'react';
 import { FaSquareCheck } from 'react-icons/fa6';
 

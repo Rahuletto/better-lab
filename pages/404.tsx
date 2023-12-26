@@ -1,6 +1,6 @@
-import { TbError404 } from 'react-icons/tb';
 import styles from '@/styles/Error.module.css';
 import { useRouter } from 'next/router';
+import { TbError404 } from 'react-icons/tb';
 
 
 export default function Error404() {

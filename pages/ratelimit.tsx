@@ -1,5 +1,5 @@
-import { FaHourglassEnd } from 'react-icons/fa6';
 import styles from '@/styles/Error.module.css';
+import { FaHourglassEnd } from 'react-icons/fa6';
 
 export default function Ratelimit() {
   return (

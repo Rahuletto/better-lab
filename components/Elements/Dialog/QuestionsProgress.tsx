@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import styles from './QuestionProgress.module.css';
 import dialogStyles from './Dialog.module.css';
+import styles from './QuestionProgress.module.css';
 
 import { CourseInfo } from '@/types';
 

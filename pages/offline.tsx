@@ -1,5 +1,5 @@
-import { IoCloudOffline } from 'react-icons/io5';
 import styles from '@/styles/Error.module.css';
+import { IoCloudOffline } from 'react-icons/io5';
 
 export default function Offline() {
   return (

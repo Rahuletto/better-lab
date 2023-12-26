@@ -1,5 +1,5 @@
-import Hero from '@/components/PageComponents/Home/Hero';
 import Features from '@/components/PageComponents/Home/Features';
+import Hero from '@/components/PageComponents/Home/Hero';
 
 import styles from '@/styles/Home.module.css';
 

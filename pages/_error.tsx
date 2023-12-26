@@ -1,5 +1,5 @@
-import { LuServerCrash } from 'react-icons/lu';
 import { FaDoorOpen } from "react-icons/fa6";
+import { LuServerCrash } from 'react-icons/lu';
 
 import styles from '@/styles/Error.module.css';
 

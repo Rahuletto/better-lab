@@ -1,14 +1,14 @@
-import { Suspense, useCallback, useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import dynamic from 'next/dynamic';
 import styles from '@/styles/Question.module.css';
+import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
+import { Suspense, useCallback, useEffect, useState } from 'react';
 
 import {
+  CompilerResponse,
+  CourseInfo,
   Languages,
   QuestionData,
-  CompilerResponse,
   RegisteredCourse,
-  CourseInfo,
 } from '@/types';
 
 import { loadLanguage } from '@uiw/codemirror-extensions-langs';

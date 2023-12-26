@@ -1,5 +1,5 @@
-import { PiShieldWarningFill } from 'react-icons/pi';
 import styles from '@/styles/Home.module.css';
+import { PiShieldWarningFill } from 'react-icons/pi';
 
 export default function Features() {
     return (

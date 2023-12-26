@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
+import { useEffect, useState } from 'react';
 
 import styles from '../styles/Login.module.css';
 

@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
 import styles from '@/styles/Course.module.css';
 
-import { RegisteredCourse, Courses } from '@/types';
+import { Courses, RegisteredCourse } from '@/types';
 
 import Loader from '@/components/PageComponents/Courses/Loader';
 

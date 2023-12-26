@@ -1,7 +1,7 @@
-import { MouseEventHandler, useEffect, ChangeEventHandler } from 'react';
-import styles from './Dialog.module.css';
-import dialogHandler from '@/utils/DialogHandler';
 import { RegisteredCourse } from '@/types';
+import dialogHandler from '@/utils/DialogHandler';
+import { ChangeEventHandler, MouseEventHandler, useEffect } from 'react';
+import styles from './Dialog.module.css';
 
 export default function SettingsDialog({
   logout,
