@@ -59,9 +59,33 @@
   color: var(--yellow);
   margin: 0;
 }
+
 .container svg {
   font-size: 74px;
   color: var(--yellow);
+  animation: 2s 1s float cubic-bezier(0.075, 0.82, 0.165, 1);
+  -webkit-animation: 2s 1s float cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+@keyframes float {
+  0%,
+  100% {
+    filter: drop-shadow(5px 12px 0px rgba(0, 0, 0, 0.6));
+    transform: translatey(0px);
+    -webkit-filter: drop-shadow(5px 12px 0px rgba(0, 0, 0, 0.6));
+}
+
+  50%,
+  85% {
+    filter: drop-shadow(5px 10px 0px rgba(0, 0, 0, 0.2));
+    transform: translatey(-20px);
+    -webkit-filter: drop-shadow(5px 15px 0px rgba(0, 0, 0, 0.2));
+  }
+  95%, 99.5% {
+    filter: drop-shadow(5px 0px 0px rgba(0, 0, 0, 0.6));
+    transform: translatey(0px);
+    -webkit-filter: drop-shadow(5px 0px 0px rgba(0, 0, 0, 0.6));
+  }
 }
 
 .blockquote {
