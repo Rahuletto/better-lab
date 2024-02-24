@@ -27,7 +27,7 @@ export default function IconMaker({ lang }: { lang: string }) {
 
 const iconMap = {
   C: <FaCopyright />,
-  CPP: <SiCplusplus />,
+  OOPS: <SiCplusplus />,
   CSHARP: <SiCsharp />,
   GO: <FaGolang />,
   JULIA: <SiJulia />,

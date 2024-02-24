@@ -9,8 +9,7 @@ export default function Hero() {
         <div>
           <h1>Better-Lab</h1>
           <p>
-            A better alternative to SRM-Elab made by the SRM DLD{' '}
-            {'(Directorate of Learning and Development)'} team.
+            A better alternative to SRM-Elab. Efficient, Fast, Zippy as hecc
           </p>
   
           <div className={styles.buttons}>

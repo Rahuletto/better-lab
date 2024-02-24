@@ -141,7 +141,7 @@ export default function Question() {
 
   useEffect(() => {
     const l = courseId.split('|')[1];
-    setLanguage(loadLanguage((l.toLowerCase() as Languages) || 'shell'));
+    setLanguage(loadLanguage((l.toLowerCase().replace('oops', 'cpp') as Languages) || 'shell'));
   }, [courseId]);
 
   useEffect(() => {
@@ -273,7 +273,7 @@ export default function Question() {
       body: JSON.stringify({
         qid: qData?.studentData.Q_ID,
         code: code,
-        language: courseId.split('|')[1].toLowerCase(),
+        language: courseId.split('|')[1].toLowerCase().replace('oops', 'cpp'),
         course: {
           name: qData?.questionData.COURSE_NAME,
           id: qData?.studentData.COURSE_ID,
