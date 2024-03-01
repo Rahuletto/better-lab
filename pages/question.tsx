@@ -91,6 +91,7 @@ const QuestionsProgress = dynamic(
 import { RiEmotionHappyFill } from 'react-icons/ri';
 
 import Skeleton from 'react-loading-skeleton';
+import Switcher from '@/components/Elements/Buttons/Switcher';
 
 export default function Question() {
   const router = useRouter();
@@ -141,7 +142,11 @@ export default function Question() {
 
   useEffect(() => {
     const l = courseId.split('|')[1];
-    setLanguage(loadLanguage((l.toLowerCase().replace('oops', 'cpp') as Languages) || 'shell'));
+    setLanguage(
+      loadLanguage(
+        (l.toLowerCase().replace('oops', 'cpp') as Languages) || 'shell'
+      )
+    );
   }, [courseId]);
 
   useEffect(() => {
@@ -310,7 +315,7 @@ export default function Question() {
               setCourseId(e.target.value);
             }}
           />
-
+          <Switcher changeQuestion={changeQuestion} num={num} />
           <QuestionsProgress
             user={user}
             setNum={changeQuestion}
