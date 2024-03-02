@@ -23,20 +23,20 @@ export default function LoginInput({
             ? {
                 border: '1px solid var(--red)',
                 background: '#D133330e',
-                borderBottomLeftRadius: 2,
-                borderBottomRightRadius: 2,
+                borderBottomLeftRadius: 4,
+                borderBottomRightRadius: 4,
               }
             : error === 2
               ? {
                   border: '1px solid var(--green)',
-                  background: '#65d1330e',
-                  borderBottomLeftRadius: 2,
-                  borderBottomRightRadius: 2,
+                  background: '#45d1330e',
+                  borderBottomLeftRadius: 4,
+                  borderBottomRightRadius: 4,
                 }
               : {
                   border: '1px solid transparent',
-                  borderBottomLeftRadius: 2,
-                  borderBottomRightRadius: 2,
+                  borderBottomLeftRadius: 4,
+                  borderBottomRightRadius: 4,
                 }
         }
         onChange={onChange}
@@ -53,20 +53,20 @@ export default function LoginInput({
             ? {
                 border: '1px solid var(--red)',
                 background: '#D133330e',
-                borderTopLeftRadius: 2,
-                borderTopRightRadius: 2,
+                borderTopLeftRadius: 4,
+                borderTopRightRadius: 4,
               }
             : error === 2
               ? {
                   border: '1px solid var(--green)',
-                  background: '#65d1330e',
-                  borderTopLeftRadius: 2,
-                  borderTopRightRadius: 2,
+                  background: '#45d1330e',
+                  borderTopLeftRadius: 4,
+                  borderTopRightRadius: 4,
                 }
               : {
                   border: '1px solid transparent',
-                  borderTopLeftRadius: 2,
-                  borderTopRightRadius: 2,
+                  borderTopLeftRadius: 4,
+                  borderTopRightRadius: 4,
                 }
         }
         onChange={onChange}

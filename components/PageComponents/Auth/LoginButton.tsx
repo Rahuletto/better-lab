@@ -10,7 +10,7 @@ export default function LoginButton({
   return error === -1 ? (
     <button
       style={{
-        border: '2px solid var(--yellow)',
+        border: '1px solid var(--yellow)',
         backgroundColor: '#ffca630e !important',
         color: 'var(--yellow) !important',
       }}
