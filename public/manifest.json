@@ -3,28 +3,13 @@
   "short_name": "Better Lab",
   "icons": [
     {
-      "src": "/icons/icon-128x128.png",
+      "src": "/icons/betterlab.png",
       "sizes": "128x128",
       "type": "image/png",
       "purpose": "any maskable"
-    },
-    {
-      "src": "/icons/icon-256x256.png",
-      "sizes": "256x256",
-      "type": "image/png"
-    },
-    {
-      "src": "/icons/icon-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    },
-    {
-      "src": "/icons/icon-1024x1024.png",
-      "sizes": "1024x1024",
-      "type": "image/png"
     }
   ],
-  "theme_color": "#a0aab6",
+  "theme_color": "#FFCA63",
   "background_color": "#12161c",
   "start_url": "/",
   "display": "standalone",
