@@ -106,7 +106,7 @@ export default function Login() {
                   hecc
                 </p>
               </div>
-              <button>Academia</button>
+              <button onClick={() => router.push('/academia')}>Academia</button>
             </div>
 
             <div className={styles.inputs}>

@@ -18,6 +18,15 @@ const config = withPWA({
     };
     return config;
   },
+  async redirects() {
+    return [
+      {
+        source: '/academia',
+        destination: 'https://academiapro.vercel.app',
+        permanent: true,
+      },
+    ]
+  }
 });
 
 //export default million.next(config, { auto: true });
