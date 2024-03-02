@@ -32,7 +32,7 @@ export default function CodeBlock({
       }>
       <p>Code Editor</p>
       <a
-        target="_blank"
+        target="new"
         href={`https://execoder.vercel.app/code?lang=${encodeURIComponent(
           courseId.split('|')[1].toLowerCase().replace('oops', 'cpp')
         )}&prog=${encodeURIComponent(code).replaceAll('\\n', '%0A')}`}
