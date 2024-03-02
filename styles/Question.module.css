@@ -230,8 +230,73 @@
   flex-direction: column;
   margin-top: 12px;
 }
-
 .run {
+  cursor: pointer;
+  font-family: var(--main-font);
+  font-size: 16px;
+  padding: 4px 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 6px;
+  background: rgba(78,208,57,.42);
+  border: 3px solid transparent;
+  color: #f0f0f0;
+  border-radius: 10px;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  -webkit-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  -o-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  position: absolute;
+  z-index: 2;
+  right: 140px;
+  text-decoration: none;
+}
+
+.run:hover {
+  opacity: 0.9;
+  border: 3px solid rgba(78, 208, 57, 0.42);
+
+  background-color: transparent;
+  color: #f0f0f0;
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+}
+
+.run:disabled:hover {
+  opacity: 0.9;
+  background-color: #d13333ab;
+  color: #f0f0f0;
+  border: 1.9px solid var(--border);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+}
+
+.run:disabled:active {
+  -webkit-transform: none !important;
+  -ms-transform: none !important;
+  transform: none !important;
+  opacity: 0.9;
+  background-color: #d13333b6;
+  color: #f0f0f0;
+}
+
+.run:active {
+  -webkit-transform: scale(0.9) rotate(-2deg);
+  -ms-transform: scale(0.9) rotate(-2deg);
+  transform: scale(0.9) rotate(-2deg);
+  opacity: 0.9;
+  background-color: rgba(78, 208, 57, 0.42);
+  color: #f0f0f0;
+}
+
+
+.submit {
   cursor: pointer;
   font-family: var(--main-font);
   font-size: 16px;
@@ -258,7 +323,7 @@
   right: 28px;
 }
 
-.run:hover {
+.submit:hover {
   opacity: 0.9;
   background-color: rgba(78, 208, 57, 0.42);
   color: #f0f0f0;
@@ -267,7 +332,7 @@
   backdrop-filter: blur(3px);
 }
 
-.run:disabled:hover {
+.submit:disabled:hover {
   opacity: 0.9;
   background-color: #d13333ab;
   color: #f0f0f0;
@@ -276,7 +341,7 @@
   backdrop-filter: blur(3px);
 }
 
-.run:disabled:active {
+.submit:disabled:active {
   -webkit-transform: none !important;
   -ms-transform: none !important;
   transform: none !important;
@@ -285,7 +350,7 @@
   color: #f0f0f0;
 }
 
-.run:active {
+.submit:active {
   -webkit-transform: scale(0.9) rotate(-2deg);
   -ms-transform: scale(0.9) rotate(-2deg);
   transform: scale(0.9) rotate(-2deg);

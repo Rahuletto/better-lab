@@ -1,21 +1,26 @@
 import styles from '@/styles/Question.module.css';
 import { CompilerResponse, QuestionData } from '@/types';
+import { redirect } from 'next/navigation';
+import { useRouter } from 'next/router';
 import { MouseEventHandler } from 'react';
-import { FaSquareCheck } from 'react-icons/fa6';
+import { FaPlay, FaSquareCheck } from 'react-icons/fa6';
 
 export default function CodeBlock({
   qData,
   compileData,
   run,
+  courseId,
   code,
   children,
 }: {
   qData: QuestionData | null;
   compileData: CompilerResponse | null;
   run: MouseEventHandler<HTMLButtonElement>;
+  courseId: string;
   code: string;
   children: any;
 }) {
+  const router = useRouter();
   return (
     <div
       className={styles.codeWrapper}
@@ -26,10 +31,17 @@ export default function CodeBlock({
           : {}
       }>
       <p>Code Editor</p>
+      <a
+        href={`https://execoder.vercel.app/code?lang=${encodeURIComponent(
+          courseId.split('|')[1].toLowerCase().replace('oops', 'cpp')
+        )}&prog=${encodeURIComponent(code).replaceAll('\\n', '%0A')}`}
+        className={styles.run}>
+        <FaPlay /> Run
+      </a>
       <button
         onClick={run}
         disabled={code === '' || qData?.studentData.STATUS === 2}
-        className={styles.run}>
+        className={styles.submit}>
         <FaSquareCheck /> Submit
       </button>
       {children}

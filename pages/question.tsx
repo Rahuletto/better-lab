@@ -362,6 +362,7 @@ export default function Question() {
 
             <Suspense fallback={<Loader />}>
               <CodeBlock
+              courseId={courseId}
                 compileData={compileData}
                 qData={qData}
                 code={code}
