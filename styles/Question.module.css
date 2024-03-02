@@ -492,7 +492,11 @@
     padding: 18px;
   }
 
-  .run {
+  .submit, .run {
     right: 18px !important;
+  }
+
+  .run {
+    margin-top: 45px;
   }
 }
