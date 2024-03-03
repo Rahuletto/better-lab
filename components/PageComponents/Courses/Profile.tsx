@@ -16,7 +16,7 @@ export default function Profile({ name }: { name: string }) {
             title="Log out"
             onClick={() => {
               localStorage.clear();
-              router.push('/login');
+              router.push('/');
             }}>
             <svg
               stroke="currentColor"
