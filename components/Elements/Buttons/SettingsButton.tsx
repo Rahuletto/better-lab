@@ -1,7 +1,7 @@
 import { CSSProperties } from 'react';
 import { FaGear } from 'react-icons/fa6';
 
-import styles from './Buttons.module.css';
+import styles from '@/components/styles/Buttons.module.css';
 
 export default function SettingsButton({ style }: { style: CSSProperties }) {
   return (

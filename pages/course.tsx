@@ -1,4 +1,5 @@
 import Loader from '@/components/PageComponents/Courses/Loader';
+import Profile from '@/components/PageComponents/Courses/Profile';
 import styles from '@/styles/Course.module.css';
 import { Courses, RegisteredCourse } from '@/types';
 import dynamic from 'next/dynamic';
@@ -16,14 +17,6 @@ const SettingsButton = dynamic(
 const CourseElement = dynamic(
   () =>
     import('@/components/PageComponents/Courses/CourseElement').then(
-      (mod) => mod.default
-    ),
-  { ssr: false }
-);
-
-const SettingsDialog = dynamic(
-  () =>
-    import('@/components/Elements/Dialog/SettingsDialog').then(
       (mod) => mod.default
     ),
   { ssr: false }
@@ -59,30 +52,12 @@ export default function Course() {
   }, []);
   return (
     <>
-      <header>
+      <header style={{border: '0px none', marginBottom: 4}}>
         <h1>Better-Lab</h1>
+        <Profile name={user} />
       </header>
       {user ? (
         <main>
-          <SettingsDialog
-            user={user}
-            logout={() => {
-              localStorage.setItem('userid', '');
-              router.push('/login');
-            }}
-          />
-          <div className={styles.registered}>
-            <h2>Registered Courses</h2>
-            <SettingsButton
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                borderWidth: 1.8,
-                padding: '8px 12px',
-                fontSize: 18,
-              }}
-            />
-          </div>
           <div className={styles.grid}>
             {regData ? (
               regData.courses.map((course: Courses, index: number) => {
@@ -106,9 +81,23 @@ export default function Course() {
               <Loader />
             )}
           </div>
+          <style>
+        {
+          `html {
+            padding: 12px !important;
+          }`
+        }
+        </style>
         </main>
       ) : (
         <div className="loader-div">
+          <style>
+        {
+          `html {
+            padding: 12px !important;
+          }`
+        }
+        </style>
           <h1 className="loader-text">Loading...</h1>
         </div>
       )}

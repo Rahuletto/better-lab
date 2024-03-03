@@ -3,22 +3,31 @@
   display: grid;
   grid-gap: 2em;
   gap: 2em;
-  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
   grid-template-rows: -webkit-min-content;
   -ms-grid-rows: -webkit-min-content;
   -ms-grid-rows: min-content;
   grid-template-rows: min-content;
   padding: 18px;
-  min-height: 70vh;
+  min-height: 85vh;
   background: var(--background-darker);
-  border-radius: 30px;
+  border-radius: 42px;
+  -webkit-border-radius: 42px;
+  -moz-border-radius: 42px;
+  -ms-border-radius: 42px;
+  -o-border-radius: 42px;
 }
 
 .card {
-  background-color: var(--border);
-  border-radius: 16px;
   border: 2px solid transparent;
-  padding: 8px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  background-color: var(--background);
+  border-radius: 28px;
+  border: 2px solid transparent;
+  padding: 16px;
   color: var(--color);
   font-family: var(--main-font);
   height: -webkit-fit-content;
@@ -28,6 +37,10 @@
   -webkit-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
   -o-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
   transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  -webkit-border-radius: 28px;
+  -moz-border-radius: 28px;
+  -ms-border-radius: 28px;
+  -o-border-radius: 28px;
 }
 
 .card:hover {
@@ -82,6 +95,7 @@
 .card h2 {
   color: var(--accent);
   margin: 0px;
+  font-size: 64px;
 }
 
 .text {
@@ -92,14 +106,11 @@
   -ms-flex-align: center;
   align-items: center;
   gap: 12px;
+  flex-direction: column;
 }
 
 .levels {
-  background: var(--background-dark);
-  margin-bottom: 8px;
-  margin-top: 16px;
-  padding: 4px 8px;
-  border-radius: 8px;
+  padding: 6px;
 }
 
 .levelIndicator {
@@ -119,11 +130,10 @@
   cursor: pointer;
   max-width: 180px;
   min-width: 100px;
-  width: 69%;
+  width: 76%;
   border-radius: 20px;
-  height: 8px;
-  background: #ffca630e;
-  border: 1px solid var(--border);
+  height: 6px;
+  background: var(--background-darker);
   -webkit-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
   -o-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
   transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
@@ -133,7 +143,7 @@
   border-radius: 20px;
   width: 0%;
   padding: 0.1px;
-  background: var(--green);
+  background: #70fa70;
   -webkit-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
   -o-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
   transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;

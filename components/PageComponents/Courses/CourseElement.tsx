@@ -5,7 +5,7 @@ import { MouseEventHandler } from 'react';
 import dynamic from 'next/dynamic';
 
 const IconMaker = dynamic(() => import('./Icons').then((mod) => mod.default), {
-  ssr: false,
+  ssr: true,
 });
 
 export default function CourseElement({
@@ -40,40 +40,38 @@ export default function CourseElement({
           <IconMaker lang={course.COURSE_NAME} />
           <p className={styles.title}>
             {course.COURSE_NAME.charAt(0).toUpperCase() +
-              course.COURSE_NAME.slice(1).toLowerCase()}
+              (course.COURSE_NAME == 'OOPS' ? course.COURSE_NAME.slice(1) : course.COURSE_NAME.slice(1).toLowerCase())} Course
           </p>
         </div>
       }
 
       <div className={styles.levels}>
         <div className={styles.levelIndicator}>
-          <p style={course.LEVEL1 === 100 ? { color: 'var(--green)' } : {}}>
+          <p style={course.LEVEL1 === 100 ? { color: '#70FA70' } : {}}>
             {course.LEVEL1}
-            <span>/100</span>
           </p>
           <div className={styles.progress}>
             <div style={{ width: `${course.LEVEL1}%` }}></div>
           </div>
         </div>
         <div className={styles.levelIndicator}>
-          <p style={course.LEVEL2 === 100 ? { color: 'var(--green)' } : {}}>
+          <p style={course.LEVEL2 === 100 ? { color: '#70FA70' } : {}}>
             {course.LEVEL2}
-            <span>/100</span>
           </p>
           <div className={styles.progress}>
             <div style={{ width: `${course.LEVEL2}%` }}></div>
           </div>
         </div>
         <div className={styles.levelIndicator}>
-          <p style={course.LEVEL3 === 100 ? { color: 'var(--green)' } : {}}>
+          <p style={course.LEVEL3 === 100 ? { color: '#70FA70' } : {}}>
             {course.LEVEL3}
-            <span>/100</span>
           </p>
           <div className={styles.progress}>
             <div style={{ width: `${course.LEVEL3}%` }}></div>
           </div>
         </div>
       </div>
+      
     </div>
   );
 }

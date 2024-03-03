@@ -27,14 +27,6 @@ const CodeEditor = dynamic(
   { ssr: false }
 );
 
-const SettingsDialog = dynamic(
-  () =>
-    import('@/components/Elements/Dialog/SettingsDialog').then(
-      (mod) => mod.default
-    ),
-  { ssr: false }
-);
-
 const MandatoryCase = dynamic(
   () =>
     import('@/components/PageComponents/Question/Cases/Mandatory').then(
@@ -91,7 +83,6 @@ const QuestionsProgress = dynamic(
 import { RiEmotionHappyFill } from 'react-icons/ri';
 
 import Skeleton from 'react-loading-skeleton';
-import Switcher from '@/components/Elements/Buttons/Switcher';
 
 export default function Question() {
   const router = useRouter();
@@ -302,20 +293,7 @@ export default function Question() {
       </header>
       {user ? (
         <main>
-          <SettingsDialog
-            logout={() => {
-              localStorage.setItem('userid', '');
-              router.push('/login');
-            }}
-            user={user}
-            regData={regData}
-            courseId={courseId}
-            changeCourses={(e) => {
-              localStorage.setItem('course', e.target.value);
-              setCourseId(e.target.value);
-            }}
-          />
-          <Switcher changeQuestion={changeQuestion} num={num} />
+
           <QuestionsProgress
             user={user}
             setNum={changeQuestion}
@@ -336,6 +314,8 @@ export default function Question() {
 
           <Suspense fallback={<ToolbarLoader />}>
             <Toolbar
+              changeQuestion={changeQuestion}
+              num={num}
               handleProgress={handleProgress}
               onHome={() => router.push('/course')}
             />
