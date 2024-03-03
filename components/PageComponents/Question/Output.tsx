@@ -15,8 +15,8 @@ export default function Output({
             compileData.result.evalPercentage === '100.0'
               ? { borderColor: 'var(--green)' }
               : compileData.result.errorMsg
-                ? { borderColor: 'var(--red)' }
-                : {}
+              ? { borderColor: 'var(--red)' }
+              : {}
           }>
           <h2
             style={

@@ -362,7 +362,7 @@ export default function Question() {
 
             <Suspense fallback={<Loader />}>
               <CodeBlock
-              courseId={courseId}
+                courseId={courseId}
                 compileData={compileData}
                 qData={qData}
                 code={code}
@@ -407,7 +407,6 @@ export default function Question() {
 
             <Loader />
           </div>
-
         </main>
       )}
     </>

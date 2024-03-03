@@ -136,7 +136,12 @@ export default function Login() {
                 <LoginButton error={error} onClick={save} />
               </div>
             </div>
-            <p className={styles.credits}>Made by <a href="https://marban.is-a.dev">Marban</a> and <a href="#">root-daemon</a></p>
+            <p className={styles.credits}>
+              Made by <a href="https://marban.is-a.dev">Marban</a> and{' '}
+              <a href="https://www.linkedin.com/in/srivishal-sivasubramanian-1a09b9240/">
+                root-daemon
+              </a>
+            </p>
           </div>
         ) : (
           <div className={styles.login}>

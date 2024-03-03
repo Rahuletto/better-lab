@@ -27,17 +27,17 @@ export default function LoginInput({
                 borderBottomRightRadius: 4,
               }
             : error === 2
-              ? {
-                  border: '1px solid var(--green)',
-                  background: '#45d1330e',
-                  borderBottomLeftRadius: 4,
-                  borderBottomRightRadius: 4,
-                }
-              : {
-                  border: '1px solid transparent',
-                  borderBottomLeftRadius: 4,
-                  borderBottomRightRadius: 4,
-                }
+            ? {
+                border: '1px solid var(--green)',
+                background: '#45d1330e',
+                borderBottomLeftRadius: 4,
+                borderBottomRightRadius: 4,
+              }
+            : {
+                border: '1px solid transparent',
+                borderBottomLeftRadius: 4,
+                borderBottomRightRadius: 4,
+              }
         }
         onChange={onChange}
         placeholder="User ID"
@@ -57,17 +57,17 @@ export default function LoginInput({
                 borderTopRightRadius: 4,
               }
             : error === 2
-              ? {
-                  border: '1px solid var(--green)',
-                  background: '#45d1330e',
-                  borderTopLeftRadius: 4,
-                  borderTopRightRadius: 4,
-                }
-              : {
-                  border: '1px solid transparent',
-                  borderTopLeftRadius: 4,
-                  borderTopRightRadius: 4,
-                }
+            ? {
+                border: '1px solid var(--green)',
+                background: '#45d1330e',
+                borderTopLeftRadius: 4,
+                borderTopRightRadius: 4,
+              }
+            : {
+                border: '1px solid transparent',
+                borderTopLeftRadius: 4,
+                borderTopRightRadius: 4,
+              }
         }
         onChange={onChange}
         placeholder="Passw*rd"

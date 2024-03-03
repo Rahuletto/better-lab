@@ -82,11 +82,11 @@ const UnmemoEditor: React.FC<EditorProps> = ({ language, code, onChange }) => {
       }
     });
   }, []);
-  useEffect(()=>{
-    if(trigger){
+  useEffect(() => {
+    if (trigger) {
       setLightMode(true);
     }
-  },[trigger]);
+  }, [trigger]);
   return (
     <Suspense fallback={<Loader />}>
       <CodeMirror
