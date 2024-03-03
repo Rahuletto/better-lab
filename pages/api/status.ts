@@ -54,6 +54,7 @@ export default async function GET(req: NextRequest) {
       },
     });
   } catch (err: any) {
+    console.log(err)
     return Response.json(
       { Status: 0, error: 'Offline' },
       {
