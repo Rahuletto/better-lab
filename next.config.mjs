@@ -22,7 +22,7 @@ const config = withPWA({
     return [
       {
         source: '/academia',
-        destination: 'https://academiapro.vercel.app',
+        destination: 'https://academia-pro.vercel.app',
         permanent: true,
       },
     ]

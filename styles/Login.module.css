@@ -25,8 +25,8 @@
 .login {
   opacity: 0;
 
-  animation: .7s fade forwards;
-  animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275) ;
+  animation: 0.7s fade forwards;
+  animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   animation-delay: 0.5s;
   background-color: #04070b;
   align-items: center;
@@ -69,6 +69,26 @@
   justify-content: space-between;
   padding-bottom: 8px;
 }
+
+.lefty button {
+  position: relative;
+}
+.lefty button::after {
+  content: 'NEW';
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: -12px;
+  margin-right: -24px;
+  font-size: 14px;
+  background: var(--green);
+  padding: 0px 6px;
+  border-radius: 50px;
+  color: var(--background-darker);
+  font-weight: 800;
+}
+
 .titles {
   display: flex;
 
@@ -155,8 +175,9 @@
 
 .credits {
   position: absolute;
-  bottom: 6px;
-  color: #ADADAF;
+  bottom: 16px;
+  margin: 0px;
+  color: #adadaf;
   font-size: 14px;
   width: 100vw;
   left: 0;
@@ -164,8 +185,8 @@
 }
 
 .credits a {
-  color: #ADADAF;
-text-decoration: none;
+  color: #adadaf;
+  text-decoration: none;
 }
 
 @media only screen and (max-width: 999px) {
@@ -190,7 +211,11 @@ text-decoration: none;
 
 @media only screen and (max-width: 620px) {
   .lefty button {
-    display: none;
+    position: absolute;
+    bottom: 69px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--background-dark);
   }
   .login {
     display: flex;
@@ -219,7 +244,8 @@ text-decoration: none;
 @keyframes fade {
   from {
     opacity: 0;
-  } to {
+  }
+  to {
     opacity: 1;
   }
 }

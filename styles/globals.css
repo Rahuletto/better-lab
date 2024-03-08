@@ -644,6 +644,8 @@ button {
   -webkit-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
   -o-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
   transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  -moz-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  -ms-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
 }
 
 header h1 {
