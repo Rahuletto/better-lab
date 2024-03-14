@@ -1,7 +1,7 @@
 ![image](https://github.com/Rahuletto/better-lab/blob/main/public/og.png?raw=true)
 
 # Better-Lab
-A better alternative to SRM-Elab made by the SRM DLD (Directorate of Learning and Development) team.
+A better alternative to SRM-Elab. Efficient, Fast, Zippy as hecc
 
 ## Why Better-Lab ?
 
