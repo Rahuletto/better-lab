@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
 import dialogStyles from '@/components/styles/Dialog.module.css';
 import styles from '@/components/styles/QuestionProgress.module.css';
+import { useEffect, useState } from 'react';
 
 import { CourseInfo } from '@/types';
 
@@ -38,7 +38,17 @@ const QuestionsProgress = ({
   }, [user]);
 
   const [index, setIndex] = useState(0);
+  function calculateQuestionStatus(node: any, status: number): number {
+    console.log(node);
+    let count = node.status === status ? 1 : 0;
+    if (node.children && node.children.length > 0) {
+      node.children.forEach((child: any) => {
+        count += calculateQuestionStatus(child, status);
+      });
+    }
 
+    return count;
+  }
   function handleOnClick(e: string) {
     if (!courseData) return;
 
@@ -50,7 +60,7 @@ const QuestionsProgress = ({
   }
 
   return (
-    <dialog className={dialogStyles.dialog} id="wheel">
+    <dialog className={`${dialogStyles.dialog}`} id="wheel">
       <div id="wheel-div">
         {courseData ? (
           <>
@@ -66,10 +76,18 @@ const QuestionsProgress = ({
             </h1>
             <div className={styles.grid}>
               <div className="row d-flex justify-content-center align-items-center">
-                <div className="col-3" style={{ width: 64 }}>
+                <div className="col-2 d-flex justify-content-around p-0">
                   <p className={styles.levelTitle}> L1</p>
+                  <div
+                    title="Completed"
+                    className={`${styles.borderSquare} ${styles.greenBorderSquare}`}>
+                    {calculateQuestionStatus(
+                      courseData.flare.children[index],
+                      2
+                    )}
+                  </div>
                 </div>
-                <div className="col-9 d-flex" style={{ gap: 4 }}>
+                <div className="col-8 d-flex" style={{ gap: 4 }}>
                   {courseData &&
                     courseData?.flare.children[index].children.map((el, i) => {
                       return (
@@ -94,10 +112,18 @@ const QuestionsProgress = ({
                 </div>
               </div>
               <div className="row d-flex justify-content-center align-items-center">
-                <div className="col-3" style={{ width: 64 }}>
+                <div className="col-2 d-flex justify-content-around p-0">
                   <p className={styles.levelTitle}> L2</p>
+                  <div
+                    title="Attened"
+                    className={`${styles.borderSquare} ${styles.yellowBorderSquare}`}>
+                    {calculateQuestionStatus(
+                      courseData.flare.children[index],
+                      1
+                    )}
+                  </div>
                 </div>
-                <div className="col-9 d-flex" style={{ gap: 4 }}>
+                <div className="col-8 d-flex" style={{ gap: 4 }}>
                   {courseData &&
                     courseData?.flare.children[index].children.map((el, i) => {
                       return (
@@ -124,10 +150,20 @@ const QuestionsProgress = ({
                 </div>
               </div>
               <div className="row d-flex justify-content-center align-items-center">
-                <div className="col-3" style={{ width: 64 }}>
+                <div
+                  className="col-2 d-flex justify-content-around p-0"
+                  style={{ width: 64 }}>
                   <p className={styles.levelTitle}> L3</p>
+                  <div
+                    title="Unopened"
+                    className={`${styles.borderSquare} ${styles.redBorderSquare}`}>
+                    {calculateQuestionStatus(
+                      courseData.flare.children[index],
+                      0
+                    )}
+                  </div>
                 </div>
-                <div className="col-9 d-flex" style={{ gap: 4 }}>
+                <div className="col-8 d-flex" style={{ gap: 4 }}>
                   {courseData &&
                     courseData?.flare.children[index].children.map((el, i) => {
                       return (
@@ -152,6 +188,7 @@ const QuestionsProgress = ({
                       );
                     })}
                 </div>
+                <div className="col-2"></div>
               </div>
             </div>
             <div className="d-flex justify-content-between align-items-center">
