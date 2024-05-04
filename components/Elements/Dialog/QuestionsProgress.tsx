@@ -60,7 +60,7 @@ const QuestionsProgress = ({
   }
 
   return (
-    <dialog className={`${dialogStyles.dialog}`} id="wheel">
+    <dialog className={`${dialogStyles.dialog} p-5 d-flex`} id="wheel">
       <div id="wheel-div">
         {courseData ? (
           <>
@@ -150,9 +150,7 @@ const QuestionsProgress = ({
                 </div>
               </div>
               <div className="row d-flex justify-content-center align-items-center">
-                <div
-                  className="col-2 d-flex justify-content-around p-0"
-                  style={{ width: 64 }}>
+                <div className="col-2 d-flex justify-content-around p-0">
                   <p className={styles.levelTitle}> L3</p>
                   <div
                     title="Unopened"
@@ -188,7 +186,6 @@ const QuestionsProgress = ({
                       );
                     })}
                 </div>
-                <div className="col-2"></div>
               </div>
             </div>
             <div className="d-flex justify-content-between align-items-center">

@@ -31,12 +31,12 @@
 .dialog {
   background: var(--background);
   z-index: 10;
-  width: fit-content;
-  max-width: 25vw;
+  width: 30vw;
+  /* max-width: 25vw; */
   position: fixed;
   border: 1px solid var(--border);
   border-radius: 18px;
-  padding: 14px 24px !important;
+  /* padding: 14px 24px !important; */
 }
 
 .dialog h1 {
