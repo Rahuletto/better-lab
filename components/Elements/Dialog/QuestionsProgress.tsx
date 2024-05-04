@@ -60,7 +60,7 @@ const QuestionsProgress = ({
   }
 
   return (
-    <dialog className={`${dialogStyles.dialog} p-5 d-flex`} id="wheel">
+    <dialog className={`${dialogStyles.dialog}`} id="wheel">
       <div id="wheel-div">
         {courseData ? (
           <>
