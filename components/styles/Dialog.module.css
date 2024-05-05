@@ -31,7 +31,7 @@
 .dialog {
   background: var(--background);
   z-index: 10;
-  width: 30vw;
+  width: 40vw;
   /* max-width: 25vw; */
   position: fixed;
   border: 1px solid var(--border);
@@ -85,13 +85,16 @@
   border: 2px solid rgba(48, 54, 61, 0.5);
 }
 
+@media only screen and (max-width: 900px) {
+  .dialog {
+    width: 60vw;
+  }
+}
+
 @media only screen and (max-width: 620px) {
   .dialog input {
     width: 150px;
   }
-}
-
-@media only screen and (max-width: 460px) {
   .dialog {
     width: -webkit-max-content;
     width: -moz-max-content;
