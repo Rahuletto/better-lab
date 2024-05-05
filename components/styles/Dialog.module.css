@@ -31,12 +31,13 @@
 .dialog {
   background: var(--background);
   z-index: 10;
-  width: 40vw;
-  /* max-width: 25vw; */
+  width: 420px;
   position: fixed;
   border: 1px solid var(--border);
   border-radius: 18px;
-  /* padding: 14px 24px !important; */
+  -webkit-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  -o-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
 }
 
 .dialog h1 {
@@ -83,12 +84,6 @@
 .dialog select:hover {
   background: var(--background-light);
   border: 2px solid rgba(48, 54, 61, 0.5);
-}
-
-@media only screen and (max-width: 900px) {
-  .dialog {
-    width: 60vw;
-  }
 }
 
 @media only screen and (max-width: 620px) {
