@@ -39,7 +39,6 @@ const QuestionsProgress = ({
 
   const [index, setIndex] = useState(0);
   function calculateQuestionStatus(node: any, status: number): number {
-    console.log(node);
     let count = node.status === status ? 1 : 0;
     if (node.children && node.children.length > 0) {
       node.children.forEach((child: any) => {
@@ -58,7 +57,7 @@ const QuestionsProgress = ({
       setIndex(index - 1);
     }
   }
-
+  ``;
   return (
     <dialog className={`${dialogStyles.dialog}`} id="wheel">
       <div id="wheel-div">
