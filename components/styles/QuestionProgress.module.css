@@ -15,6 +15,7 @@
 
 .completedText{
   color: var(--level-color);
+  font-size: 16px;
 }
 .borderSquare{
   color: var(--accent) !important;
