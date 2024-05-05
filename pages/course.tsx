@@ -26,7 +26,6 @@ export default function Course() {
     fetch('/api/status?server=' + sr)
       .then((d) => d.json())
       .then((a) => {
-        console.log(a);
         if (a.Status !== 1) router.push('/offline');
       });
     if (!us) router.push('/login');
