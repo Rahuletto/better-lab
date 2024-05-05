@@ -6,14 +6,6 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-const SettingsButton = dynamic(
-  () =>
-    import('@/components/Elements/Buttons/SettingsButton').then(
-      (mod) => mod.default
-    ),
-  { ssr: false }
-);
-
 const CourseElement = dynamic(
   () =>
     import('@/components/PageComponents/Courses/CourseElement').then(
@@ -34,7 +26,6 @@ export default function Course() {
     fetch('/api/status?server=' + sr)
       .then((d) => d.json())
       .then((a) => {
-        console.log(a)
         if (a.Status !== 1) router.push('/offline');
       });
     if (!us) router.push('/login');
@@ -48,12 +39,13 @@ export default function Course() {
         .then((d) => d.json())
         .then((a) => {
           setRegData(a);
+          console.log(regData);
         });
     }
   }, []);
   return (
     <>
-      <header style={{border: '0px none', marginBottom: 4}}>
+      <header style={{ border: '0px none', marginBottom: 4 }}>
         <h1>Better-Lab</h1>
         <Profile name={user} />
       </header>
@@ -83,22 +75,18 @@ export default function Course() {
             )}
           </div>
           <style>
-        {
-          `html {
+            {`html {
             padding: 12px !important;
-          }`
-        }
-        </style>
+          }`}
+          </style>
         </main>
       ) : (
         <div className="loader-div">
           <style>
-        {
-          `html {
+            {`html {
             padding: 12px !important;
-          }`
-        }
-        </style>
+          }`}
+          </style>
           <h1 className="loader-text">Loading...</h1>
         </div>
       )}

@@ -31,11 +31,13 @@
 .dialog {
   background: var(--background);
   z-index: 10;
-  width: 68vh;
+  width: 420px;
   position: fixed;
   border: 1px solid var(--border);
   border-radius: 18px;
-  padding: 14px 24px !important;
+  -webkit-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  -o-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
 }
 
 .dialog h1 {
@@ -88,9 +90,6 @@
   .dialog input {
     width: 150px;
   }
-}
-
-@media only screen and (max-width: 460px) {
   .dialog {
     width: -webkit-max-content;
     width: -moz-max-content;

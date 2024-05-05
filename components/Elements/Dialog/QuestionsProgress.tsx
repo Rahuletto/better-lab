@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
 import dialogStyles from '@/components/styles/Dialog.module.css';
 import styles from '@/components/styles/QuestionProgress.module.css';
+import { useEffect, useState } from 'react';
 
 import { CourseInfo } from '@/types';
 
@@ -38,7 +38,16 @@ const QuestionsProgress = ({
   }, [user]);
 
   const [index, setIndex] = useState(0);
+  function calculateQuestionStatus(node: any, status: number): number {
+    let count = node.status === status ? 1 : 0;
+    if (node.children && node.children.length > 0) {
+      node.children.forEach((child: any) => {
+        count += calculateQuestionStatus(child, status);
+      });
+    }
 
+    return count;
+  }
   function handleOnClick(e: string) {
     if (!courseData) return;
 
@@ -47,25 +56,31 @@ const QuestionsProgress = ({
     } else if (index > 0) {
       setIndex(index - 1);
     }
-  }
-
+  };
+  
   return (
     <dialog className={dialogStyles.dialog} id="wheel">
       <div id="wheel-div">
         {courseData ? (
           <>
-            <h1
-              style={{
-                fontSize: 24,
-                textTransform: 'capitalize',
-                marginBottom: 18,
-              }}>
-              {' '}
-              {courseData &&
-                courseData.flare.children[index].name.toLowerCase()}
-            </h1>
+            <div className="d-flex justify-content-between align-items-center">
+              <h1
+                style={{
+                  fontSize: 24,
+                  textTransform: 'capitalize',
+                  marginBottom: 18,
+                }}>
+                {' '}
+                {courseData &&
+                  courseData.flare.children[index].name.toLowerCase()}
+              </h1>
+              <h5 className={`${styles.completedText} mb-3`}>
+                Completed:{' '}
+                {calculateQuestionStatus(courseData.flare.children[index], 2)}
+              </h5>
+            </div>
             <div className={styles.grid}>
-              <div className="row d-flex justify-content-center align-items-center">
+              <div className="row d-flex justify-content-center align-items-center flex-wrap">
                 <div className="col-3" style={{ width: 64 }}>
                   <p className={styles.levelTitle}> L1</p>
                 </div>
