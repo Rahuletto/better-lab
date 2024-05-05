@@ -59,34 +59,32 @@ const QuestionsProgress = ({
   }
   ``;
   return (
-    <dialog className={`${dialogStyles.dialog}`} id="wheel">
+    <dialog className={dialogStyles.dialog} id="wheel">
       <div id="wheel-div">
         {courseData ? (
           <>
-            <h1
-              style={{
-                fontSize: 24,
-                textTransform: 'capitalize',
-                marginBottom: 18,
-              }}>
-              {' '}
-              {courseData &&
-                courseData.flare.children[index].name.toLowerCase()}
-            </h1>
+            <div className="d-flex justify-content-between align-items-center">
+              <h1
+                style={{
+                  fontSize: 24,
+                  textTransform: 'capitalize',
+                  marginBottom: 18,
+                }}>
+                {' '}
+                {courseData &&
+                  courseData.flare.children[index].name.toLowerCase()}
+              </h1>
+              <h5 className={`${styles.completedText} mb-3`}>
+                Completed:{' '}
+                {calculateQuestionStatus(courseData.flare.children[index], 2)}
+              </h5>
+            </div>
             <div className={styles.grid}>
-              <div className="row d-flex justify-content-center align-items-center">
-                <div className="col-2 d-flex justify-content-around p-0">
+              <div className="row d-flex justify-content-center align-items-center flex-wrap">
+                <div className="col-3" style={{ width: 64 }}>
                   <p className={styles.levelTitle}> L1</p>
-                  <div
-                    title="Completed"
-                    className={`${styles.borderSquare} ${styles.greenBorderSquare}`}>
-                    {calculateQuestionStatus(
-                      courseData.flare.children[index],
-                      2
-                    )}
-                  </div>
                 </div>
-                <div className="col-8 d-flex" style={{ gap: 4 }}>
+                <div className="col-9 d-flex" style={{ gap: 4 }}>
                   {courseData &&
                     courseData?.flare.children[index].children.map((el, i) => {
                       return (
@@ -111,18 +109,10 @@ const QuestionsProgress = ({
                 </div>
               </div>
               <div className="row d-flex justify-content-center align-items-center">
-                <div className="col-2 d-flex justify-content-around p-0">
+                <div className="col-3" style={{ width: 64 }}>
                   <p className={styles.levelTitle}> L2</p>
-                  <div
-                    title="Attened"
-                    className={`${styles.borderSquare} ${styles.yellowBorderSquare}`}>
-                    {calculateQuestionStatus(
-                      courseData.flare.children[index],
-                      1
-                    )}
-                  </div>
                 </div>
-                <div className="col-8 d-flex" style={{ gap: 4 }}>
+                <div className="col-9 d-flex" style={{ gap: 4 }}>
                   {courseData &&
                     courseData?.flare.children[index].children.map((el, i) => {
                       return (
@@ -149,18 +139,10 @@ const QuestionsProgress = ({
                 </div>
               </div>
               <div className="row d-flex justify-content-center align-items-center">
-                <div className="col-2 d-flex justify-content-around p-0">
+                <div className="col-3" style={{ width: 64 }}>
                   <p className={styles.levelTitle}> L3</p>
-                  <div
-                    title="Unopened"
-                    className={`${styles.borderSquare} ${styles.redBorderSquare}`}>
-                    {calculateQuestionStatus(
-                      courseData.flare.children[index],
-                      0
-                    )}
-                  </div>
                 </div>
-                <div className="col-8 d-flex" style={{ gap: 4 }}>
+                <div className="col-9 d-flex" style={{ gap: 4 }}>
                   {courseData &&
                     courseData?.flare.children[index].children.map((el, i) => {
                       return (
