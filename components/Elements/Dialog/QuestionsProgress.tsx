@@ -56,8 +56,8 @@ const QuestionsProgress = ({
     } else if (index > 0) {
       setIndex(index - 1);
     }
-  }
-  ``;
+  };
+  
   return (
     <dialog className={dialogStyles.dialog} id="wheel">
       <div id="wheel-div">
