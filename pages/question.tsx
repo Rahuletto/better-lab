@@ -82,6 +82,7 @@ const QuestionsProgress = dynamic(
 
 import { RiEmotionHappyFill } from 'react-icons/ri';
 
+import { convertLanguageCode } from '@/utils/Convert';
 import Skeleton from 'react-loading-skeleton';
 
 export default function Question() {
@@ -132,14 +133,9 @@ export default function Question() {
   }, [num, courseId]);
 
   useEffect(() => {
-    const l = courseId.split('|')[1];
-    setLanguage(
-      loadLanguage(
-        (l.toLowerCase().replace('oops', 'cpp') as Languages) || 'shell'
-      )
-    );
+    const l = courseId.split('|')[1].toLowerCase();
+    setLanguage(loadLanguage(convertLanguageCode(l) as Languages));
   }, [courseId]);
-
   useEffect(() => {
     if (user) {
       const sr = localStorage.getItem('server');
@@ -293,7 +289,6 @@ export default function Question() {
       </header>
       {user ? (
         <main>
-
           <QuestionsProgress
             user={user}
             setNum={changeQuestion}

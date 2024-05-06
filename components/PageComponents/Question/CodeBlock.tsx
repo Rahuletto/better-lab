@@ -1,10 +1,10 @@
 import styles from '@/styles/Question.module.css';
 import { CompilerResponse, QuestionData } from '@/types';
-import { redirect } from 'next/navigation';
+import { convertLanguageCode } from '@/utils/Convert';
 import { useRouter } from 'next/router';
-import { MouseEventHandler } from 'react';
+import { MouseEventHandler, useEffect } from 'react';
 import { FaPlay, FaSquareCheck } from 'react-icons/fa6';
-
+import { fromString, getCompilers } from 'wandbox-api-updated/lib';
 export default function CodeBlock({
   qData,
   compileData,
@@ -21,6 +21,8 @@ export default function CodeBlock({
   children: any;
 }) {
   const router = useRouter();
+
+  function compile() {}
   return (
     <div
       className={styles.codeWrapper}
@@ -31,12 +33,7 @@ export default function CodeBlock({
           : {}
       }>
       <p>Code Editor</p>
-      <a
-        target="new"
-        href={`https://execoder.vercel.app/code?lang=${encodeURIComponent(
-          courseId.split('|')[1].toLowerCase().replace('oops', 'cpp')
-        )}&prog=${encodeURIComponent(code).replaceAll('\\n', '%0A')}`}
-        className={styles.run}>
+      <a target="new" onClick={() => compile()} className={styles.run}>
         <FaPlay /> Run
       </a>
       <button
