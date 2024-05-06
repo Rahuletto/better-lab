@@ -1,11 +1,14 @@
 import styles from '@/styles/Question.module.css';
-import { CompilerResponse, QuestionData } from '@/types';
+
+import { CompilerResponse, Languages, QuestionData } from '@/types';
+import { convertLanguageCode } from '@/utils/Convert';
 import { useRouter } from 'next/router';
 import { MouseEventHandler, useEffect } from 'react';
 import { FaPlay, FaSquareCheck } from 'react-icons/fa6';
 export default function CodeBlock({
   qData,
   compileData,
+  courseId,
   run,
   code,
   children,
@@ -18,7 +21,6 @@ export default function CodeBlock({
 }) {
   const router = useRouter();
 
-  function compile() {}
   return (
     <div
       className={styles.codeWrapper}
@@ -29,7 +31,12 @@ export default function CodeBlock({
           : {}
       }>
       <p>Code Editor</p>
-      <a target="new" onClick={() => compile()} className={styles.run}>
+      <a
+        target="new"
+        href={`https://execoder.vercel.app/code?lang=${encodeURIComponent(
+          convertLanguageCode(courseId.split('|')[1].toLowerCase()) as Languages
+        )}&prog=${encodeURIComponent(code).replaceAll('\\n', '%0A')}`}
+        className={styles.run}>
         <FaPlay /> Run
       </a>
       <button
