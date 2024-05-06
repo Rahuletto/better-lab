@@ -1,8 +1,9 @@
 import styles from '@/styles/Question.module.css';
+
 import { CompilerResponse, Languages, QuestionData } from '@/types';
 import { convertLanguageCode } from '@/utils/Convert';
 import { useRouter } from 'next/router';
-import { MouseEventHandler } from 'react';
+import { MouseEventHandler, useEffect } from 'react';
 import { FaPlay, FaSquareCheck } from 'react-icons/fa6';
 export default function CodeBlock({
   qData,
@@ -15,7 +16,6 @@ export default function CodeBlock({
   qData: QuestionData | null;
   compileData: CompilerResponse | null;
   run: MouseEventHandler<HTMLButtonElement>;
-  courseId: string;
   code: string;
   children: any;
 }) {
