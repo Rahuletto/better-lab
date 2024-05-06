@@ -2,7 +2,7 @@ import styles from '@/styles/Question.module.css';
 import { CompilerResponse, Languages, QuestionData } from '@/types';
 import { convertLanguageCode } from '@/utils/Convert';
 import { useRouter } from 'next/router';
-import { MouseEventHandler, useEffect } from 'react';
+import { MouseEventHandler } from 'react';
 import { FaPlay, FaSquareCheck } from 'react-icons/fa6';
 export default function CodeBlock({
   qData,
@@ -21,7 +21,6 @@ export default function CodeBlock({
 }) {
   const router = useRouter();
 
-  function compile() {}
   return (
     <div
       className={styles.codeWrapper}
