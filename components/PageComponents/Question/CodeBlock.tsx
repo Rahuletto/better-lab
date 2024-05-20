@@ -10,11 +10,13 @@ export default function CodeBlock({
   code,
   children,
   runner,
+  running
 }: {
   qData: QuestionData | null;
   compileData: CompilerResponse | null;
   run?: MouseEventHandler<HTMLButtonElement>;
   runner?: MouseEventHandler<HTMLButtonElement>;
+  running?: any;
   code: string;
   children: ReactNode;
 }) {
@@ -29,8 +31,8 @@ export default function CodeBlock({
       }>
       <p>Code Editor</p>
       <div className={styles.buttonHolders}>
-        <button onClick={runner} className={styles.run}>
-          <FaPlay /> Run
+        <button onClick={runner} disabled={running} className={styles.run}>
+          <FaPlay /> {running ? "Compiling" : "Run"}
         </button>
         {run ? (
           <button

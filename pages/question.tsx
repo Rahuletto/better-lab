@@ -86,6 +86,7 @@ import { convertLanguageCode } from '@/utils/Convert';
 import Skeleton from 'react-loading-skeleton';
 import InputCase from '@/components/PageComponents/Question/Cases/Input';
 import OutputCase from '@/components/PageComponents/Question/Cases/OutputCase';
+import { FaPlay } from 'react-icons/fa6';
 
 export default function Question() {
   const router = useRouter();
@@ -100,6 +101,7 @@ export default function Question() {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState(' ');
   const [error, setError] = useState(false);
+  const [running, setRunning] = useState(false);
 
   const [language, setLanguage] = useState(
     loadLanguage(('c' as Languages) || 'shell')
@@ -258,8 +260,9 @@ export default function Question() {
   }
 
   async function run() {
-    setError(false)
-    setOutput(' ')
+    setRunning(true);
+    setError(false);
+    setOutput(' ');
     fetch('/api/compile', {
       method: 'POST',
       body: JSON.stringify({
@@ -269,10 +272,18 @@ export default function Question() {
         ) as Languages,
         input: input,
       }),
-    }).then(res => res.json()).then(a => {
-      if(a.error) setError(true)
-      setOutput(a.output)
-    }).catch(() => setError(true));
+    })
+      .then((res) => res.json())
+      .then((a) => {
+        if (a.error) setError(true);
+        setOutput(a.output);
+
+        setRunning(false);
+      })
+      .catch(() => {
+        setError(true);
+        setRunning(false);
+      });
   }
   async function compile() {
     if (!qData) return;
@@ -356,16 +367,35 @@ export default function Question() {
                 </Suspense>
                 <Suspense fallback={<Loader />}>
                   <div className={styles.runCases} id="cases">
-                  <InputCase input={input} setInput={setInput} qData={qData} />
-                  <OutputCase output={output} error={error} />
+                    <InputCase
+                      input={input}
+                      setInput={setInput}
+                      qData={qData}
+                    />
+                    <OutputCase output={output} error={error} />
                   </div>
                 </Suspense>
+              </div>
+
+              <div className='m-o buttonHolders'>
+              <button onClick={() => (document.getElementById('runner') as HTMLDialogElement).showModal()} disabled={running} className={styles.run}>
+          <FaPlay /> {running ? "Compiling" : "Run"}
+        </button>
+        
+          <button
+            onClick={() =>
+              (document.getElementById('runner') as HTMLDialogElement).close()
+            }
+            className={styles.closeRunner}>
+            Close
+          </button>
               </div>
 
               <Suspense fallback={<Loader />}>
                 <CodeBlock
                   compileData={compileData}
                   qData={qData}
+                running={running}
                   code={code}
                   runner={run}>
                   <CodeEditor
@@ -394,6 +424,7 @@ export default function Question() {
                 compileData={compileData}
                 qData={qData}
                 code={code}
+                running={running}
                 runner={() =>
                   (
                     document.getElementById('runner') as HTMLDialogElement

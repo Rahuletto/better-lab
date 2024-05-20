@@ -234,6 +234,7 @@
 }
 
 .buttonHolders {
+  align-items: flex-start;
   display: flex;
   gap: 12px;
   position: absolute;
@@ -536,6 +537,16 @@
 }
 
 @media only screen and (max-width: 620px) {
+  .runner {
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+  }
+
+  .runner .codeWrapper {
+    display: none;
+  }
+
   .grid {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -568,9 +579,5 @@
 
   .submit, .run {
     right: 18px !important;
-  }
-
-  .run {
-    margin-top: 45px;
   }
 }

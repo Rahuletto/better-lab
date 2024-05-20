@@ -218,6 +218,10 @@ body {
   color: var(--red) !important;
 }
 
+.m-o {
+  display: none;
+}
+
 code {
   background: var(--background);
   border: 1px solid var(--border);
@@ -548,6 +552,7 @@ html {
   --contexify-activeItem-bgColor: var(--accent);
 }
 
+
 .key span {
   display: inline-block;
   -webkit-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
@@ -622,6 +627,7 @@ html {
   }
 }
 @media only screen and (max-width: 690px) {
+
   .cm-scroller {
     max-width: initial;
     width: 87vw;
@@ -629,6 +635,18 @@ html {
 
   #wheel-div {
     overflow: auto;
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  .m-o {
+    display: block;
+  }
+
+  .buttonHolders {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
   }
 }
 
