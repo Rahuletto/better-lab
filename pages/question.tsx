@@ -84,6 +84,8 @@ import { RiEmotionHappyFill } from 'react-icons/ri';
 
 import { convertLanguageCode } from '@/utils/Convert';
 import Skeleton from 'react-loading-skeleton';
+import InputCase from '@/components/PageComponents/Question/Cases/Input';
+import OutputCase from '@/components/PageComponents/Question/Cases/OutputCase';
 
 export default function Question() {
   const router = useRouter();
@@ -94,6 +96,11 @@ export default function Question() {
   const [compileData, setCompileData] = useState<CompilerResponse | null>(null); // Compiler Response
   const [courseId, setCourseId] = useState('11|C'); // The course they currently working on
   const [code, setCode] = useState(''); // The code
+
+  const [input, setInput] = useState('');
+  const [output, setOutput] = useState(' ');
+  const [error, setError] = useState(false);
+
   const [language, setLanguage] = useState(
     loadLanguage(('c' as Languages) || 'shell')
   ); // Language of such course in codeblock
@@ -251,6 +258,23 @@ export default function Question() {
   }
 
   async function run() {
+    setError(false)
+    setOutput(' ')
+    fetch('/api/compile', {
+      method: 'POST',
+      body: JSON.stringify({
+        code: code,
+        language: convertLanguageCode(
+          courseId.split('|')[1].toLowerCase()
+        ) as Languages,
+        input: input,
+      }),
+    }).then(res => res.json()).then(a => {
+      if(a.error) setError(true)
+      setOutput(a.output)
+    }).catch(() => setError(true));
+  }
+  async function compile() {
     if (!qData) return;
     if (!user) return;
     const box = document.getElementById('result');
@@ -324,6 +348,36 @@ export default function Question() {
             </div>
           )}
 
+          <dialog className={styles.runner} id="runner">
+            <div className={styles.grid}>
+              <div className={styles.caseChild}>
+                <Suspense fallback={<Loader />}>
+                  <TestCase compileData={compileData} qData={qData} />
+                </Suspense>
+                <Suspense fallback={<Loader />}>
+                  <div className={styles.runCases} id="cases">
+                  <InputCase input={input} setInput={setInput} qData={qData} />
+                  <OutputCase output={output} error={error} />
+                  </div>
+                </Suspense>
+              </div>
+
+              <Suspense fallback={<Loader />}>
+                <CodeBlock
+                  compileData={compileData}
+                  qData={qData}
+                  code={code}
+                  runner={run}>
+                  <CodeEditor
+                    code={code}
+                    language={language}
+                    onChange={onChange}
+                  />
+                </CodeBlock>
+              </Suspense>
+            </div>
+          </dialog>
+
           <div className={styles.grid}>
             <div className={styles.caseChild}>
               <Suspense fallback={<Loader />}>
@@ -337,11 +391,15 @@ export default function Question() {
 
             <Suspense fallback={<Loader />}>
               <CodeBlock
-                courseId={courseId}
                 compileData={compileData}
                 qData={qData}
                 code={code}
-                run={run}>
+                runner={() =>
+                  (
+                    document.getElementById('runner') as HTMLDialogElement
+                  ).showModal()
+                }
+                run={compile}>
                 <CodeEditor
                   code={code}
                   language={language}

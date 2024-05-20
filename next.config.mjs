@@ -1,10 +1,19 @@
-import million from 'million/compiler';
-/** @type {import('next').NextConfig} */
 
+/** @type {import('next').NextConfig} */
+import runtimeCaching from 'next-pwa/cache.js';
 import pwa from 'next-pwa';
+
 const withPWA = pwa({
   dest: 'public',
+  runtimeCaching,
+  register: true,
+  disable: process.env.NODE_ENV === 'development',
+  skipWaiting: true,
+  fallbacks: {
+    document: '/_offline',
+  },
 });
+
 
 const config = withPWA({
   poweredByHeader: false,
@@ -29,5 +38,5 @@ const config = withPWA({
   }
 });
 
-//export default million.next(config, { auto: true });
+
 export default config;

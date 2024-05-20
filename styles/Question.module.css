@@ -1,6 +1,7 @@
 .codeWrapper {
   display: -webkit-box;
   display: -ms-flexbox;
+  position: relative;
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -15,7 +16,7 @@
 }
 
 .sideContainer {
-  background: var(--background-light);
+  background: var(--buttons);
   border: 2px solid var(--border);
   border-radius: 18px;
   padding: 8px 12px;
@@ -204,6 +205,7 @@
 
 .qna h2 {
   margin: 0px;
+  text-decoration: underline solid 2px var(--signature);
 }
 
 .closebutton {
@@ -230,6 +232,14 @@
   flex-direction: column;
   margin-top: 12px;
 }
+
+.buttonHolders {
+  display: flex;
+  gap: 12px;
+  position: absolute;
+  z-index: 2;
+  right: 8px;
+}
 .run {
   cursor: pointer;
   font-family: var(--main-font);
@@ -239,9 +249,9 @@
   display: -ms-flexbox;
   display: flex;
   gap: 6px;
-  background: rgba(78,208,57,.42);
-  border: 3px solid transparent;
-  color: #f0f0f0;
+  background: var(--signature);
+    border: 3px solid transparent;
+    color: var(--background);
   border-radius: 10px;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -252,18 +262,15 @@
   -webkit-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
   -o-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
   transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
-  position: absolute;
-  z-index: 2;
-  right: 140px;
+  
   text-decoration: none;
 }
 
 .run:hover {
   opacity: 0.9;
-  border: 3px solid rgba(78, 208, 57, 0.42);
-
+    border: 3px solid var(--signature);
   background-color: transparent;
-  color: #f0f0f0;
+  color: var(--signature);
   -webkit-backdrop-filter: blur(3px);
   backdrop-filter: blur(3px);
 }
@@ -286,13 +293,42 @@
   color: #f0f0f0;
 }
 
+.runCases {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.runCases div {
+  height: -webkit-fill-available;
+}
+
+
+.runner {
+  background: var(--background);
+  z-index: 10;
+  width: 90vw;
+  top: 50%;
+  bottom: 50%;
+  position: fixed;
+  border: 1px solid var(--border);
+  border-radius: 36px;
+  -webkit-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  -o-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  -webkit-border-radius: 36px;
+  -moz-border-radius: 36px;
+  -ms-border-radius: 36px;
+  -o-border-radius: 36px;
+}
+
 .run:active {
   -webkit-transform: scale(0.9) rotate(-2deg);
   -ms-transform: scale(0.9) rotate(-2deg);
   transform: scale(0.9) rotate(-2deg);
-  opacity: 0.9;
-  background-color: rgba(78, 208, 57, 0.42);
-  color: #f0f0f0;
+  opacity: 0.8;
+  background-color: var(--signature);
+  color: var(--background);
 }
 
 
@@ -318,9 +354,30 @@
   -webkit-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
   -o-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
   transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
-  position: absolute;
-  z-index: 2;
-  right: 28px;
+}
+
+.closeRunner {
+  cursor: pointer;
+  font-family: var(--main-font);
+  font-size: 16px;
+  padding: 6px 12px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 6px;
+  background: var(--red);
+  border: 1.9px solid var(--border);
+  color: var(--background-dark);
+  border-radius: 10px;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  -webkit-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  -o-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
 }
 
 .submit:hover {
@@ -332,7 +389,16 @@
   backdrop-filter: blur(3px);
 }
 
-.submit:disabled:hover {
+.closeRunner:hover {
+  opacity: 0.9;
+  background-color: #d13333ab;
+  color: var(--background-dark);
+  border: 1.9px solid transparent;
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+}
+
+.submit:disabled:hover, .closeRunner:disabled:hover {
   opacity: 0.9;
   background-color: #d13333ab;
   color: #f0f0f0;
@@ -341,7 +407,7 @@
   backdrop-filter: blur(3px);
 }
 
-.submit:disabled:active {
+.submit:disabled:active, .closeRunner:disabled:active {
   -webkit-transform: none !important;
   -ms-transform: none !important;
   transform: none !important;
@@ -357,6 +423,14 @@
   opacity: 0.9;
   background-color: rgba(78, 208, 57, 0.42);
   color: #f0f0f0;
+}
+.closeRunner:active {
+  -webkit-transform: scale(0.9) rotate(-2deg);
+  -ms-transform: scale(0.9) rotate(-2deg);
+  transform: scale(0.9) rotate(-2deg);
+  opacity: 0.9;
+  background-color: var(--red);
+  color: var(--background-dark);
 }
 
 .result {

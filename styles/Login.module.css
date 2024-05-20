@@ -73,21 +73,6 @@
 .lefty button {
   position: relative;
 }
-.lefty button::after {
-  content: 'NEW';
-  display: flex;
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin-top: -12px;
-  margin-right: -24px;
-  font-size: 14px;
-  background: var(--green);
-  padding: 0px 6px;
-  border-radius: 50px;
-  color: var(--background-darker);
-  font-weight: 800;
-}
 
 .titles {
   display: flex;

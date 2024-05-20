@@ -1,26 +1,23 @@
 import styles from '@/styles/Question.module.css';
 
 import { CompilerResponse, Languages, QuestionData } from '@/types';
-import { convertLanguageCode } from '@/utils/Convert';
-import { useRouter } from 'next/router';
-import { MouseEventHandler, useEffect } from 'react';
+import { MouseEventHandler, ReactNode, useEffect } from 'react';
 import { FaPlay, FaSquareCheck } from 'react-icons/fa6';
 export default function CodeBlock({
   qData,
   compileData,
-  courseId,
   run,
   code,
   children,
+  runner,
 }: {
   qData: QuestionData | null;
   compileData: CompilerResponse | null;
-  run: MouseEventHandler<HTMLButtonElement>;
+  run?: MouseEventHandler<HTMLButtonElement>;
+  runner?: MouseEventHandler<HTMLButtonElement>;
   code: string;
-  children: any;
+  children: ReactNode;
 }) {
-  const router = useRouter();
-
   return (
     <div
       className={styles.codeWrapper}
@@ -31,20 +28,28 @@ export default function CodeBlock({
           : {}
       }>
       <p>Code Editor</p>
-      <a
-        target="new"
-        href={`https://execoder.vercel.app/code?lang=${encodeURIComponent(
-          convertLanguageCode(courseId.split('|')[1].toLowerCase()) as Languages
-        )}&prog=${encodeURIComponent(code).replaceAll('\\n', '%0A')}`}
-        className={styles.run}>
-        <FaPlay /> Run
-      </a>
-      <button
-        onClick={run}
-        disabled={code === '' || qData?.studentData.STATUS === 2}
-        className={styles.submit}>
-        <FaSquareCheck /> Submit
-      </button>
+      <div className={styles.buttonHolders}>
+        <button onClick={runner} className={styles.run}>
+          <FaPlay /> Run
+        </button>
+        {run ? (
+          <button
+            onClick={run}
+            disabled={code === '' || qData?.studentData.STATUS === 2}
+            className={styles.submit}>
+            <FaSquareCheck /> Submit
+          </button>
+        ) : (
+          <button
+            onClick={() =>
+              (document.getElementById('runner') as HTMLDialogElement).close()
+            }
+            className={styles.closeRunner}>
+            Close
+          </button>
+        )}
+      </div>
+
       {children}
       <p
         style={{
@@ -52,8 +57,9 @@ export default function CodeBlock({
           marginRight: '12px',
           marginBottom: 0,
           opacity: 0.7,
-          position: 'relative',
-          bottom: '-4px',
+          position: 'absolute',
+          bottom: '4px',
+          right: '4px',
         }}>
         Powered by{' '}
         <a
