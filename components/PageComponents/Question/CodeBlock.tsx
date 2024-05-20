@@ -31,7 +31,7 @@ export default function CodeBlock({
       }>
       <p>Code Editor</p>
       <div className={styles.buttonHolders}>
-        <button onClick={runner} disabled={running} className={styles.run}>
+        <button onClick={runner} disabled={!qData || running} className={styles.run}>
           <FaPlay /> {running ? "Compiling" : "Run"}
         </button>
         {run ? (

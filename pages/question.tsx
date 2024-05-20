@@ -359,7 +359,7 @@ export default function Question() {
             </div>
           )}
 
-          <dialog className={styles.runner} id="runner">
+          { <dialog className={styles.runner} id="runner">
             <div className={styles.grid}>
               <div className={styles.caseChild}>
                 <Suspense fallback={<Loader />}>
@@ -377,25 +377,32 @@ export default function Question() {
                 </Suspense>
               </div>
 
-              <div className='m-o buttonHolders'>
-              <button onClick={() => (document.getElementById('runner') as HTMLDialogElement).showModal()} disabled={running} className={styles.run}>
-          <FaPlay /> {running ? "Compiling" : "Run"}
-        </button>
-        
-          <button
-            onClick={() =>
-              (document.getElementById('runner') as HTMLDialogElement).close()
-            }
-            className={styles.closeRunner}>
-            Close
-          </button>
+              <div className="m-o buttonHolders">
+                <button
+                  onClick={() =>
+                    run()
+                  }
+                  disabled={running}
+                  className={styles.run}>
+                  <FaPlay /> {running ? 'Compiling' : 'Run'}
+                </button>
+
+                <button
+                  onClick={() =>
+                    (
+                      document.getElementById('runner') as HTMLDialogElement
+                    ).close()
+                  }
+                  className={styles.closeRunner}>
+                  Close
+                </button>
               </div>
 
               <Suspense fallback={<Loader />}>
                 <CodeBlock
                   compileData={compileData}
                   qData={qData}
-                running={running}
+                  running={running}
                   code={code}
                   runner={run}>
                   <CodeEditor
@@ -406,7 +413,7 @@ export default function Question() {
                 </CodeBlock>
               </Suspense>
             </div>
-          </dialog>
+          </dialog>}
 
           <div className={styles.grid}>
             <div className={styles.caseChild}>
