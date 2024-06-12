@@ -9,7 +9,7 @@ export default function InputCase({
   error: boolean;
 }) {
   return (
-    <div id={error ? "errorOutput" : ""} className={styles.sideContainer} style={error ? { gap: 4, justifyContent: 'flex-start', paddingBottom: 14, borderColor: 'var(--red)' } : {gap: 4, justifyContent: 'flex-start', paddingBottom: 14}} >
+    <div id={error ? "errorOutput" : ""} className={styles.sideContainer} style={error ? { gap: 4, justifyContent: 'flex-start', paddingBottom: 14,  height: "50%", borderColor: 'var(--red)' } : {gap: 4, justifyContent: 'flex-start', paddingBottom: 14}} >
         <h3>Output</h3>
         {output && <code>{output}</code>}
     </div>
