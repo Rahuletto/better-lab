@@ -366,7 +366,7 @@ export default function Question() {
                   <TestCase compileData={compileData} qData={qData} />
                 </Suspense>
                 <Suspense fallback={<Loader />}>
-                  <div className={styles.runCases} id="cases">
+                  <div className={styles.runCases} style={{height: "60.6vh"}}  id="cases">
                     <InputCase
                       input={input}
                       setInput={setInput}
