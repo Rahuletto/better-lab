@@ -17,6 +17,7 @@
 }
 
 .sideContainer {
+  max-height: 20vh;
   background: var(--buttons);
   border: 2px solid var(--border);
   border-radius: 18px;
@@ -84,13 +85,9 @@
 }
 
 .caseChild {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 1fr;
-  grid-template-columns: 1fr;
-  -ms-grid-rows: 0.5fr 20px 1fr;
-  grid-template-rows: 0.5fr 1fr;
-  gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
 .caseChild > *:nth-child(1) {
