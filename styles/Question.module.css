@@ -1,4 +1,5 @@
 .codeWrapper {
+  max-height: 96vh;
   display: -webkit-box;
   display: -ms-flexbox;
   position: relative;
