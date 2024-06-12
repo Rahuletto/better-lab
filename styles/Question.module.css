@@ -84,6 +84,7 @@
 }
 
 .caseChild {
+  max-height: 96vh;
  display: -ms-grid;
   display: grid;
   -ms-grid-columns: 1fr;
