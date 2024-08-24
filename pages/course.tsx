@@ -39,10 +39,10 @@ export default function Course() {
         .then((d) => d.json())
         .then((a) => {
           setRegData(a);
-          console.log(regData);
         });
     }
   }, []);
+
   return (
     <>
       <header style={{ border: '0px none', marginBottom: 4 }}>

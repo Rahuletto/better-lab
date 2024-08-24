@@ -103,9 +103,7 @@ export default function Question() {
   const [error, setError] = useState(false);
   const [running, setRunning] = useState(false);
 
-  const [language, setLanguage] = useState(
-    loadLanguage(('c' as Languages) || 'shell')
-  ); // Language of such course in codeblock
+  const [language, setLanguage] = useState(loadLanguage('c' as Languages)); // Language of such course in codeblock
   const [courseData, setCourseData] = useState<CourseInfo | null>(null); // All course data (the wheel)
   // Changes happen in Codeblock happens here
   const onChange = useCallback((value: string) => {
@@ -359,61 +357,64 @@ export default function Question() {
             </div>
           )}
 
-          { <dialog className={styles.runner} id="runner">
-            <div className={styles.grid}>
-              <div className={styles.caseChild}>
+          {
+            <dialog className={styles.runner} id="runner">
+              <div className={styles.grid}>
+                <div className={styles.caseChild}>
+                  <Suspense fallback={<Loader />}>
+                    <TestCase compileData={compileData} qData={qData} />
+                  </Suspense>
+                  <Suspense fallback={<Loader />}>
+                    <div
+                      className={styles.runCases}
+                      style={{ height: '60.6vh' }}
+                      id="cases">
+                      <InputCase
+                        input={input}
+                        setInput={setInput}
+                        qData={qData}
+                      />
+                      <OutputCase output={output} error={error} />
+                    </div>
+                  </Suspense>
+                </div>
+
+                <div className="m-o buttonHolders">
+                  <button
+                    onClick={() => run()}
+                    disabled={running}
+                    className={styles.run}>
+                    <FaPlay /> {running ? 'Compiling' : 'Run'}
+                  </button>
+
+                  <button
+                    onClick={() =>
+                      (
+                        document.getElementById('runner') as HTMLDialogElement
+                      ).close()
+                    }
+                    className={styles.closeRunner}>
+                    Close
+                  </button>
+                </div>
+
                 <Suspense fallback={<Loader />}>
-                  <TestCase compileData={compileData} qData={qData} />
-                </Suspense>
-                <Suspense fallback={<Loader />}>
-                  <div className={styles.runCases} style={{height: "60.6vh"}}  id="cases">
-                    <InputCase
-                      input={input}
-                      setInput={setInput}
-                      qData={qData}
-                    />
-                    <OutputCase output={output} error={error} />
-                  </div>
-                </Suspense>
-              </div>
-
-              <div className="m-o buttonHolders">
-                <button
-                  onClick={() =>
-                    run()
-                  }
-                  disabled={running}
-                  className={styles.run}>
-                  <FaPlay /> {running ? 'Compiling' : 'Run'}
-                </button>
-
-                <button
-                  onClick={() =>
-                    (
-                      document.getElementById('runner') as HTMLDialogElement
-                    ).close()
-                  }
-                  className={styles.closeRunner}>
-                  Close
-                </button>
-              </div>
-
-              <Suspense fallback={<Loader />}>
-                <CodeBlock
-                  compileData={compileData}
-                  qData={qData}
-                  running={running}
-                  code={code}
-                  runner={run}>
-                  <CodeEditor
+                  <CodeBlock
+                    compileData={compileData}
+                    qData={qData}
+                    running={running}
                     code={code}
-                    language={language}
-                    onChange={onChange}
-                  />
-                </CodeBlock>
-              </Suspense>
-            </div>
-          </dialog>}
+                    runner={run}>
+                    <CodeEditor
+                      code={code}
+                      language={language}
+                      onChange={onChange}
+                    />
+                  </CodeBlock>
+                </Suspense>
+              </div>
+            </dialog>
+          }
 
           <div className={styles.grid}>
             <div className={styles.caseChild}>

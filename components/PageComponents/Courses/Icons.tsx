@@ -13,10 +13,12 @@ import {
   SiHaskell,
   SiJulia,
   SiLua,
+  SiOctave,
   SiPerl,
   SiPhp,
   SiR,
   SiRuby,
+  SiShell,
   SiTypescript,
 } from 'react-icons/si';
 
@@ -27,7 +29,10 @@ export default function IconMaker({ lang }: { lang: string }) {
 
 const iconMap = {
   C: <FaCopyright />,
+  CPP: <SiCplusplus />,
+  DAA: <SiCplusplus />,
   OOPS: <SiCplusplus />,
+  APP: <FaJava />,
   CSHARP: <SiCsharp />,
   GO: <FaGolang />,
   JULIA: <SiJulia />,
@@ -38,9 +43,12 @@ const iconMap = {
   JAVASCRIPT: <FaJs />,
   LUA: <SiLua />,
   PHP: <SiPhp />,
+  OCTAVE: <SiOctave />,
+  OS: <SiShell />,
   RUBY: <SiRuby />,
   R: <SiR />,
   RUST: <FaRust />,
   SWIFT: <FaSwift />,
   TYPESCRIPT: <SiTypescript />,
+  DS: <FaCopyright />,
 };
