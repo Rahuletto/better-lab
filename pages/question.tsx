@@ -298,7 +298,7 @@ export default function Question() {
       body: JSON.stringify({
         qid: qData?.studentData.Q_ID,
         code: code,
-        language: courseId.split('|')[1].toLowerCase().replace('oops', 'cpp'),
+        language: convertLanguageCode(courseId.split('|')[1].toLowerCase()),
         course: {
           name: qData?.questionData.COURSE_NAME,
           id: qData?.studentData.COURSE_ID,
